@@ -417,7 +417,56 @@
                     <p>SEPTEMBER 2026</p>
                 </div>
             </div>
+             <!-- NEW INTERACTIVE WIDGET SECTION -->
+    <h3 style="margin-top: 40px;">Interactive Title Page Generator</h3>
+    <p>Fill out the fields below to instantly generate, preview, and download your perfectly formatted SBL Title Page.</p>
+    
+    <div class="widget-wrapper">
+        <!-- Sidebar Inputs -->
+        <div class="widget-sidebar">
+            <div class="widget-input-group">
+                <label for="w-institution">Institution Name</label>
+                <input type="text" id="w-institution" value="NORTH CENTRAL UNIVERSITY">
+            </div>
+            <div class="widget-input-group">
+                <label for="w-title">Paper Title & Subtitle</label>
+                <textarea id="w-title" rows="3">WRITING IN SBL:&#10;COMPLICATED FORMATTING</textarea>
+            </div>
+            <div class="widget-input-group">
+                <label for="w-instructor">Instructor Name</label>
+                <input type="text" id="w-instructor" value="DR. OLD MCDONALD">
+            </div>
+            <div class="widget-input-group">
+                <label for="w-course">Course Code & Description</label>
+                <input type="text" id="w-course" value="BIBL 777 JESUS AND STUFF">
+            </div>
+            <div class="widget-input-group">
+                <label for="w-author">Student Name</label>
+                <input type="text" id="w-author" value="ANDREW B. CARL">
+            </div>
+            <div class="widget-input-group">
+                <label for="w-date">Submission Date</label>
+                <input type="text" id="w-date" value="DECEMBER 11, 2023">
+            </div>
+            
+            <div class="widget-actions">
+                <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()">📄 Download .DOCX</button>
+                <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()">picture_as_pdf Download .PDF</button>
+                <button class="w-btn w-btn-copy" onclick="copyWidgetText()">📋 Copy Plain Text</button>
+            </div>
         </div>
+        
+        <!-- Document Canvas Preview Panel -->
+        <div class="widget-preview-area">
+            <div class="widget-paper-canvas" id="widget-canvas">
+                <div class="w-sbl-text w-inst-block" id="w-view-inst"></div>
+                <div class="w-sbl-text w-title-block" id="w-view-title"></div>
+                <div class="w-sbl-text w-sub-block" id="w-view-sub"></div>
+                <div class="w-sbl-text w-auth-block" id="w-view-auth"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- CITE A SOURCE -->
         <div id="cite" class="tab-content">
