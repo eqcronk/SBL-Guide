@@ -306,6 +306,117 @@
         li {
             margin-bottom: 5px;
         }
+
+        /* SBL Interactive Title Page Widget Layout Styles */
+.widget-wrapper {
+    display: flex;
+    background: #f4f6f8;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    margin-top: 20px;
+    height: 700px;
+    overflow: hidden;
+}
+
+.widget-sidebar {
+    width: 320px;
+    background: #ffffff;
+    border-right: 1px solid #dcdde1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.widget-input-group {
+    margin-bottom: 14px;
+}
+
+.widget-input-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.widget-input-group input, .widget-input-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.widget-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.w-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: white;
+}
+
+.w-btn-docx { background-color: #3498db; }
+.w-btn-pdf { background-color: #2ecc71; }
+.w-btn-copy { background-color: #7f8c8d; }
+
+/* Visual Simulator Sheet Canvas Layout */
+.widget-preview-area {
+    flex: 1;
+    background: #f4f6f8;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.widget-paper-canvas {
+    width: 450px; /* Scaled down representation for web browser views */
+    height: 582px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 0.5in;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.w-sbl-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 8.5pt; /* Scaled text relative to container width */
+    line-height: 14pt;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal; /* No bold allowed */
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+.w-inst-block { margin-top: 0.3in; }
+.w-sub-block { line-height: 16pt; }
+.w-auth-block { margin-bottom: 0.3in; }
+
     </style>
 </head>
 <body>
