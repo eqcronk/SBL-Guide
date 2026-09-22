@@ -481,8 +481,8 @@
             <h3>The Layout</h3>
             
              <!-- NEW INTERACTIVE WIDGET SECTION -->
-    <h3 style="margin-top: 40px;">Interactive Title Page Generator</h3>
-    <p>Fill out the fields below to instantly generate, preview, and download your perfectly formatted SBL Title Page.</p>
+    <h3 style="margin-top: 40px;">Title Page Creator</h3>
+    <p>Fill out the fields below to create and download your formatted SBL Title Page.</p>
     
     <div class="widget-wrapper">
         <!-- Sidebar Inputs -->
@@ -513,9 +513,9 @@
             </div>
             
             <div class="widget-actions">
-                <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()">📄 Download .DOCX</button>
-                <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()">picture_as_pdf Download .PDF</button>
-                <button class="w-btn w-btn-copy" onclick="copyWidgetText()">📋 Copy Plain Text</button>
+                <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()"> Download .DOCX</button>
+                <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()"> Download .PDF</button>
+                <button class="w-btn w-btn-copy" onclick="copyWidgetText()"> Copy Plain Text</button>
             </div>
         </div>
         
@@ -656,6 +656,66 @@ function downloadWidgetPdf() {
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
     html2pdf().set(pdfSettings).from(targetElement).save();
+}
+function downloadWidgetDocx() {
+    // 🟢 ABSOLUTE FIX: Safely find where the unpkg script registered the library
+    const docxLibrary = window.docx || docx;
+    
+    if (!docxLibrary) {
+        alert("Error: The Word document engine is not loaded on this page yet.");
+        return;
+    }
+
+    // Pull the structural configuration variables from the active global engine instance
+    const { Document, Packer, Paragraph, TextRun, AlignmentType } = docxLibrary;
+    
+    // (Keep the rest of your original function body below this exactly the same!)
+    const makeBreaks = (count) => Array.from({ length: count }, () => new Paragraph({ text: "" }));
+    
+    try {
+        const documentStructure = new Document({
+            sections: [{
+                properties: {
+                    page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                },
+                children: [
+                    ...makeBreaks(5),
+                    new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24 })]
+                    }),
+                    ...makeBreaks(8),
+                    ...widgetFields.vTitle.textContent.split('\n').map(line => new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                    })),
+                    ...makeBreaks(8),
+                    ...widgetFields.vSub.textContent.split('\n').map(line => new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                    })),
+                    ...makeBreaks(8),
+                    ...widgetFields.vAuth.textContent.split('\n').map(line => new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                    }))
+                ]
+            }]
+        });
+
+        Packer.toBlob(documentStructure).then(fileBlob => {
+            const fileURL = window.URL.createObjectURL(fileBlob);
+            const anchorElement = document.createElement("a");
+            anchorElement.href = fileURL;
+            anchorElement.download = "SBL_Title_Page.docx";
+            document.body.appendChild(anchorElement);
+            anchorElement.click();
+            window.URL.revokeObjectURL(fileURL);
+            document.body.removeChild(anchorElement);
+        });
+    } catch (err) {
+        alert("Word Document engine processing crash: " + err.message);
+    }
 }
 
 function downloadWidgetDocx() {
