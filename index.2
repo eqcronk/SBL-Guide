@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBL Citation Guide</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #eff6ff;
+            --accent: #b91c1c;
+            --accent-light: #fef2f2;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --text: #1f2937;
+            --bg: #f9fafb;
+            --border: #e5e7eb;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--text); background-color: var(--bg); line-height: 1.5; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        header { border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 25px; }
+        h1 { color: var(--primary); font-size: 2rem; margin-bottom: 8px; }
+        .subtitle { color: #6b7280; font-size: 1.1rem; }
+        
+        nav { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; flex-wrap: wrap; }
+        .tab-btn { background: none; border: none; padding: 10px 20px; font-size: 1rem; font-weight: 600; color: #4b5563; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
+        .tab-btn:hover { background-color: var(--primary-light); color: var(--primary); }
+        .tab-btn.active { background-color: var(--primary); color: white; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .hero { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 20px; border-radius: 4px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { border: 1px solid var(--border); padding: 20px; border-radius: 6px; background: white; }
+        .card h3 { color: var(--primary); margin-bottom: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        th, td { border: 1px solid var(--border); padding: 12px; text-align: left; }
+        th { background-color: var(--primary-light); color: var(--primary); font-weight: 600; }
+        
+        .blueprint { font-family: "Times New Roman", Times, serif; border: 2px dashed #9ca3af; padding: 30px; background: #fff; max-width: 400px; margin: 20px auto; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        .example-box { background: #f3f4f6; border-left: 4px solid #9ca3af; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .example-label { font-weight: bold; font-size: 0.85rem; color: #4b5563; text-transform: uppercase; margin-bottom: 5px; }
+        .example-text { font-family: "Times New Roman", Times, serif; font-size: 1.1rem; }
+        
+        .mistake-row { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .wrong { border-left: 4px solid var(--accent); background: var(--accent-light); flex: 1; min-width: 280px; padding: 15px; border-radius: 4px; }
+        .right { border-left: 4px solid var(--success); background: var(--success-light); flex: 1; min-width: 280px; padding: 15px; border-radius: 4px; }
+        
+        a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>SBL Citation Guide</h1>
+        <div class="subtitle">An Approachable Reference for Graduate Students</div>
+    </header>
+
+    <nav>
+        <button class="tab-btn active" onclick="switchTab('home')"> Home</button>
+        <button class="tab-btn" onclick="switchTab('format')"> Format My Paper</button>
+        <button class="tab-btn" onclick="switchTab('cite')"> Cite a Source</button>
+        <button class="tab-btn" onclick="switchTab('mistakes')"> Common Mistakes</button>
+    </nav>
+
+    <!-- HOME TAB -->
+    <div id="home" class="tab-content active">
+        <div class="hero">
+            <strong>Welcome to SBL Style!</strong> SBL style is simply Chicago Style fine-tuned for biblical studies. If you can master footnotes, you can master SBL. Use this guide to easily layout your pages and cite your sources correctly.
+        </div>
+        <h2>Quick Shortcuts</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Need to Format?</h3>
+                <p>Check out the standard page settings, margins, line spacing, and title page architecture.</p>
+                <p style="margin-top:15px;"><a href="#" onclick="switchTab('format'); return false;">Go to Formatting &rarr;</a></p>
+            </div>
+            <div class="card">
+                <h3>Need to Cite?</h3>
+                <p>View visual, real-world formula blueprints for books, commentary series, journals, and Bibles.</p>
+                <p style="margin-top:15px;"><a href="#" onclick="switchTab('cite'); return false;">Go to Citation Rules &rarr;</a></p>
+            </div>
+            <div class="card">
+                <h3>Before Submitting...</h3>
+                <p>Review the absolute absolute "no-no's" of SBL 2nd edition, like the total ban on using <em>Ibid</em>.</p>
+                <p style="margin-top:15px;"><a href="#" onclick="switchTab('mistakes'); return false;">Check for Mistakes &rarr;</a></p>
+            </div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; color: #6b7280;">
+            Need the official manual? Download the <a href="https://www.sbl-site.org/assets/pdfs/SBLHSrevised2_09.pdf" target="_blank">SBL Handbook Student Supplement PDF</a>.
+        </p>
+    </div>
+
+    <!-- FORMAT TAB -->
+    <div id="format" class="tab-content">
+        <h2>Document Formatting Matrix</h2>
+        <p>Set these standards up in Microsoft Word or Google Docs before writing your paper:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>SBL Rule</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Margins</strong></td>
+                    <td>1 inch on all four sides.</td>
+                </tr>
+                <tr>
+                    <td><strong>Font</strong></td>
+                    <td>Times New Roman, 12pt for main text. 10pt for footnotes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Line Spacing</strong></td>
+                    <td>Double-spaced for body text. Single-spaced inside individual footnotes and block quotes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Page Numbers</strong></td>
+                    <td>Top-right corner. Suppressed (hidden) on the Title Page.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 style="margin-top:30px;">Title Page Architecture</h2>
+        <p>SBL requires a completely clean title page layout with explicit vertical spacing rules:</p>
+        <div class="blueprint">
+            <div style="margin-top: 20px; font-weight: bold; font-size: 1.2rem;">THE TITLE OF YOUR PAPER:<br>SUBTITLE HERE</div>
+            <div style="margin-top: 20px; font-size: 0.9rem; color:#6b7280;">(Positioned 1/3 down the page)</div>
+            <div style="margin-top: 80px; font-weight: bold;">Your Name</div>
+            <div style="margin-top: 10px; font-size: 0.9rem; color:#6b7280;">(Positioned 2/3 down the page)</div>
+            <div style="margin-top: 80px; font-size: 0.95rem; line-height: 1.3;">
+                Course Number: Course Name<br>
+                Professor's Name<br>
+                December 12, 2026
+            </div>
+        </div>
+    </div>
+
+    <!-- CITE TAB -->
+    <div id="cite" class="tab-content">
+        <h2>Citation Formula Templates</h2>
+        <p>SBL requires a <strong>First Footnote (N)</strong> format, a shortened <strong>Subsequent Footnote (SN)</strong> format, and a <strong>Bibliography (B)</strong> format.</p>
+        
+        <h3 style="margin-top:25px; color: var(--primary);">1. Standard Book (Single Author)</h3>
+        <div class="example-box">
+            <div class="example-label">First Footnote (N)</div>
+            <div class="example-text">1. Firstname Lastname, <em>Title of Book: Subtitle</em> (City: Publisher, Year), Page Number.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-label">Subsequent Footnote (SN)</div>
+            <div class="example-text">2. Lastname, <em>Short Title</em>, Page Number.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-label">Bibliography (B)</div>
+            <div class="example-text">Lastname, Firstname. <em>Title of Book: Subtitle</em>. City: Publisher, Year.</div>
+        </div>
+
+        <h3 style="margin-top:25px; color: var(--primary);">2. Commentary in a Series</h3>
+        <div class="example-box">
+            <div class="example-label">First Footnote (N)</div>
+            <div class="example-text">1. Firstname Lastname, <em>Book Title</em>, Series Title Vol Number (City: Publisher, Year), Page.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-label">Real Example</div>
+            <div class="example-text">1. John J. Collins, <em>Daniel</em>, Hermeneia (Minneapolis: Fortress, 1993), 45.</div>
+        </div>
+    </div>
+
+    <!-- MISTAKES TAB -->
+    <div id="mistakes" class="tab-content">
+        <h2>SBL "Before You Submit" Diagnostic Checklist</h2>
+        <p>Avoid these common, high-frequency deduction errors before finalizing your graduate assignments:</p>
+        
+        <div class="mistake-row">
+            <div class="wrong">
+                <strong> The Ibid. Trap</strong>
+                <p>Do not use "Ibid." when citing the same source consecutively. SBL 2nd Edition completely eliminated its usage.</p>
+            </div>
+            <div class="right">
+                <strong>&check; The SBL Solution</strong>
+                <p>Always use the author's last name, a shortened title, and the page number for all subsequent citations.</p>
+            </div>
+        </div>
+
+        <div class="mistake-row">
+            <div class="wrong">
+                <strong> The Bible Bibliography Error</strong>
+                <p>Do not include standard modern Bible translations (e.g., NRSV, ESV, NIV) inside your final bibliography.</p>
+            </div>
+            <div class="right">
+                <strong>&check; The SBL Solution</strong>
+                <p>Cite Bible translations parenthetically inside your main text text only (e.g., Gen 1:1 NRSV), never in the back bibliography.</p>
+            </div>
+        </div>
+
+        <div class="mistake-row">
+            <div class="wrong">
+                <strong> Footnote Punctuation Splitting</strong>
+                <p>Do not separate authors and book names with periods in footnotes like you do in a bibliography.</p>
+            </div>
+            <div class="right">
+                <strong>&check; The SBL Solution</strong>
+                <p>Footnotes flow like sentences. Use commas between names and titles, and wrap your publication info cleanly in parentheses.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchTab(tabId) {
+        // Remove active class from all buttons and tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        // Find button that has the matching onclick function string and make it active
+        const clickedBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+        if(clickedBtn) clickedBtn.classList.add('active');
+        
+        // Show target tab content
+        const targetTab = document.getElementById(tabId);
+        if(targetTab) targetTab.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
