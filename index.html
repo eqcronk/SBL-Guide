@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SBL Citation Style Guide</title>
@@ -164,63 +163,6 @@
             font-size: 1.1rem;
         }
 
-        .btn-link {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: background-color 0.2s;
-        }
-
-        .btn-link:hover {
-            background-color: #1d4ed8;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background-color: #f1f5f9;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .blueprint {
-            background: #ffffff;
-            border: 2px dashed #cbd5e1;
-            padding: 30px;
-            border-radius: 6px;
-            font-family: "Times New Roman", Times, serif;
-            color: #000;
-            margin: 20px 0;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .blueprint-center {
-            text-align: center;
-        }
-
         .citation-block {
             background: white;
             border: 1px solid var(--border);
@@ -309,120 +251,116 @@
         }
 
         /* SBL Interactive Title Page Widget Layout Styles */
-.widget-wrapper {
-    display: flex;
-    background: #f4f6f8;
-    border: 1px solid #dcdde1;
-    border-radius: 8px;
-    margin-top: 20px;
-    height: 700px;
-    overflow: hidden;
-}
+        .widget-wrapper {
+            display: flex;
+            background: #f4f6f8;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            margin-top: 20px;
+            height: 700px;
+            overflow: hidden;
+        }
 
-.widget-sidebar {
-    width: 320px;
-    background: #ffffff;
-    border-right: 1px solid #dcdde1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
+        .widget-sidebar {
+            width: 320px;
+            background: #ffffff;
+            border-right: 1px solid #dcdde1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
 
-.widget-input-group {
-    margin-bottom: 14px;
-}
+        .widget-input-group {
+            margin-bottom: 14px;
+        }
 
-.widget-input-group label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+        .widget-input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-.widget-input-group input, .widget-input-group textarea {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #dcdde1;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    box-sizing: border-box;
-}
+        .widget-input-group input, .widget-input-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #dcdde1;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
 
-.widget-actions {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+        .widget-actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.w-btn {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    color: white;
-}
+        .w-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: white;
+        }
 
-.w-btn-docx { background-color: #3498db; }
-.w-btn-pdf { background-color: #2ecc71; }
-.w-btn-copy { background-color: #7f8c8d; }
+        .w-btn-docx { background-color: #3498db; }
+        .w-btn-pdf { background-color: #2ecc71; }
+        .w-btn-copy { background-color: #7f8c8d; }
 
-/* Visual Simulator Sheet Canvas Layout */
-.widget-preview-area {
-    flex: 1;
-    background: #f4f6f8;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
+        .widget-preview-area {
+            flex: 1;
+            background: #f4f6f8;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-.widget-paper-canvas {
-    width: 450px; /* Scaled down representation for web browser views */
-    height: 582px;
-    background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 0.5in;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
+        .widget-paper-canvas {
+            width: 450px;
+            min-height: 582px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 0.5in;
+            display: block;
+            box-sizing: border-box;
+        }
 
-.w-sbl-text {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 8.5pt; /* Scaled text relative to container width */
-    line-height: 14pt;
-    color: #000000;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: normal; /* No bold allowed */
-    width: 100%;
-    white-space: pre-wrap;
-}
+        .w-sbl-text {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8.5pt;
+            line-height: 14pt;
+            color: #000000;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: normal;
+            width: 100%;
+            white-space: pre-wrap;
+        }
 
-<style>
-        .w-inst-block { margin-top: 0.3in; }
-        .w-sub-block { line-height: 16pt; }
-        .w-auth-block { margin-bottom: 0.3in; }
+        .w-inst-block { margin-top: 0.2in; }
+        .w-title-block { margin-top: 1.1in; }
+        .w-sub-block { margin-top: 1.1in; line-height: 14pt; }
+        .w-auth-block { margin-top: 1.1in; }
     </style>
 
-
-    <script src="https://unpkg.com"></script>
-    <script src="https://cloudflare.com"></script>
+    <!-- Required Libraries for DOCX and PDF generation -->
+    <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -443,7 +381,7 @@
         <!-- HOME PAGE -->
         <div id="home" class="tab-content active">
             <div class="hero-box">
-                 SBL style is simply Chicago Manual of Style for theological and biblical research. Master the mechanics of footnotes, and you master SBL!
+                SBL style is simply Chicago Manual of Style for theological and biblical research. Master the mechanics of footnotes, and you master SBL!
             </div>
             
             <h2>Quick Shortcuts</h2>
@@ -482,58 +420,57 @@
             <p>Follow this structure when creating your document layout in Microsoft Word or Google Docs.</p>
             
             <h3>The Layout</h3>
-             <p> 1 inch margins on all four sides, Times New Roman, 12-point scaling, Times New Roman, 10-point scaling for footnotes, Double-spaced for main text body. Single-spaced inside individual footnotes and long block quotes, 	Top right corner or bottom center page numbers, Do not show numbers on the introductory title page..</p>
+            <p>1 inch margins on all four sides, Times New Roman, 12-point scaling, Times New Roman, 10-point scaling for footnotes, Double-spaced for main text body. Single-spaced inside individual footnotes and long block quotes, Top right corner or bottom center page numbers, Do not show numbers on the introductory title page.</p>
              
-             <!-- NEW INTERACTIVE WIDGET SECTION -->
-    <h3 style="margin-top: 40px;">Title Page Creator</h3>
-    <p>Fill out the fields below to create and download your formatted SBL Title Page.</p>
-    
-    <div class="widget-wrapper">
-        <!-- Sidebar Inputs -->
-        <div class="widget-sidebar">
-            <div class="widget-input-group">
-                <label for="w-institution">Institution Name</label>
-                <input type="text" id="w-institution" value="NORTH CENTRAL UNIVERSITY">
-            </div>
-            <div class="widget-input-group">
-                <label for="w-title">Paper Title & Subtitle</label>
-                <textarea id="w-title" rows="3">WRITING IN SBL:&#10;COMPLICATED FORMATTING</textarea>
-            </div>
-            <div class="widget-input-group">
-                <label for="w-instructor">Instructor Name</label>
-                <input type="text" id="w-instructor" value="DR. OLD MCDONALD">
-            </div>
-            <div class="widget-input-group">
-                <label for="w-course">Course Code & Description</label>
-                <input type="text" id="w-course" value="BIBL 777 JESUS AND STUFF">
-            </div>
-            <div class="widget-input-group">
-                <label for="w-author">Student Name</label>
-                <input type="text" id="w-author" value="ANDREW B. CARL">
-            </div>
-            <div class="widget-input-group">
-                <label for="w-date">Submission Date</label>
-                <input type="text" id="w-date" value="DECEMBER 11, 2023">
-            </div>
+            <h3 style="margin-top: 40px;">Title Page Creator</h3>
+            <p>Fill out the fields below to create and download your formatted SBL Title Page.</p>
             
-            <div class="widget-actions">
-                <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()"> Download .DOCX</button>
-                <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()"> Download .PDF</button>
-                <button class="w-btn w-btn-copy" onclick="copyWidgetText()"> Copy Plain Text</button>
+            <div class="widget-wrapper">
+                <!-- Sidebar Inputs -->
+                <div class="widget-sidebar">
+                    <div class="widget-input-group">
+                        <label for="w-institution">Institution Name</label>
+                        <input type="text" id="w-institution" value="NORTH CENTRAL UNIVERSITY">
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="w-title">Paper Title & Subtitle</label>
+                        <textarea id="w-title" rows="3">WRITING IN SBL:&#10;COMPLICATED FORMATTING</textarea>
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="w-instructor">Instructor Name</label>
+                        <input type="text" id="w-instructor" value="DR. OLD MCDONALD">
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="w-course">Course Code & Description</label>
+                        <input type="text" id="w-course" value="BIBL 777 JESUS AND STUFF">
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="w-author">Student Name</label>
+                        <input type="text" id="w-author" value="ANDREW B. CARL">
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="w-date">Submission Date</label>
+                        <input type="text" id="w-date" value="DECEMBER 11, 2023">
+                    </div>
+                    
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()"> Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()"> Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyWidgetText()"> Copy Plain Text</button>
+                    </div>
+                </div>
+                
+                <!-- Document Canvas Preview Panel -->
+                <div class="widget-preview-area">
+                    <div class="widget-paper-canvas" id="widget-canvas">
+                        <div class="w-sbl-text w-inst-block" id="w-view-inst"></div>
+                        <div class="w-sbl-text w-title-block" id="w-view-title"></div>
+                        <div class="w-sbl-text w-sub-block" id="w-view-sub"></div>
+                        <div class="w-sbl-text w-auth-block" id="w-view-auth"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Document Canvas Preview Panel -->
-        <div class="widget-preview-area">
-            <div class="widget-paper-canvas" id="widget-canvas">
-                <div class="w-sbl-text w-inst-block" id="w-view-inst"></div>
-                <div class="w-sbl-text w-title-block" id="w-view-title"></div>
-                <div class="w-sbl-text w-sub-block" id="w-view-sub"></div>
-                <div class="w-sbl-text w-auth-block" id="w-view-auth"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
         <!-- CITE A SOURCE -->
         <div id="cite" class="tab-content">
@@ -609,186 +546,139 @@
         </div>
 
     </div>
-<script>
-// Scope wrapper to isolate variable lookups safely inside your layout page
-const widgetFields = {
-    inst: document.getElementById('w-institution'),
-    title: document.getElementById('w-title'),
-    instructor: document.getElementById('w-instructor'),
-    course: document.getElementById('w-course'),
-    author: document.getElementById('w-author'),
-    date: document.getElementById('w-date'),
-    vInst: document.getElementById('w-view-inst'),
-    vTitle: document.getElementById('w-view-title'),
-    vSub: document.getElementById('w-view-sub'),
-    vAuth: document.getElementById('w-view-auth')
-};
 
-function renderWidgetLiveUpdate() {
-    widgetFields.vInst.textContent = widgetFields.inst.value.toUpperCase();
-    widgetFields.vTitle.textContent = widgetFields.title.value.toUpperCase();
-    
-    widgetFields.vSub.textContent = `SUBMITTED TO ${widgetFields.instructor.value.toUpperCase()}\nIN PARTIAL FULFILLMENT OF\n${widgetFields.course.value.toUpperCase()}`;
-    
-    widgetFields.vAuth.textContent = `BY\n${widgetFields.author.value.toUpperCase()}\n${widgetFields.date.value.toUpperCase()}`;
-}
-
-// Bind live text changes to user field interactions
-Object.values(widgetFields).slice(0, 6).forEach(element => {
-    element.addEventListener('input', renderWidgetLiveUpdate);
-});
-
-// Run immediate execution to frame preview correctly on load
-renderWidgetLiveUpdate();
-
-function copyWidgetText() {
-    const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
-    navigator.clipboard.writeText(outputString).then(() => {
-        alert('Plain text metadata successfully copied to clipboard!');
-    }).catch(err => {
-        alert('Clipboard sync error encountered: ' + err);
-    });
-}
-
-function downloadWidgetPdf() {
-    const targetElement = document.getElementById('widget-canvas');
-    const pdfSettings = {
-        margin: 0,
-        filename: 'SBL_Title_Page.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 3, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(pdfSettings).from(targetElement).save();
-}
-function downloadWidgetDocx() {
-    // 🟢 ABSOLUTE FIX: Safely find where the unpkg script registered the library
-    const docxLibrary = window.docx || docx;
-    
-    if (!docxLibrary) {
-        alert("Error: The Word document engine is not loaded on this page yet.");
-        return;
-    }
-
-    // Pull the structural configuration variables from the active global engine instance
-    const { Document, Packer, Paragraph, TextRun, AlignmentType } = docxLibrary;
-    
-    // (Keep the rest of your original function body below this exactly the same!)
-    const makeBreaks = (count) => Array.from({ length: count }, () => new Paragraph({ text: "" }));
-    
-    try {
-        const documentStructure = new Document({
-            sections: [{
-                properties: {
-                    page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-                },
-                children: [
-                    ...makeBreaks(5),
-                    new Paragraph({
-                        alignment: AlignmentType.CENTER,
-                        children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24 })]
-                    }),
-                    ...makeBreaks(8),
-                    ...widgetFields.vTitle.textContent.split('\n').map(line => new Paragraph({
-                        alignment: AlignmentType.CENTER,
-                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                    })),
-                    ...makeBreaks(8),
-                    ...widgetFields.vSub.textContent.split('\n').map(line => new Paragraph({
-                        alignment: AlignmentType.CENTER,
-                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                    })),
-                    ...makeBreaks(8),
-                    ...widgetFields.vAuth.textContent.split('\n').map(line => new Paragraph({
-                        alignment: AlignmentType.CENTER,
-                        children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                    }))
-                ]
-            }]
-        });
-
-        Packer.toBlob(documentStructure).then(fileBlob => {
-            const fileURL = window.URL.createObjectURL(fileBlob);
-            const anchorElement = document.createElement("a");
-            anchorElement.href = fileURL;
-            anchorElement.download = "SBL_Title_Page.docx";
-            document.body.appendChild(anchorElement);
-            anchorElement.click();
-            window.URL.revokeObjectURL(fileURL);
-            document.body.removeChild(anchorElement);
-        });
-    } catch (err) {
-        alert("Word Document engine processing crash: " + err.message);
-    }
-}
-
-function downloadWidgetDocx() {
-    const { Document, Packer, Paragraph, TextRun, AlignmentType } = docx;
-    const makeBreaks = (count) => Array.from({ length: count }, () => new Paragraph({ text: "" }));
-
-    const documentStructure = new Document({
-        sections: [{
-            properties: {
-                page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-            },
-            children: [
-                ...makeBreaks(5),
-                new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24 })]
-                }),
-                ...makeBreaks(8),
-                ...widgetFields.vTitle.textContent.split('\n').map(line => new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                })),
-                ...makeBreaks(8),
-                ...widgetFields.vSub.textContent.split('\n').map(line => new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                })),
-                ...makeBreaks(8),
-                ...widgetFields.vAuth.textContent.split('\n').map(line => new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
-                }))
-            ]
-        }]
-    });
-
-    Packer.toBlob(documentStructure).then(fileBlob => {
-        const fileURL = window.URL.createObjectURL(fileBlob);
-        const anchorElement = document.createElement("a");
-        anchorElement.href = fileURL;
-        anchorElement.download = "SBL_Title_Page.docx";
-        document.body.appendChild(anchorElement);
-        anchorElement.click();
-        window.URL.revokeObjectURL(fileURL);
-        document.body.removeChild(anchorElement);
-    });
-}
-  </script>
     <script>
+        // DOM Element lookup binding
+        const widgetFields = {
+            inst: document.getElementById('w-institution'),
+            title: document.getElementById('w-title'),
+            instructor: document.getElementById('w-instructor'),
+            course: document.getElementById('w-course'),
+            author: document.getElementById('w-author'),
+            date: document.getElementById('w-date'),
+            vInst: document.getElementById('w-view-inst'),
+            vTitle: document.getElementById('w-view-title'),
+            vSub: document.getElementById('w-view-sub'),
+            vAuth: document.getElementById('w-view-auth')
+        };
+
+        function renderWidgetLiveUpdate() {
+            widgetFields.vInst.textContent = widgetFields.inst.value.toUpperCase();
+            widgetFields.vTitle.textContent = widgetFields.title.value.toUpperCase();
+            
+            widgetFields.vSub.textContent = `SUBMITTED TO ${widgetFields.instructor.value.toUpperCase()}\nIN PARTIAL FULFILLMENT OF\n${widgetFields.course.value.toUpperCase()}`;
+            
+            widgetFields.vAuth.textContent = `BY\n${widgetFields.author.value.toUpperCase()}\n${widgetFields.date.value.toUpperCase()}`;
+        }
+
+        // Attach live updates to form controls
+        [widgetFields.inst, widgetFields.title, widgetFields.instructor, widgetFields.course, widgetFields.author, widgetFields.date].forEach(element => {
+            if (element) element.addEventListener('input', renderWidgetLiveUpdate);
+        });
+
+        // Initialize preview on page load
+        renderWidgetLiveUpdate();
+
+        function copyWidgetText() {
+            const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
+            navigator.clipboard.writeText(outputString).then(() => {
+                alert('Plain text metadata successfully copied to clipboard!');
+            }).catch(err => {
+                alert('Clipboard sync error encountered: ' + err);
+            });
+        }
+
+        function downloadWidgetPdf() {
+            if (typeof html2pdf === 'undefined') {
+                alert("Error: The PDF generation library is still loading or blocked.");
+                return;
+            }
+            
+            // Scroll to top to ensure html2canvas captures offset elements correctly
+            window.scrollTo(0, 0);
+
+            const targetElement = document.getElementById('widget-canvas');
+            const pdfSettings = {
+                margin: 0.5,
+                filename: 'SBL_Title_Page.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(pdfSettings).from(targetElement).save();
+        }
+
+        function downloadWidgetDocx() {
+            const docxLibrary = window.docx;
+            
+            if (!docxLibrary) {
+                alert("Error: The Word document engine is not loaded on this page yet.");
+                return;
+            }
+
+            const { Document, Packer, Paragraph, TextRun, AlignmentType } = docxLibrary;
+            const makeBreaks = (count) => Array.from({ length: count }, () => new Paragraph({ text: "" }));
+            
+            try {
+                const documentStructure = new Document({
+                    sections: [{
+                        properties: {
+                            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                        },
+                        children: [
+                            ...makeBreaks(5),
+                            new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24 })]
+                            }),
+                            ...makeBreaks(8),
+                            ...widgetFields.vTitle.textContent.split('\n').map(line => new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                            })),
+                            ...makeBreaks(8),
+                            ...widgetFields.vSub.textContent.split('\n').map(line => new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                            })),
+                            ...makeBreaks(8),
+                            ...widgetFields.vAuth.textContent.split('\n').map(line => new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                            }))
+                        ]
+                    }]
+                });
+
+                Packer.toBlob(documentStructure).then(fileBlob => {
+                    const fileURL = window.URL.createObjectURL(fileBlob);
+                    const anchorElement = document.createElement("a");
+                    anchorElement.href = fileURL;
+                    anchorElement.download = "SBL_Title_Page.docx";
+                    document.body.appendChild(anchorElement);
+                    anchorElement.click();
+                    window.URL.revokeObjectURL(fileURL);
+                    document.body.removeChild(anchorElement);
+                });
+            } catch (err) {
+                alert("Word Document engine processing crash: " + err.message);
+            }
+        }
+
         function switchTab(tabId) {
-            // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Remove active status from all tab buttons
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Show selected tab content and add active state to its matching button
             document.getElementById(tabId).classList.add('active');
             
-            // Map button context to target tab IDs
             const indexMap = { 'home': 0, 'format': 1, 'cite': 2, 'mistakes': 3 };
             buttons[indexMap[tabId]].classList.add('active');
 
-            // Automatically scroll smooth back to navigation focus point
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
-    
 </body>
 </html>
