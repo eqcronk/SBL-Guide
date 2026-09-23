@@ -61,6 +61,7 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
         }
 
         .tab-btn {
@@ -132,6 +133,23 @@
             font-size: 1.1rem;
             color: var(--primary);
             font-weight: 500;
+        }
+
+        .info-disclaimer {
+            background-color: #fffbeeb0;
+            border-left: 4px solid #d97706;
+            color: #92400e;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .info-disclaimer a {
+            color: #b45309;
+            font-weight: 600;
+            text-decoration: underline;
         }
 
         .grid {
@@ -250,7 +268,7 @@
             margin-bottom: 5px;
         }
 
-        /* SBL Interactive Title Page Widget Layout Styles */
+        /* Widget Layout Styles */
         .widget-wrapper {
             display: flex;
             background: #f4f6f8;
@@ -259,6 +277,19 @@
             margin-top: 20px;
             height: 700px;
             overflow: hidden;
+        }
+
+        @media (max-width: 850px) {
+            .widget-wrapper {
+                flex-direction: column;
+                height: auto;
+            }
+            .widget-sidebar {
+                width: 100% !important;
+            }
+            .widget-preview-area {
+                overflow-x: auto;
+            }
         }
 
         .widget-sidebar {
@@ -285,7 +316,7 @@
             letter-spacing: 0.5px;
         }
 
-        .widget-input-group input, .widget-input-group textarea {
+        .widget-input-group input, .widget-input-group textarea, .widget-input-group select {
             width: 100%;
             padding: 8px 10px;
             border: 1px solid #dcdde1;
@@ -299,6 +330,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            padding-top: 10px;
         }
 
         .w-btn {
@@ -314,11 +346,17 @@
             justify-content: center;
             gap: 6px;
             color: white;
+            transition: opacity 0.2s;
+        }
+
+        .w-btn:hover {
+            opacity: 0.9;
         }
 
         .w-btn-docx { background-color: #3498db; }
         .w-btn-pdf { background-color: #2ecc71; }
         .w-btn-copy { background-color: #7f8c8d; }
+        .w-btn-primary { background-color: var(--primary); }
 
         .widget-preview-area {
             flex: 1;
@@ -330,7 +368,7 @@
             align-items: flex-start;
         }
 
-        /* Set preview canvas padding to 1 inch to match PDF export */
+        /* Strict Canvas Formatting: Times New Roman, 12pt (16px), NOT BOLD */
         .widget-paper-canvas {
             width: 450px;
             min-height: 582px;
@@ -343,12 +381,62 @@
             align-items: center;
             box-sizing: border-box;
             text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            font-weight: normal;
+        }
+
+        .bib-paper-canvas {
+            width: 450px;
+            min-height: 582px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 0.75in;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+            text-align: left;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            font-weight: normal;
+        }
+
+        .bib-header-title {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            font-weight: normal;
+            text-align: center;
+            margin-bottom: 24pt;
+            width: 100%;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .bib-entry-list {
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            font-weight: normal;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .bib-item {
+            padding-left: 0.5in;
+            text-indent: -0.5in;
+            margin-bottom: 12pt;
+            word-wrap: break-word;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            font-weight: normal;
         }
 
         .w-sbl-text {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 8.5pt;
-            line-height: 14pt;
+            font-size: 12pt;
+            line-height: 18pt;
             color: #000000;
             text-align: center;
             text-transform: uppercase;
@@ -360,10 +448,10 @@
 
         .w-inst-block { margin-top: 0; }
         .w-title-block { margin-top: auto; margin-bottom: auto; }
-        .w-sub-block { margin-top: 0; line-height: 14pt; }
+        .w-sub-block { margin-top: 0; line-height: 18pt; }
         .w-auth-block { margin-top: auto; margin-bottom: 0; }
 
-        /* Custom Notification Toast */
+        /* Notification Toast */
         .toast-message {
             position: fixed;
             bottom: 20px;
@@ -377,13 +465,14 @@
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
         .toast-message.show {
             opacity: 1;
         }
     </style>
 
-    <!-- Required Libraries for DOCX and PDF generation -->
+    <!-- Required Libraries for DOCX and PDF export -->
     <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -391,14 +480,14 @@
 
     <header>
         <h1>SBL Citation Guide</h1>
-        <p>A handbook for students navigating Society of Biblical Literature formatting.</p>
+        <p>A handbook and formatting suite for Society of Biblical Literature papers.</p>
     </header>
 
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('home')"> Home Page</button>
-        <button class="tab-btn" onclick="switchTab('format')"> Format My Paper</button>
-        <button class="tab-btn" onclick="switchTab('cite')"> Cite a Source</button>
-        <button class="tab-btn" onclick="switchTab('mistakes')"> Common Mistakes</button>
+        <button class="tab-btn active" onclick="switchTab('home')">Home Page</button>
+        <button class="tab-btn" onclick="switchTab('format')">Format My Paper</button>
+        <button class="tab-btn" onclick="switchTab('cite')">Cite a Source</button>
+        <button class="tab-btn" onclick="switchTab('mistakes')">Common Mistakes</button>
     </nav>
 
     <div class="container">
@@ -406,7 +495,7 @@
         <!-- HOME PAGE -->
         <div id="home" class="tab-content active">
             <div class="hero-box">
-                SBL style is simply Chicago Manual of Style for theological and biblical research. Master the mechanics of footnotes, and you master SBL!
+                SBL style is built upon the Chicago Manual of Style specifically for theological and biblical research. Master footnotes, title layout, and bibliographies right here!
             </div>
             
             <h2>Quick Shortcuts</h2>
@@ -414,41 +503,41 @@
             
             <div class="grid">
                 <div class="card" onclick="switchTab('format')">
-                    <h4> General Layout</h4>
-                    <p>Margins, font choices, line spacing, and title page templates.</p>
+                    <h4>General Layout & Title Creator</h4>
+                    <p>Margins, font choices, line spacing, and interactive title page exports.</p>
+                </div>
+                <div class="card" onclick="switchTab('format')">
+                    <h4>Bibliography Alphabetizer</h4>
+                    <p>Paste your pre-formatted entries to sort them into proper SBL hanging indent order.</p>
                 </div>
                 <div class="card" onclick="switchTab('cite')">
-                    <h4> Citing Resources </h4>
-                    <p>How to construct your first footnote, short notes, and bibliography entry.</p>
-                </div>
-                <div class="card" onclick="switchTab('cite')">
-                    <h4> Commentary Series</h4>
-                    <p>Format rules for single-volume vs. multi-volume biblical commentaries.</p>
+                    <h4>SBL Citation Generator</h4>
+                    <p>Generate precise SBL Footnotes and Bibliography entries instantly for books, articles, and commentaries.</p>
                 </div>
                 <div class="card" onclick="switchTab('mistakes')">
-                    <h4> The "No Ibid" Rule</h4>
-                    <p>Learn how to properly repeat a citation.</p>
+                    <h4>The "No Ibid." Rule</h4>
+                    <p>Learn how to properly repeat a citation without using Ibid.</p>
                 </div>
             </div>
 
             <h3>Official Resources</h3>
-            <p>When you need to verify massive lists of ancient text abbreviations or advanced edge-cases, always check the foundational manuals directly:</p>
+            <p>When you need to verify massive lists of ancient text abbreviations or advanced edge-cases, check these direct links:</p>
             <ul>
                 <li>Explore the official <a href="https://northcentral.on.worldcat.org/oclc/890377614" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: none;">SBL Style Handbook</a>.</li>
-                <li>Schedule a meeting with our <a href="https://libguides.northcentral.edu/c.php?g=1300109&p=9551397" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: none;">SBL Specialist</a>.</li>
+                <li>Schedule a meeting with an <a href="https://libguides.northcentral.edu/c.php?g=1300109&p=9551397" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: none;">SBL Specialist</a>.</li>
             </ul>
         </div>
 
         <!-- FORMAT MY PAPER -->
         <div id="format" class="tab-content">
             <h2>Format My Paper</h2>
-            <p>Follow this structure when creating your document layout in Microsoft Word or Google Docs.</p>
+            <p>Follow this standard layout structure when configuring your document in Microsoft Word or Google Docs.</p>
             
-            <h3>The Layout</h3>
-            <p>1 inch margins on all four sides, Times New Roman, 12-point scaling, Times New Roman, 10-point scaling for footnotes, Double-spaced for main text body. Single-spaced inside individual footnotes and long block quotes, Top right corner or bottom center page numbers, Do not show numbers on the introductory title page.</p>
+            <h3>General Layout Guidelines</h3>
+            <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text, 10-point font for footnotes. Double-spaced body text, single-spaced footnotes and block quotes. Top-right or bottom-center page numbers (omit page number on title page).</p>
              
             <h3 style="margin-top: 40px;">Title Page Creator</h3>
-            <p>Fill out the fields below to create and download your formatted SBL Title Page.</p>
+            <p>Fill out the fields below to create and export your formatted SBL Title Page.</p>
             
             <div class="widget-wrapper">
                 <!-- Sidebar Inputs -->
@@ -479,9 +568,9 @@
                     </div>
                     
                     <div class="widget-actions">
-                        <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()"> Download .DOCX</button>
-                        <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()"> Download .PDF</button>
-                        <button class="w-btn w-btn-copy" onclick="copyWidgetText()"> Copy Plain Text</button>
+                        <button class="w-btn w-btn-docx" onclick="downloadWidgetDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadWidgetPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyWidgetText()">Copy Plain Text</button>
                     </div>
                 </div>
                 
@@ -495,19 +584,104 @@
                     </div>
                 </div>
             </div>
+
+            <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
+            <h3 style="margin-top: 50px;">Bibliography Alphabetizer</h3>
+            <div class="info-disclaimer">
+                <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
+            </div>
+
+            <div class="widget-wrapper">
+                <!-- Sidebar Inputs -->
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
+                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; font-family: 'Times New Roman', Times, serif; font-size: 0.95rem; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadBibDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadBibPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyBibText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <!-- Document Canvas Preview Panel -->
+                <div class="widget-preview-area">
+                    <div class="bib-paper-canvas" id="bib-canvas">
+                        <div class="bib-header-title">BIBLIOGRAPHY</div>
+                        <div class="bib-entry-list" id="bib-entry-list">
+                            <!-- Alphabetized bibliography entries will render here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- CITE A SOURCE -->
         <div id="cite" class="tab-content">
             <h2>Cite a Source</h2>
             <p>SBL uses footnotes at the bottom of each page, alongside a comprehensive Bibliography list at the very end of your paper.</p>
+
+            <!-- Interactive SBL Citation Generator -->
+            <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+                <h3 style="margin-top: 0; color: var(--primary);">Interactive SBL Citation Generator</h3>
+                <p style="font-size: 0.95rem;">Select your resource type, fill in the details, and automatically construct accurate SBL Footnotes and Bibliography entries.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px;">
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Source Type</label>
+                        <select id="gen-type" onchange="updateGenFields()" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; margin-top: 4px;">
+                            <option value="book">Book (Single/Multi Author)</option>
+                            <option value="journal">Journal Article</option>
+                            <option value="commentary">Commentary Volume</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Author / Editor Name</label>
+                        <input type="text" id="gen-author" placeholder="First Last (e.g. N. T. Wright)" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; margin-top: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Title</label>
+                        <input type="text" id="gen-title" placeholder="Main Title: Subtitle" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; margin-top: 4px;">
+                    </div>
+                </div>
+
+                <div id="gen-dynamic-fields" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 15px;">
+                    <!-- Dynamic fields injected here -->
+                </div>
+
+                <button class="w-btn w-btn-primary" onclick="generateSblCitation()" style="width: auto; padding: 10px 24px; margin-bottom: 20px;">Generate Citation</button>
+
+                <div id="gen-output-container" style="display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 15px;">
+                    <div style="margin-bottom: 12px;">
+                        <span class="tag">First Footnote (N):</span>
+                        <div id="out-note" style="background: white; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-family: 'Times New Roman', Times, serif; font-size: 11pt; margin-top: 4px;"></div>
+                        <button onclick="copyElementText('out-note')" style="font-size: 0.75rem; background: none; border: none; color: var(--primary); cursor: pointer; text-decoration: underline; margin-top: 4px;">Copy Footnote</button>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <span class="tag">Short Footnote (SN):</span>
+                        <div id="out-short" style="background: white; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-family: 'Times New Roman', Times, serif; font-size: 11pt; margin-top: 4px;"></div>
+                        <button onclick="copyElementText('out-short')" style="font-size: 0.75rem; background: none; border: none; color: var(--primary); cursor: pointer; text-decoration: underline; margin-top: 4px;">Copy Short Footnote</button>
+                    </div>
+
+                    <div>
+                        <span class="tag">Bibliography Entry (B):</span>
+                        <div id="out-bib" style="background: white; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-family: 'Times New Roman', Times, serif; font-size: 11pt; text-indent: -0.35in; padding-left: 0.35in; margin-top: 4px;"></div>
+                        <button onclick="copyElementText('out-bib')" style="font-size: 0.75rem; background: none; border: none; color: var(--primary); cursor: pointer; text-decoration: underline; margin-top: 4px;">Copy Bibliography Entry</button>
+                    </div>
+                </div>
+            </div>
             
+            <h3>Reference Rules & Manual Examples</h3>
+
             <div class="citation-block">
                 <div class="citation-type">Standard Book (Single Author)</div>
                 <div class="example-line"><span class="tag">First Note (N):</span> 1. Firstname Lastname, <em>Title of Book: Subtitle</em> (City: Publisher, Year), Page.</div>
                 <div class="example-line"><span class="tag">Short Note (SN):</span> 2. Lastname, <em>Short Title</em>, Page.</div>
                 <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Firstname. <em>Title of Book: Subtitle</em>. City: Publisher, Year.</div>
-                <div class="callout"> Key differences: First footnotes use commas and separate publication parameters with parentheses. Bibliography items use trailing periods and a hanging indent.</div>
+                <div class="callout">Key differences: First footnotes use commas and enclose publication details in parentheses. Bibliography items use trailing periods and hanging indents.</div>
             </div>
 
             <div class="citation-block">
@@ -521,51 +695,51 @@
                 <div class="citation-type">Commentary Volume (In a Series)</div>
                 <div class="example-line"><span class="tag">First Note (N):</span> 1. Scholar Firstname Lastname, <em>The Book of Genesis</em>, Series Title 1A (City: Publisher, Year), Page.</div>
                 <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Scholar Firstname. <em>The Book of Genesis</em>. Series Title 1A. City: Publisher, Year.</div>
-                <div class="callout"> Warning: Commentary series are diverse. Always cross-check if your series is treated like an authored volume or an edited compilation entry.</div>
+                <div class="callout">Warning: Commentary series formats vary. Verify whether your series treats volumes as authored or edited compilations.</div>
             </div>
         </div>
 
         <!-- COMMON MISTAKES -->
         <div id="mistakes" class="tab-content">
             <h2>Common Mistakes to Avoid</h2>
-            <p>Review this diagnostic checklist before uploading or passing in your final paper draft to safeguard your grades.</p>
+            <p>Review this diagnostic checklist before uploading or submitting your final paper draft.</p>
 
             <h3>1. The Extinction of "Ibid."</h3>
-            <p>SBL 2nd Edition <strong>completely banned</strong> the use of "Ibid." to denote consecutive duplicate citation resources.</p>
+            <p>SBL 2nd Edition <strong>completely banned</strong> the use of "Ibid." for consecutive duplicate citations.</p>
             <div class="wrong-right">
                 <div class="box-wrong">
-                    <div class="box-title"> Incorrect Form</div>
+                    <div class="box-title">Incorrect Form</div>
                     <p>1. Smith, <em>Genesis</em>, 12.<br>2. Ibid., 14.</p>
                 </div>
                 <div class="box-right">
-                    <div class="box-title"> Correct SBL 2nd Edition Form</div>
+                    <div class="box-title">Correct SBL 2nd Edition Form</div>
                     <p>1. Smith, <em>Genesis</em>, 12.<br>2. Smith, <em>Genesis</em>, 14.</p>
                 </div>
             </div>
 
             <h3>2. The Bible Bibliography Trap</h3>
-            <p>Modern translation editions of Holy Scripture are <strong>only cited textually inside inline parenthetical blocks</strong>. Never list them in your trailing Bibliography index!</p>
+            <p>Modern translation editions of Holy Scripture are <strong>cited textually in inline parenthetical blocks</strong>. Do not list standard Bible translations in your trailing Bibliography index!</p>
             <div class="wrong-right">
                 <div class="box-wrong">
-                    <div class="box-title"> Incorrect Form</div>
-                    <p>Adding "The New Revised Standard Version. Nashville: Nelson, 1989" into your structural bibliography pages.</p>
+                    <div class="box-title">Incorrect Form</div>
+                    <p>Adding "The New Revised Standard Version. Nashville: Nelson, 1989" into your structural bibliography page.</p>
                 </div>
                 <div class="box-right">
-                    <div class="box-title"> Correct SBL 2nd Edition Form</div>
-                    <p>Incorporate the scriptural span directly into your main text prose body: "...as stated in the absolute narrative baseline text (Gen 1:1 NRSV)."</p>
+                    <div class="box-title">Correct SBL 2nd Edition Form</div>
+                    <p>Incorporate the scriptural reference directly in your body prose: "...as stated in the text (Gen 1:1 NRSV)."</p>
                 </div>
             </div>
 
             <h3>3. Punctuation Placement with Footnotes</h3>
-            <p>Footnote lookup callout index numerals must sit outside trailing punctuation marks like periods or quotes.</p>
+            <p>Footnote callout numbers must sit outside trailing punctuation marks like periods or quotation marks.</p>
             <div class="wrong-right">
                 <div class="box-wrong">
-                    <div class="box-title"> Incorrect Form</div>
-                    <p>According to research<sup>3</sup>, the context changes. Or alternative layout traps like "This is true."<sup>4</sup></p>
+                    <div class="box-title">Incorrect Form</div>
+                    <p>According to research<sup>3</sup>, the context changes. Or "This is true."<sup>4</sup></p>
                 </div>
                 <div class="box-right">
-                    <div class="box-title"> Correct SBL 2nd Edition Form</div>
-                    <p>According to comprehensive research, the historical framework context changes dynamically.<sup>3</sup></p>
+                    <div class="box-title">Correct SBL 2nd Edition Form</div>
+                    <p>According to research, the context changes.<sup>3</sup> Or "This is true."<sup>4</sup></p>
                 </div>
             </div>
         </div>
@@ -590,6 +764,11 @@
             vAuth: document.getElementById('w-view-auth')
         };
 
+        const bibPasteArea = document.getElementById('bib-paste-area');
+        const bibEntryList = document.getElementById('bib-entry-list');
+
+        let currentAlphabetizedEntries = [];
+
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -599,6 +778,9 @@
             }, 3000);
         }
 
+        // -------------------------------------------------------------
+        // TITLE PAGE CREATOR ENGINE
+        // -------------------------------------------------------------
         function renderWidgetLiveUpdate() {
             widgetFields.vInst.textContent = widgetFields.inst.value.toUpperCase();
             widgetFields.vTitle.textContent = widgetFields.title.value.toUpperCase();
@@ -608,29 +790,192 @@
             widgetFields.vAuth.textContent = `BY\n${widgetFields.author.value.toUpperCase()}\n${widgetFields.date.value.toUpperCase()}`;
         }
 
-        // Attach live updates to form controls
         [widgetFields.inst, widgetFields.title, widgetFields.instructor, widgetFields.course, widgetFields.author, widgetFields.date].forEach(element => {
             if (element) element.addEventListener('input', renderWidgetLiveUpdate);
         });
 
-        // Initialize preview on page load
         renderWidgetLiveUpdate();
 
-        function copyWidgetText() {
-            const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
+        // -------------------------------------------------------------
+        // BIBLIOGRAPHY ALPHABETIZER ENGINE
+        // -------------------------------------------------------------
+        function processAndAlphabetizeBibliography() {
+            const rawText = bibPasteArea.value;
+            if (!rawText || !rawText.trim()) {
+                bibEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 12pt;">Paste your citations on the left to alphabetize them.</div>';
+                currentAlphabetizedEntries = [];
+                return;
+            }
+
+            // Split by lines, filtering out empty lines
+            const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+
+            // Clean leading quotes/punctuation for accurate surname/alphabetical sorting
+            currentAlphabetizedEntries = lines.sort((a, b) => {
+                const cleanA = a.replace(/^["'“‘\s]+/, '').toLowerCase();
+                const cleanB = b.replace(/^["'“‘\s]+/, '').toLowerCase();
+                return cleanA.localeCompare(cleanB);
+            });
+
+            bibEntryList.innerHTML = '';
+            currentAlphabetizedEntries.forEach(entry => {
+                const div = document.createElement('div');
+                div.className = 'bib-item';
+                div.textContent = entry;
+                bibEntryList.appendChild(div);
+            });
+        }
+
+        if (bibPasteArea) {
+            bibPasteArea.addEventListener('input', processAndAlphabetizeBibliography);
+            processAndAlphabetizeBibliography();
+        }
+
+        // -------------------------------------------------------------
+        // INTERACTIVE SBL CITATION GENERATOR
+        // -------------------------------------------------------------
+        function updateGenFields() {
+            const type = document.getElementById('gen-type').value;
+            const container = document.getElementById('gen-dynamic-fields');
             
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(outputString).then(() => {
-                    showToast('Plain text metadata successfully copied to clipboard!');
-                }).catch(err => {
-                    fallbackCopyText(outputString);
-                });
-            } else {
-                fallbackCopyText(outputString);
+            if (type === 'book') {
+                container.innerHTML = `
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">City</label>
+                        <input type="text" id="gen-city" placeholder="e.g. Grand Rapids" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Publisher</label>
+                        <input type="text" id="gen-pub" placeholder="e.g. Eerdmans" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Year</label>
+                        <input type="text" id="gen-year" placeholder="e.g. 2011" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Page Number</label>
+                        <input type="text" id="gen-page" placeholder="e.g. 45" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                `;
+            } else if (type === 'journal') {
+                container.innerHTML = `
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Journal Title</label>
+                        <input type="text" id="gen-journal" placeholder="e.g. Journal of Biblical Literature" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Volume & Issue</label>
+                        <input type="text" id="gen-vol" placeholder="e.g. 132, no. 4" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Year</label>
+                        <input type="text" id="gen-year" placeholder="e.g. 2013" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Full Page Range / Page</label>
+                        <input type="text" id="gen-page" placeholder="e.g. 501–522 or 505" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                `;
+            } else if (type === 'commentary') {
+                container.innerHTML = `
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Series Name & Vol</label>
+                        <input type="text" id="gen-series" placeholder="e.g. WBC 1" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">City</label>
+                        <input type="text" id="gen-city" placeholder="e.g. Waco, TX" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Publisher</label>
+                        <input type="text" id="gen-pub" placeholder="e.g. Word" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: var(--text-dark);">Year & Page</label>
+                        <input type="text" id="gen-yearpage" placeholder="e.g. 1987, 12" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    </div>
+                `;
             }
         }
 
-        function fallbackCopyText(text) {
+        updateGenFields();
+
+        function splitAuthorName(full) {
+            if (!full) return { first: '', last: '' };
+            const parts = full.trim().split(' ');
+            if (parts.length === 1) return { first: '', last: parts[0] };
+            const last = parts.pop();
+            const first = parts.join(' ');
+            return { first, last };
+        }
+
+        function generateSblCitation() {
+            const type = document.getElementById('gen-type').value;
+            const author = document.getElementById('gen-author').value.trim();
+            const title = document.getElementById('gen-title').value.trim();
+            const { first, last } = splitAuthorName(author);
+
+            let noteHtml = '', shortHtml = '', bibHtml = '';
+
+            if (type === 'book') {
+                const city = (document.getElementById('gen-city')?.value || 'City').trim();
+                const pub = (document.getElementById('gen-pub')?.value || 'Publisher').trim();
+                const year = (document.getElementById('gen-year')?.value || 'Year').trim();
+                const page = (document.getElementById('gen-page')?.value || 'Page').trim();
+
+                noteHtml = `1. ${author}, <em>${title}</em> (${city}: ${pub}, ${year}), ${page}.`;
+                shortHtml = `2. ${last}, <em>${title}</em>, ${page}.`;
+                bibHtml = `${last}, ${first}. <em>${title}</em>. ${city}: ${pub}, ${year}.`;
+            } else if (type === 'journal') {
+                const journal = (document.getElementById('gen-journal')?.value || 'Journal Title').trim();
+                const vol = (document.getElementById('gen-vol')?.value || '1').trim();
+                const year = (document.getElementById('gen-year')?.value || 'Year').trim();
+                const page = (document.getElementById('gen-page')?.value || 'Page').trim();
+
+                noteHtml = `1. ${author}, "${title}," <em>${journal}</em> ${vol} (${year}): ${page}.`;
+                shortHtml = `2. ${last}, "${title}," ${page}.`;
+                bibHtml = `${last}, ${first}. "${title}." <em>${journal}</em> ${vol} (${year}): ${page}.`;
+            } else if (type === 'commentary') {
+                const series = (document.getElementById('gen-series')?.value || 'Series').trim();
+                const city = (document.getElementById('gen-city')?.value || 'City').trim();
+                const pub = (document.getElementById('gen-pub')?.value || 'Publisher').trim();
+                const yearpage = (document.getElementById('gen-yearpage')?.value || '1990, 15').trim();
+
+                noteHtml = `1. ${author}, <em>${title}</em>, ${series} (${city}: ${pub}, ${yearpage}).`;
+                shortHtml = `2. ${last}, <em>${title}</em>, ${yearpage.split(',').pop()}.`;
+                bibHtml = `${last}, ${first}. <em>${title}</em>. ${series}. ${city}: ${pub}, ${yearpage.split(',')[0]}.`;
+            }
+
+            document.getElementById('out-note').innerHTML = noteHtml;
+            document.getElementById('out-short').innerHTML = shortHtml;
+            document.getElementById('out-bib').innerHTML = bibHtml;
+            document.getElementById('gen-output-container').style.display = 'block';
+        }
+
+        function copyElementText(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            fallbackCopyText(el.innerText, 'Copied formatted citation to clipboard!');
+        }
+
+        // -------------------------------------------------------------
+        // EXPORT ENGINE (.DOCX, .PDF, Plain Text)
+        // -------------------------------------------------------------
+        function copyWidgetText() {
+            const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
+            fallbackCopyText(outputString, 'Plain text metadata copied to clipboard!');
+        }
+
+        function copyBibText() {
+            if (currentAlphabetizedEntries.length === 0) {
+                showToast('No bibliography items to copy.');
+                return;
+            }
+            const outputString = "BIBLIOGRAPHY\n\n" + currentAlphabetizedEntries.join("\n\n");
+            fallbackCopyText(outputString, 'Alphabetized Bibliography copied to clipboard!');
+        }
+
+        function fallbackCopyText(text, successMsg) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed";
@@ -640,28 +985,40 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                showToast('Plain text metadata successfully copied to clipboard!');
+                showToast(successMsg || 'Text copied!');
             } catch (err) {
-                showToast('Clipboard sync error encountered.');
+                showToast('Clipboard error encountered.');
             }
             document.body.removeChild(textArea);
         }
 
         function downloadWidgetPdf() {
             if (typeof html2pdf === 'undefined') {
-                showToast("Error: The PDF generation library is still loading or blocked.");
+                showToast("Error: PDF generator library is unavailable.");
                 return;
             }
-            
-            // Scroll to top to ensure html2canvas captures offset elements correctly
             window.scrollTo(0, 0);
-
             const targetElement = document.getElementById('widget-canvas');
-            
-            // Generate PDF with strict 1-inch margins and accurate letter sizing
             const pdfSettings = {
-                margin: [1, 1, 1, 1], // [top, left, bottom, right] strictly 1 inch
+                margin: [1, 1, 1, 1],
                 filename: 'SBL_Title_Page.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(pdfSettings).from(targetElement).save();
+        }
+
+        function downloadBibPdf() {
+            if (typeof html2pdf === 'undefined') {
+                showToast("Error: PDF generator library is unavailable.");
+                return;
+            }
+            window.scrollTo(0, 0);
+            const targetElement = document.getElementById('bib-canvas');
+            const pdfSettings = {
+                margin: [1, 1, 1, 1],
+                filename: 'SBL_Bibliography.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -671,9 +1028,8 @@
 
         function downloadWidgetDocx() {
             const docxLibrary = window.docx;
-            
             if (!docxLibrary) {
-                showToast("Error: The Word document engine is not loaded on this page yet.");
+                showToast("Error: Word document library is unavailable.");
                 return;
             }
 
@@ -681,6 +1037,7 @@
             const makeBreaks = (count) => Array.from({ length: count }, () => new Paragraph({ text: "" }));
             
             try {
+                // Strict DOCX configuration: Times New Roman, 12pt (size 24), bold = false
                 const documentStructure = new Document({
                     sections: [{
                         properties: {
@@ -690,40 +1047,93 @@
                             ...makeBreaks(5),
                             new Paragraph({
                                 alignment: AlignmentType.CENTER,
-                                children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24 })]
+                                children: [new TextRun({ text: widgetFields.vInst.textContent, font: "Times New Roman", size: 24, bold: false })]
                             }),
                             ...makeBreaks(8),
                             ...widgetFields.vTitle.textContent.split('\n').map(line => new Paragraph({
                                 alignment: AlignmentType.CENTER,
-                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24, bold: false })]
                             })),
                             ...makeBreaks(8),
                             ...widgetFields.vSub.textContent.split('\n').map(line => new Paragraph({
                                 alignment: AlignmentType.CENTER,
-                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24, bold: false })]
                             })),
                             ...makeBreaks(8),
                             ...widgetFields.vAuth.textContent.split('\n').map(line => new Paragraph({
                                 alignment: AlignmentType.CENTER,
-                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24 })]
+                                children: [new TextRun({ text: line, font: "Times New Roman", size: 24, bold: false })]
                             }))
                         ]
                     }]
                 });
 
                 Packer.toBlob(documentStructure).then(fileBlob => {
-                    const fileURL = window.URL.createObjectURL(fileBlob);
-                    const anchorElement = document.createElement("a");
-                    anchorElement.href = fileURL;
-                    anchorElement.download = "SBL_Title_Page.docx";
-                    document.body.appendChild(anchorElement);
-                    anchorElement.click();
-                    window.URL.revokeObjectURL(fileURL);
-                    document.body.removeChild(anchorElement);
+                    saveFileBlob(fileBlob, "SBL_Title_Page.docx");
                 });
             } catch (err) {
-                showToast("Word Document engine processing crash: " + err.message);
+                showToast("Word Document processing error: " + err.message);
             }
+        }
+
+        function downloadBibDocx() {
+            const docxLibrary = window.docx;
+            if (!docxLibrary) {
+                showToast("Error: Word document library is unavailable.");
+                return;
+            }
+
+            if (currentAlphabetizedEntries.length === 0) {
+                showToast("No bibliography data to export.");
+                return;
+            }
+
+            const { Document, Packer, Paragraph, TextRun, AlignmentType } = docxLibrary;
+
+            try {
+                // Header + Entries using 12pt (size: 24), Times New Roman, bold = false
+                const bibParagraphs = [
+                    new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { after: 288 },
+                        children: [new TextRun({ text: "BIBLIOGRAPHY", font: "Times New Roman", size: 24, bold: false })]
+                    })
+                ];
+
+                currentAlphabetizedEntries.forEach(entry => {
+                    bibParagraphs.push(new Paragraph({
+                        indent: { left: 720, hanging: 720 }, // 0.5-inch hanging indent
+                        spacing: { after: 288 },
+                        children: [new TextRun({ text: entry, font: "Times New Roman", size: 24, bold: false })]
+                    }));
+                });
+
+                const documentStructure = new Document({
+                    sections: [{
+                        properties: {
+                            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                        },
+                        children: bibParagraphs
+                    }]
+                });
+
+                Packer.toBlob(documentStructure).then(fileBlob => {
+                    saveFileBlob(fileBlob, "SBL_Bibliography.docx");
+                });
+            } catch (err) {
+                showToast("Bibliography DOCX error: " + err.message);
+            }
+        }
+
+        function saveFileBlob(blob, filename) {
+            const fileURL = window.URL.createObjectURL(blob);
+            const anchorElement = document.createElement("a");
+            anchorElement.href = fileURL;
+            anchorElement.download = filename;
+            document.body.appendChild(anchorElement);
+            anchorElement.click();
+            window.URL.revokeObjectURL(fileURL);
+            document.body.removeChild(anchorElement);
         }
 
         function switchTab(tabId) {
@@ -736,7 +1146,9 @@
             document.getElementById(tabId).classList.add('active');
             
             const indexMap = { 'home': 0, 'format': 1, 'cite': 2, 'mistakes': 3 };
-            buttons[indexMap[tabId]].classList.add('active');
+            if (indexMap[tabId] !== undefined) {
+                buttons[indexMap[tabId]].classList.add('active');
+            }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
