@@ -330,14 +330,19 @@
             align-items: flex-start;
         }
 
+        /* Set preview canvas padding to 1 inch to match PDF export */
         .widget-paper-canvas {
             width: 450px;
             min-height: 582px;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 0.5in;
-            display: block;
+            padding: 1in;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             box-sizing: border-box;
+            text-align: center;
         }
 
         .w-sbl-text {
@@ -350,12 +355,32 @@
             font-weight: normal;
             width: 100%;
             white-space: pre-wrap;
+            margin: 0 auto;
         }
 
-        .w-inst-block { margin-top: 0.2in; }
-        .w-title-block { margin-top: 1.1in; }
-        .w-sub-block { margin-top: 1.1in; line-height: 14pt; }
-        .w-auth-block { margin-top: 1.1in; }
+        .w-inst-block { margin-top: 0; }
+        .w-title-block { margin-top: auto; margin-bottom: auto; }
+        .w-sub-block { margin-top: 0; line-height: 14pt; }
+        .w-auth-block { margin-top: auto; margin-bottom: 0; }
+
+        /* Custom Notification Toast */
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .toast-message.show {
+            opacity: 1;
+        }
     </style>
 
     <!-- Required Libraries for DOCX and PDF generation -->
@@ -547,6 +572,9 @@
 
     </div>
 
+    <!-- Notification Toast Container -->
+    <div id="toast" class="toast-message"></div>
+
     <script>
         // DOM Element lookup binding
         const widgetFields = {
@@ -561,6 +589,15 @@
             vSub: document.getElementById('w-view-sub'),
             vAuth: document.getElementById('w-view-auth')
         };
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
         function renderWidgetLiveUpdate() {
             widgetFields.vInst.textContent = widgetFields.inst.value.toUpperCase();
@@ -581,16 +618,38 @@
 
         function copyWidgetText() {
             const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
-            navigator.clipboard.writeText(outputString).then(() => {
-                alert('Plain text metadata successfully copied to clipboard!');
-            }).catch(err => {
-                alert('Clipboard sync error encountered: ' + err);
-            });
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(outputString).then(() => {
+                    showToast('Plain text metadata successfully copied to clipboard!');
+                }).catch(err => {
+                    fallbackCopyText(outputString);
+                });
+            } else {
+                fallbackCopyText(outputString);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Plain text metadata successfully copied to clipboard!');
+            } catch (err) {
+                showToast('Clipboard sync error encountered.');
+            }
+            document.body.removeChild(textArea);
         }
 
         function downloadWidgetPdf() {
             if (typeof html2pdf === 'undefined') {
-                alert("Error: The PDF generation library is still loading or blocked.");
+                showToast("Error: The PDF generation library is still loading or blocked.");
                 return;
             }
             
@@ -598,8 +657,10 @@
             window.scrollTo(0, 0);
 
             const targetElement = document.getElementById('widget-canvas');
+            
+            // Generate PDF with strict 1-inch margins and accurate letter sizing
             const pdfSettings = {
-                margin: 0.5,
+                margin: [1, 1, 1, 1], // [top, left, bottom, right] strictly 1 inch
                 filename: 'SBL_Title_Page.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
@@ -612,7 +673,7 @@
             const docxLibrary = window.docx;
             
             if (!docxLibrary) {
-                alert("Error: The Word document engine is not loaded on this page yet.");
+                showToast("Error: The Word document engine is not loaded on this page yet.");
                 return;
             }
 
@@ -661,7 +722,7 @@
                     document.body.removeChild(anchorElement);
                 });
             } catch (err) {
-                alert("Word Document engine processing crash: " + err.message);
+                showToast("Word Document engine processing crash: " + err.message);
             }
         }
 
