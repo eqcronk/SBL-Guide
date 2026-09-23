@@ -451,13 +451,13 @@
             align-items: flex-start;
         }
 
-        /* Strict Canvas Formatting: Times New Roman, 12pt (16px), NOT BOLD */
+        /* Scaled Canvas Formatting Rules for On-Screen Preview */
         .widget-paper-canvas {
             width: 450px;
             min-height: 582px;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 1in;
+            padding: 0.5in;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -465,7 +465,7 @@
             box-sizing: border-box;
             text-align: center;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 8.5pt;
             font-weight: normal;
         }
 
@@ -474,7 +474,7 @@
             min-height: 582px;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 0.75in;
+            padding: 0.5in;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -482,16 +482,108 @@
             box-sizing: border-box;
             text-align: left;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 8.5pt;
             font-weight: normal;
+        }
+
+        .body-paper-canvas {
+            width: 450px;
+            min-height: 582px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 0.5in;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            text-align: left;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8.5pt;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .body-page-header {
+            text-align: right;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8pt;
+            margin-bottom: 8pt;
+            color: #000;
+        }
+
+        .body-title-heading {
+            text-align: center;
+            font-weight: normal;
+            font-size: 8.5pt;
+            text-transform: uppercase;
+            margin-bottom: 12pt;
+            color: #000;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .body-content-area {
+            flex: 1;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8.5pt;
+            line-height: 1.6;
+            color: #000;
+            width: 100%;
+        }
+
+        .body-p {
+            text-indent: 0.3in;
+            margin-bottom: 0;
+            word-wrap: break-word;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .body-section-heading {
+            text-align: center;
+            font-weight: bold;
+            text-indent: 0;
+            margin-top: 8pt;
+            margin-bottom: 4pt;
+            line-height: 1.2;
+            font-size: 8.5pt;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .body-footnote-area {
+            width: 100%;
+            margin-top: 12pt;
+            padding-top: 4pt;
+            font-size: 7.5pt;
+            line-height: 1.2;
+            color: #000;
+            font-family: 'Times New Roman', Times, serif;
+            position: relative;
+        }
+
+        .body-footnote-area::before {
+            content: "";
+            display: block;
+            width: 1in;
+            border-top: 1px solid #000;
+            margin-bottom: 4pt;
+        }
+
+        .body-footnote-item {
+            display: block;
+            width: 100%;
+            text-indent: 0.15in;
+            margin-bottom: 3pt;
+            word-wrap: break-word;
+            font-size: 7.5pt;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: left;
         }
 
         .bib-header-title {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 8.5pt;
             font-weight: normal;
             text-align: center;
-            margin-bottom: 24pt;
+            margin-bottom: 16pt;
             width: 100%;
             color: #000;
             text-transform: uppercase;
@@ -500,26 +592,26 @@
         .bib-entry-list {
             width: 100%;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 8.5pt;
             font-weight: normal;
-            line-height: 1.5;
+            line-height: 1.4;
             color: #000;
         }
 
         .bib-item {
-            padding-left: 0.5in;
-            text-indent: -0.5in;
-            margin-bottom: 12pt;
+            padding-left: 0.3in;
+            text-indent: -0.3in;
+            margin-bottom: 8pt;
             word-wrap: break-word;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 8.5pt;
             font-weight: normal;
         }
 
         .w-sbl-text {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
-            line-height: 18pt;
+            font-size: 8.5pt;
+            line-height: 14pt;
             color: #000000;
             text-align: center;
             text-transform: uppercase;
@@ -531,7 +623,7 @@
 
         .w-inst-block { margin-top: 0; }
         .w-title-block { margin-top: auto; margin-bottom: auto; }
-        .w-sub-block { margin-top: 0; line-height: 18pt; }
+        .w-sub-block { margin-top: 0; line-height: 14pt; }
         .w-auth-block { margin-top: auto; margin-bottom: 0; }
 
         /* Notification Toast */
@@ -606,7 +698,7 @@
                     <p>Margins, font choices, line spacing, and interactive title page exports.</p>
                 </div>
                 <div class="card" onclick="switchTab('format')">
-                    <h4>Title Page & Bibliography Creator</h4>
+                    <h4>Title Page, Body & Bibliography Creator</h4>
                     <p>Type in your information to sort it into proper SBL formatting.</p>
                 </div>
                 <div class="card" onclick="switchTab('cite')">
@@ -745,7 +837,7 @@
             <h3>General Layout Guidelines</h3>
             <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text, 10-point font for footnotes. Double-spaced body text, single-spaced footnotes and block quotes. Top-right or bottom-center page numbers (omit page number on title page).</p>
              
-            <h3 style="margin-top: 40px;">Title Page Creator</h3>
+            <h3 style="margin-top: 40px;">1. Title Page Creator</h3>
             <p>Fill out the fields below to create and export your formatted SBL Title Page.</p>
             
             <div class="widget-wrapper">
@@ -794,8 +886,59 @@
                 </div>
             </div>
 
+            <!-- SBL PAPER BODY GENERATOR WIDGET -->
+            <h3 style="margin-top: 50px;">2. Paper Body Generator</h3>
+            <div class="info-disclaimer">
+                <strong>Note:</strong> All text is formatted in Times New Roman. In exported Word documents, footnote references in text (e.g., [1] or ^1) are automatically converted into native Microsoft Word bottom-of-page footnotes.
+            </div>
+
+            <div class="widget-wrapper">
+                <!-- Sidebar Inputs -->
+                <div class="widget-sidebar">
+                    <div class="widget-input-group">
+                        <label for="body-paper-title">Main Paper Title</label>
+                        <input type="text" id="body-paper-title" value="WRITING IN SBL: COMPLICATED FORMATTING">
+                    </div>
+                    <div class="widget-input-group">
+                        <label for="body-section-head">Section Heading (Optional)</label>
+                        <input type="text" id="body-section-head" value="Introduction">
+                    </div>
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="body-text-area">Body Paragraphs (Double Line Breaks = New Paragraph)</label>
+                        <textarea id="body-text-area" style="flex: 1; min-height: 140px; font-family: 'Times New Roman', Times, serif; font-size: 0.9rem; line-height: 1.4;" placeholder="Type or paste your main text here. Use footnote numbers like [1] or ^1 in text.">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards to maintain academic integrity and clarity.[1]
+
+In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the first-century Mediterranean world.[2]</textarea>
+                    </div>
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="body-fn-area">Footnotes (One per line)</label>
+                        <textarea id="body-fn-area" style="min-height: 90px; font-family: 'Times New Roman', Times, serif; font-size: 0.85rem; line-height: 1.3;" placeholder="1. Author Name, Book Title (City: Publisher, Year), 45.">1. N. T. Wright, Jesus and the Victory of God (Minneapolis: Fortress Press, 1996), 112.
+2. Richard B. Hays, "Psalm 143 and the Logic of Apocalypse in Paul," JBL 117, no. 1 (1998): 22.</textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <!-- Document Canvas Preview Panel -->
+                <div class="widget-preview-area">
+                    <div class="body-paper-canvas" id="body-canvas">
+                        <div class="body-page-header">1</div>
+                        <div class="body-title-heading" id="body-view-title"></div>
+                        <div class="body-content-area" id="body-view-content">
+                            <!-- Body paragraphs and section headings render here -->
+                        </div>
+                        <div class="body-footnote-area" id="body-view-footnotes">
+                            <!-- Footnotes render here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-            <h3 style="margin-top: 50px;">Bibliography Alphabetizer</h3>
+            <h3 style="margin-top: 50px;">3. Bibliography Alphabetizer</h3>
             <div class="info-disclaimer">
                 <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
             </div>
@@ -1024,6 +1167,16 @@
             vAuth: document.getElementById('w-view-auth')
         };
 
+        const bodyFields = {
+            title: document.getElementById('body-paper-title'),
+            section: document.getElementById('body-section-head'),
+            text: document.getElementById('body-text-area'),
+            fn: document.getElementById('body-fn-area'),
+            vTitle: document.getElementById('body-view-title'),
+            vContent: document.getElementById('body-view-content'),
+            vFn: document.getElementById('body-view-footnotes')
+        };
+
         const bibPasteArea = document.getElementById('bib-paste-area');
         const bibEntryList = document.getElementById('bib-entry-list');
 
@@ -1057,20 +1210,79 @@
         renderWidgetLiveUpdate();
 
         // -------------------------------------------------------------
+        // SBL PAPER BODY GENERATOR ENGINE
+        // -------------------------------------------------------------
+        function renderBodyLiveUpdate() {
+            const paperTitle = bodyFields.title.value.trim().toUpperCase();
+            bodyFields.vTitle.textContent = paperTitle;
+            bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
+
+            bodyFields.vContent.innerHTML = '';
+
+            const sectionHeading = bodyFields.section.value.trim();
+            if (sectionHeading) {
+                const headDiv = document.createElement('div');
+                headDiv.className = 'body-section-heading';
+                headDiv.textContent = sectionHeading;
+                bodyFields.vContent.appendChild(headDiv);
+            }
+
+            const rawText = bodyFields.text.value.trim();
+            if (rawText) {
+                const paragraphs = rawText.split(/\n\s*\n/);
+                paragraphs.forEach((pText) => {
+                    if (pText.trim()) {
+                        const pDiv = document.createElement('div');
+                        pDiv.className = 'body-p';
+                        pDiv.textContent = pText.trim();
+                        bodyFields.vContent.appendChild(pDiv);
+                    }
+                });
+            } else {
+                const pDiv = document.createElement('div');
+                pDiv.className = 'body-p';
+                pDiv.style.color = '#94a3b8';
+                pDiv.style.fontStyle = 'italic';
+                pDiv.style.textIndent = '0';
+                pDiv.textContent = 'Enter paper text on the left...';
+                bodyFields.vContent.appendChild(pDiv);
+            }
+
+            const rawFn = bodyFields.fn.value.trim();
+            bodyFields.vFn.innerHTML = '';
+            if (rawFn) {
+                bodyFields.vFn.style.display = 'block';
+                const fnLines = rawFn.split(/\r?\n/).filter(line => line.trim().length > 0);
+                fnLines.forEach((fnLine) => {
+                    const fnDiv = document.createElement('div');
+                    fnDiv.className = 'body-footnote-item';
+                    fnDiv.textContent = fnLine.trim();
+                    bodyFields.vFn.appendChild(fnDiv);
+                });
+            } else {
+                bodyFields.vFn.style.display = 'none';
+            }
+        }
+
+        [bodyFields.title, bodyFields.section, bodyFields.text, bodyFields.fn].forEach(element => {
+            if (element) element.addEventListener('input', renderBodyLiveUpdate);
+        });
+
+        renderBodyLiveUpdate();
+
+        // -------------------------------------------------------------
         // BIBLIOGRAPHY ALPHABETIZER ENGINE
         // -------------------------------------------------------------
         function processAndAlphabetizeBibliography() {
             const rawText = bibPasteArea.value;
             if (!rawText || !rawText.trim()) {
-                bibEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 12pt;">Paste your citations on the left to alphabetize them.</div>';
+                bibEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Paste your citations on the left to alphabetize them.</div>';
                 currentAlphabetizedEntries = [];
                 return;
             }
 
-            // Split by lines, filtering out empty lines
             const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
 
-            // Clean leading quotes/punctuation for accurate surname/alphabetical sorting
             currentAlphabetizedEntries = lines.sort((a, b) => {
                 const cleanA = a.replace(/^["'“‘\s]+/, '').toLowerCase();
                 const cleanB = b.replace(/^["'“‘\s]+/, '').toLowerCase();
@@ -1097,6 +1309,16 @@
         function copyWidgetText() {
             const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
             fallbackCopyText(outputString, 'Plain text metadata copied to clipboard!');
+        }
+
+        function copyBodyText() {
+            let outputString = "";
+            if (bodyFields.title.value.trim()) outputString += bodyFields.title.value.trim().toUpperCase() + "\n\n";
+            if (bodyFields.section.value.trim()) outputString += bodyFields.section.value.trim() + "\n\n";
+            outputString += bodyFields.text.value.trim();
+            if (bodyFields.fn.value.trim()) outputString += "\n\nFOOTNOTES:\n" + bodyFields.fn.value.trim();
+            
+            fallbackCopyText(outputString, 'Body text and footnotes copied to clipboard!');
         }
 
         function copyBibText() {
@@ -1135,6 +1357,23 @@
             const pdfSettings = {
                 margin: [1, 1, 1, 1],
                 filename: 'SBL_Title_Page.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(pdfSettings).from(targetElement).save();
+        }
+
+        function downloadBodyPdf() {
+            if (typeof html2pdf === 'undefined') {
+                showToast("Error: PDF generator library is unavailable.");
+                return;
+            }
+            window.scrollTo(0, 0);
+            const targetElement = document.getElementById('body-canvas');
+            const pdfSettings = {
+                margin: [1, 1, 1, 1],
+                filename: 'SBL_Paper_Body.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -1205,6 +1444,132 @@
                 });
             } catch (err) {
                 showToast("Word Document processing error: " + err.message);
+            }
+        }
+
+        function downloadBodyDocx() {
+            const docxLibrary = window.docx;
+            if (!docxLibrary) {
+                showToast("Error: Word document library is unavailable.");
+                return;
+            }
+
+            const { Document, Packer, Paragraph, TextRun, AlignmentType, Footnote, FootnoteRefRun } = docxLibrary;
+
+            try {
+                const rawFn = bodyFields.fn.value.trim();
+                const fnLines = rawFn ? rawFn.split(/\r?\n/).filter(line => line.trim().length > 0) : [];
+                
+                // Construct proper docx Footnote objects
+                const footnotesMap = {};
+                fnLines.forEach((fnLine, index) => {
+                    const id = index + 1;
+                    const cleanText = fnLine.replace(/^\d+[\.\s]*/, '').trim();
+                    footnotesMap[id] = new Footnote({
+                        id: id,
+                        children: [
+                            new Paragraph({
+                                indent: { firstLine: 360 },
+                                spacing: { line: 240, after: 0 },
+                                children: [
+                                    new TextRun({ text: `${id}. `, font: "Times New Roman", size: 20 }),
+                                    new TextRun({ text: cleanText, font: "Times New Roman", size: 20 })
+                                ]
+                            })
+                        ]
+                    });
+                });
+
+                const bodyChildren = [];
+
+                if (bodyFields.title.value.trim()) {
+                    bodyChildren.push(new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { after: 288 },
+                        children: [new TextRun({ text: bodyFields.title.value.trim().toUpperCase(), font: "Times New Roman", size: 24, bold: false })]
+                    }));
+                }
+
+                if (bodyFields.section.value.trim()) {
+                    bodyChildren.push(new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { before: 144, after: 144 },
+                        children: [new TextRun({ text: bodyFields.section.value.trim(), font: "Times New Roman", size: 24, bold: true })]
+                    }));
+                }
+
+                const rawText = bodyFields.text.value.trim();
+                if (rawText) {
+                    const paragraphs = rawText.split(/\n\s*\n/);
+                    paragraphs.forEach(pText => {
+                        if (pText.trim()) {
+                            let textContent = pText.trim();
+                            const runs = [];
+                            
+                            // Regex to locate footnote callout references like [1], ^1, or (1)
+                            const fnRegex = /(\[\d+\]|\^\d+|\(\d+\))/g;
+                            let match;
+                            let lastIndex = 0;
+
+                            while ((match = fnRegex.exec(textContent)) !== null) {
+                                if (match.index > lastIndex) {
+                                    runs.push(new TextRun({
+                                        text: textContent.substring(lastIndex, match.index),
+                                        font: "Times New Roman",
+                                        size: 24
+                                    }));
+                                }
+                                
+                                const numMatch = match[0].match(/\d+/);
+                                const fnId = numMatch ? parseInt(numMatch[0], 10) : null;
+                                
+                                if (fnId && footnotesMap[fnId]) {
+                                    runs.push(new FootnoteRefRun({ id: fnId }));
+                                } else {
+                                    runs.push(new TextRun({
+                                        text: match[0],
+                                        font: "Times New Roman",
+                                        size: 24
+                                    }));
+                                }
+                                
+                                lastIndex = fnRegex.lastIndex;
+                            }
+
+                            if (lastIndex < textContent.length) {
+                                runs.push(new TextRun({
+                                    text: textContent.substring(lastIndex),
+                                    font: "Times New Roman",
+                                    size: 24
+                                }));
+                            }
+
+                            bodyChildren.push(new Paragraph({
+                                indent: { firstLine: 720 },
+                                spacing: { line: 480, after: 0 },
+                                children: runs.length > 0 ? runs : [new TextRun({ text: textContent, font: "Times New Roman", size: 24 })]
+                            }));
+                        }
+                    });
+                }
+
+                const documentStructure = new Document({
+                    footnotes: footnotesMap,
+                    sections: [{
+                        properties: {
+                            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                        },
+                        children: bodyChildren
+                    }]
+                });
+
+                Packer.toBlob(documentStructure).then(fileBlob => {
+                    saveFileBlob(fileBlob, "SBL_Paper_Body.docx");
+                }).catch(err => {
+                    showToast("DOCX Generation error: " + err.message);
+                });
+            } catch (err) {
+                showToast("Body DOCX error: " + err.message);
             }
         }
 
