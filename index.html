@@ -1002,6 +1002,11 @@
                         <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
                     </div>
 
+                     <div class="widget-input-group">
+                        <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
+                        <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
+                    </div>
+
                     <div class="widget-actions">
                         <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
                         <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
@@ -1393,7 +1398,7 @@
             appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
         }
 
-        [bodyFields.title, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
+        [bodyFields.title, bodyFields.title2, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
             if (element) element.addEventListener('input', renderBodyLiveUpdate);
         });
 
