@@ -514,7 +514,7 @@
             color: #000;
         }
 
-                .body-paper-canvas:first-of-type .body-page-header {
+                .body-paper-canvas:first-of-type .body-page-footer{
             text-align: center;
             margin-top: auto;
             margin-bottom: 0;
@@ -971,7 +971,12 @@
 
                 <div class="widget-wrapper">
                     <div class="widget-sidebar">
-                        
+    
+        <div class="body-page-header">2</div>
+        <div class="body-content-area" contenteditable="true"></div>
+    `;
+    previewArea.appendChild(newCanvas);
+}
                     <div class="widget-input-group">
                             <label for="body-paper-title">Paper Title (Primary Heading)</label>
                             <input type="text" id="body-paper-title" value="WRITING IN SBL">
