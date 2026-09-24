@@ -1373,6 +1373,11 @@ function renderBodyLiveUpdate() {
   
   bodyFields.vTitle.textContent = paperTitle;
   bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
+
+   const paperTitle2 = bodyFields.title.value.trim().toUpperCase(); 
+  
+  bodyFields.vTitle2.textContent = paperTitle;
+  bodyFields.vTitle2.style.display = paperTitle ? 'block' : 'none';
   
   // Cleaned up: Reusing the same 'paperTitle' variable instead of reading the DOM again
   bodyFields.vTitle2.textContent = paperTitle;
@@ -1405,9 +1410,10 @@ function renderBodyLiveUpdate() {
   appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
 }
 
-// Fixed: Changed 'Title' and 'Title2' to lowercase 'title' to match the DOM references
+
 [
   bodyFields.title, 
+  bodyFields.title2, 
   bodyFields.h1, bodyFields.p1, 
   bodyFields.h2, bodyFields.p2, 
   bodyFields.h3, bodyFields.p3, 
