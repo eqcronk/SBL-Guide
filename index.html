@@ -1316,8 +1316,8 @@
         };
 
         const bodyFields = {
-            title: document.getElementById('body-paper-title'),
-            title2: document.getElementById('body-paper-long-title'),
+            Title: document.getElementById('body-paper-title'),
+            Title2: document.getElementById('body-paper-long-title'),
             h1: document.getElementById('body-h1'),
             p1: document.getElementById('body-p1'),
             h2: document.getElementById('body-h2'),
@@ -1372,7 +1372,7 @@
             bodyFields.vTitle.textContent = paperTitle;
             bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
 
-            const paperTitle2 = bodyFields.title.value2.trim().toUpperCase();
+            const paperTitle2 = bodyFields.title.value.trim().toUpperCase();
             bodyFields.vTitle2.textContent = paperTitle2;
             bodyFields.vTitle2.style.display = paperTitle2 ? 'block' : 'none';
 
@@ -1402,7 +1402,7 @@
             appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
         }
 
-        [bodyFields.title, bodyFields.title2, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
+        [bodyFields.Title, bodyFields.Title2, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
             if (element) element.addEventListener('input', renderBodyLiveUpdate);
         });
 
