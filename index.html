@@ -763,7 +763,7 @@
         <!-- DOWNLOADABLE TEMPLATES -->
         <div id="templates" class="tab-content">
             <h2>Downloadable Templates & Sample Papers</h2>
-            <p>Access pre-formatted SBL Word documents and guide templates to help structure your papers and thesis projects.</p>
+            <p>Access pre-formatted SBL Word documents and guide templates to help structure your papers.</p>
 
             <div class="templates-grid">
                 
@@ -931,47 +931,49 @@
 
             <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
             <h3 style="margin-top: 50px;">2. Paper Body & Heading Hierarchy Creator</h3>
-            <div class="info-disclaimer">
-                <strong>SBL Heading Style Rules:</strong><br>
-                • <strong>First-Level Heading:</strong><br>
-                • <strong>First-Level Subheading:</strong><br>
-                • <strong>Second-Level Subheading:</strong>
             </div>
 
             <div class="widget-wrapper">
                 <div class="widget-sidebar">
                     <div class="widget-input-group">
-                        <label for="body-paper-title">Main Paper Title</label>
-                        <input type="text" id="body-paper-title" value="WRITING IN SBL: COMPLICATED FORMATTING">
+                        <label for="body-paper-title">Paper Title (Primary Heading)</label>
+                        <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                    </div>
+
+                         <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group">
+                        <label for="body-paper-long-title">Paper Long Title</label>
+                        <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
                     </div>
                     
                     <div class="widget-input-group">
-                        <label for="body-h1">First Level Heading (Centered, Bold)</label>
+                        <label for="body-h1">First Level Heading (Main Points)</label>
                         <input type="text" id="body-h1" value="Historical Context">
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-p1">First Paragraph</label>
+                        <label for="body-p1">Text</label>
                         <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-h2">First Level Subheading (Centered, Italic)</label>
+                        <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
                         <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-p2">Second Paragraph</label>
+                        <label for="body-p2">Subtext</label>
                         <textarea id="body-p2" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-h3">Second Level Subheading (Flush Left, Bold)</label>
+                        <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
                         <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-p3">Third Paragraph</label>
+                        <label for="body-p3">Subtexth</label>
                         <textarea id="body-p3" rows="3">Letter writing in antiquity followed structured patterns including salutation, thanksgiving, body, and final greetings.</textarea>
                     </div>
 
@@ -1284,6 +1286,7 @@
 
         const bodyFields = {
             title: document.getElementById('body-paper-title'),
+            title: document.getElementById('body-paper-long-title'),
             h1: document.getElementById('body-h1'),
             p1: document.getElementById('body-p1'),
             h2: document.getElementById('body-h2'),
