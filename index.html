@@ -971,20 +971,7 @@
 
                 <div class="widget-wrapper">
                     <div class="widget-sidebar">
-                        function addNewPageToGenerator() {
-                            const previewArea = document.querySelector('.widget-preview-area');
-                            const existingPages = previewArea.querySelectorAll('.body-paper-canvas');
-                            const nextPageNumber = existingPages.length + 1;
-                            
-                            const newCanvas = document.createElement('div');
-                            newCanvas.className = 'body-paper-canvas';
-                            newCanvas.innerHTML = `
-                                <div class="body-page-header">${nextPageNumber}</div>
-                                <div class="body-content-area" contenteditable="true"></div>
-                             `;
-                                previewArea.appendChild(newCanvas);
-
-                        }
+       
                     <div class="widget-input-group">
                             <label for="body-paper-title">Paper Title (Primary Heading)</label>
                             <input type="text" id="body-paper-title" value="WRITING IN SBL">
@@ -1395,6 +1382,37 @@
         renderWidgetLiveUpdate();
 
         // SBL PAPER BODY & HEADING GENERATOR ENGINE
+
+        <div class="widget-sidebar">
+    <!-- Non-auto-saved warning banner -->
+    <div class="info-disclaimer" style="margin-bottom: 15px; font-size: 0.85rem;">
+        <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently!
+    </div>
+
+    <div class="widget-input-group">
+        <label for="body-paper-title">Paper Title (Primary Heading)</label>
+        <input type="text" id="body-paper-title" value="WRITING IN SBL">
+    </div>
+
+    <div class="widget-actions">
+        <button type="button" class="w-btn w-btn-docx" onclick="addNewPageToGenerator()">+ Add New Page</button>
+    </div>
+</div>
+
+function addNewPageToGenerator() {
+    const previewArea = document.querySelector('.widget-preview-area');
+    const existingPages = previewArea.querySelectorAll('.body-paper-canvas');
+    const nextPageNumber = existingPages.length + 1;
+
+    const newCanvas = document.createElement('div');
+    newCanvas.className = 'body-paper-canvas';
+    newCanvas.innerHTML = `
+        <div class="body-page-header">${nextPageNumber}</div>
+        <div class="body-content-area" contenteditable="true"></div>
+    `;
+    previewArea.appendChild(newCanvas);
+}
+
 function renderBodyLiveUpdate() {
 
   const paperTitle = bodyFields.title.value.trim().toUpperCase(); 
