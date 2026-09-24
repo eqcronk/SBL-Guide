@@ -879,7 +879,7 @@
             <h2>Format My Paper</h2>
             <p>Follow this standard layout structure when creating your document in Microsoft Word or Google Docs.</p>
             
-            <h3>General Layout Guidelines</h3>
+            <h3>Basic Layout Guidelines</h3>
             <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p>
              
             <h3 style="margin-top: 40px;">1. Title Page Creator</h3>
@@ -991,7 +991,39 @@
                 </div>
             </div>
 
-            <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
+ <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
+            <h3 style="margin-top: 50px;">4. Bibliography Alphabetizer</h3>
+            <div class="info-disclaimer">
+                <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
+            </div>
+
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
+                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadBibDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadBibPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyBibText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <div class="widget-preview-area">
+                    <div class="bib-paper-canvas" id="bib-canvas">
+                        <div class="bib-header-title">BIBLIOGRAPHY</div>
+                        <div class="bib-entry-list" id="bib-entry-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Advanced Layout Guidelines</h3>
+            <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p
+
+ <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
+
             <h3 style="margin-top: 50px;">3. Table of Contents SBL Generator</h3>
             <div class="info-disclaimer">
                 <strong>SBL Table of Contents Rules:</strong><br>
@@ -1022,33 +1054,7 @@
                 </div>
             </div>
 
-            <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-            <h3 style="margin-top: 50px;">4. Bibliography Alphabetizer</h3>
-            <div class="info-disclaimer">
-                <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
-            </div>
-
-            <div class="widget-wrapper">
-                <div class="widget-sidebar">
-                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                        <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
-                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
-                    </div>
-
-                    <div class="widget-actions">
-                        <button class="w-btn w-btn-docx" onclick="downloadBibDocx()">Download .DOCX</button>
-                        <button class="w-btn w-btn-pdf" onclick="downloadBibPdf()">Download .PDF</button>
-                        <button class="w-btn w-btn-copy" onclick="copyBibText()">Copy Plain Text</button>
-                    </div>
-                </div>
-
-                <div class="widget-preview-area">
-                    <div class="bib-paper-canvas" id="bib-canvas">
-                        <div class="bib-header-title">BIBLIOGRAPHY</div>
-                        <div class="bib-entry-list" id="bib-entry-list"></div>
-                    </div>
-                </div>
-            </div>
+           
 
             <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
             <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
