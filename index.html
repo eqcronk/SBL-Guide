@@ -463,15 +463,14 @@
             padding: 0.5in;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Keeps it centered vertically in the middle of the page */
+            align-items: center;     /* Centers items horizontally */
             box-sizing: border-box;
             text-align: center;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             font-weight: normal;
         }
-
         .bib-paper-canvas, .toc-paper-canvas, .abbr-paper-canvas {
             width: 450px;
             min-height: 582px;
@@ -677,10 +676,10 @@
         .toc-level-2 { padding-left: 0.2in; font-weight: normal; }
         .toc-level-3 { padding-left: 0.4in; font-weight: normal; font-style: italic; }
 
-        .w-sbl-text {
+      .w-sbl-text {
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
-            line-height: 14pt;
+            line-height: 1.4;
             color: #000000;
             text-align: center;
             text-transform: uppercase;
@@ -690,10 +689,10 @@
             margin: 0 auto;
         }
 
-        .w-inst-block { margin-top: 16pt; }
-        .w-title-block { margin-top: 14; margin-bottom: 16; }
-        .w-sub-block { margin-top: 24; line-height: 14pt; }
-        .w-auth-block { margin-top: 0; margin-bottom: 0; }
+        .w-inst-block { margin-bottom: 24pt; }
+        .w-title-block { margin-bottom: 24pt; }
+        .w-sub-block { margin-bottom: 36pt; line-height: 1.4; }
+        .w-auth-block { margin-top: 0; }
 
         .toast-message {
             position: fixed;
