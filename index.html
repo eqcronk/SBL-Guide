@@ -21,7 +21,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
@@ -68,7 +68,7 @@
             background: none;
             border: none;
             padding: 15px 25px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: var(--text);
             cursor: pointer;
@@ -232,7 +232,7 @@
         }
 
         .template-details span {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #64748b;
         }
 
@@ -242,7 +242,7 @@
             padding: 8px 14px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
@@ -270,7 +270,7 @@
             border-radius: 4px;
             display: inline-block;
             margin-bottom: 10px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .example-line {
@@ -282,7 +282,7 @@
         .tag {
             font-weight: bold;
             color: var(--primary);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -391,7 +391,7 @@
 
         .widget-input-group label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 4px;
             color: #2c3e50;
@@ -399,13 +399,17 @@
             letter-spacing: 0.5px;
         }
 
-        .widget-input-group input, .widget-input-group textarea, .widget-input-group select {
+        /* GENERATOR INPUTS & TEXTAREAS USE TIMES NEW ROMAN */
+        .widget-input-group input, 
+        .widget-input-group textarea, 
+        .widget-input-group select {
             width: 100%;
             padding: 8px 10px;
             border: 1px solid #dcdde1;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .widget-actions {
@@ -421,7 +425,7 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -450,7 +454,7 @@
             align-items: flex-start;
         }
 
-        /* Scaled Canvas Formatting Rules for On-Screen Preview */
+        /* GENERATOR CANVAS / PREVIEWS USE TIMES NEW ROMAN */
         .widget-paper-canvas {
             width: 450px;
             min-height: 582px;
@@ -468,7 +472,7 @@
             font-weight: normal;
         }
 
-        .bib-paper-canvas {
+        .bib-paper-canvas, .toc-paper-canvas, .abbr-paper-canvas {
             width: 450px;
             min-height: 582px;
             background: #ffffff;
@@ -536,7 +540,7 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        /* SBL Heading Styles */
+        /* SBL Heading Styles inside Generator Preview */
         .sbl-h1 {
             text-align: center;
             font-weight: bold;
@@ -568,7 +572,7 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        .bib-header-title {
+        .bib-header-title, .toc-header-title, .abbr-header-title {
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             font-weight: normal;
@@ -579,12 +583,12 @@
             text-transform: uppercase;
         }
 
-        .bib-entry-list {
+        .bib-entry-list, .toc-entry-list, .abbr-entry-list {
             width: 100%;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             font-weight: normal;
-            line-height: 1.4;
+            line-height: 1.6;
             color: #000;
         }
 
@@ -597,6 +601,60 @@
             font-size: 8.5pt;
             font-weight: normal;
         }
+
+        .abbr-item-row {
+            display: flex;
+            margin-bottom: 6pt;
+            width: 100%;
+            align-items: baseline;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .abbr-item-term {
+            width: 100px;
+            font-weight: bold;
+            flex-shrink: 0;
+            word-break: break-word;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .abbr-item-def {
+            flex: 1;
+            word-break: break-word;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .toc-item-row {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 6pt;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .toc-item-title {
+            padding-right: 4px;
+            white-space: nowrap;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .toc-item-dots {
+            flex: 1;
+            border-bottom: 1px dotted #000;
+            margin: 0 4px;
+            height: 0.8em;
+        }
+
+        .toc-item-page {
+            padding-left: 4px;
+            text-align: right;
+            white-space: nowrap;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .toc-level-1 { padding-left: 0; font-weight: bold; }
+        .toc-level-2 { padding-left: 0.2in; font-weight: normal; }
+        .toc-level-3 { padding-left: 0.4in; font-weight: normal; font-style: italic; }
 
         .w-sbl-text {
             font-family: 'Times New Roman', Times, serif;
@@ -624,7 +682,7 @@
             color: #ffffff;
             padding: 12px 20px;
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             z-index: 1000;
             opacity: 0;
@@ -639,7 +697,7 @@
             margin-top: 50px;
             padding: 20px 0;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-style: italic;
             color: var(--text);
             opacity: 0.6;
@@ -685,7 +743,7 @@
                     <p>Margins, font choices, line spacing, and interactive title page exports.</p>
                 </div>
                 <div class="card" onclick="switchTab('format')">
-                    <h4>Title Page, Body & Heading Creator</h4>
+                    <h4>Title Page, TOC & Heading Creator</h4>
                     <p>Type in your information to sort it into proper SBL formatting.</p>
                 </div>
                 <div class="card" onclick="switchTab('cite')">
@@ -894,7 +952,7 @@
 
                     <div class="widget-input-group">
                         <label for="body-p1">First Paragraph</label>
-                        <textarea id="body-p1" rows="3" style="font-family: 'Times New Roman', Times, serif; font-size: 0.85rem;">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                        <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
                     </div>
 
                     <div class="widget-input-group">
@@ -904,7 +962,7 @@
 
                     <div class="widget-input-group">
                         <label for="body-p2">Second Paragraph</label>
-                        <textarea id="body-p2" rows="3" style="font-family: 'Times New Roman', Times, serif; font-size: 0.85rem;">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                        <textarea id="body-p2" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
                     </div>
 
                     <div class="widget-input-group">
@@ -914,7 +972,7 @@
 
                     <div class="widget-input-group">
                         <label for="body-p3">Third Paragraph</label>
-                        <textarea id="body-p3" rows="3" style="font-family: 'Times New Roman', Times, serif; font-size: 0.85rem;">Letter writing in antiquity followed structured patterns including salutation, thanksgiving, body, and final greetings.</textarea>
+                        <textarea id="body-p3" rows="3">Letter writing in antiquity followed structured patterns including salutation, thanksgiving, body, and final greetings.</textarea>
                     </div>
 
                     <div class="widget-actions">
@@ -933,8 +991,39 @@
                 </div>
             </div>
 
+            <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
+            <h3 style="margin-top: 50px;">3. Table of Contents SBL Generator</h3>
+            <div class="info-disclaimer">
+                <strong>SBL Table of Contents Rules:</strong><br>
+                • Heading titled <strong>CONTENTS</strong> centered at the top.<br>
+                • Format entries with dot leaders matching section levels (Level 1, Level 2, Level 3).<br>
+                • Type one entry per line using commas or tabs to set page numbers, e.g., <code>Section Title, Page</code> or <code>> Subheading, Page</code> for nested levels.
+            </div>
+
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="toc-paste-area">Entries (Format: Title, Page)</label>
+                        <textarea id="toc-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Abbreviations, iv&#10;1. Introduction and Historical Context, 1&#10;> Socio-Historical Background, 3&#10;>> Epistolary Conventions, 7&#10;2. Exegetical Analysis, 12&#10;3. Conclusion, 24&#10;Bibliography, 28"></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadTocDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadTocPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyTocText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <div class="widget-preview-area">
+                    <div class="toc-paper-canvas" id="toc-canvas">
+                        <div class="toc-header-title">CONTENTS</div>
+                        <div class="toc-entry-list" id="toc-entry-list"></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-            <h3 style="margin-top: 50px;">3. Bibliography Alphabetizer</h3>
+            <h3 style="margin-top: 50px;">4. Bibliography Alphabetizer</h3>
             <div class="info-disclaimer">
                 <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
             </div>
@@ -943,7 +1032,7 @@
                 <div class="widget-sidebar">
                     <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
                         <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
-                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; font-family: 'Times New Roman', Times, serif; font-size: 0.95rem; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
+                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
                     </div>
 
                     <div class="widget-actions">
@@ -957,6 +1046,38 @@
                     <div class="bib-paper-canvas" id="bib-canvas">
                         <div class="bib-header-title">BIBLIOGRAPHY</div>
                         <div class="bib-entry-list" id="bib-entry-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
+            <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
+            <div class="info-disclaimer">
+                <strong>SBL Abbreviations Rules:</strong><br>
+                • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
+                • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
+                • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
+                • Entries will automatically be sorted alphabetically.
+            </div>
+
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="abbr-paste-area">Entries (Format: Abbr = Full Title)</label>
+                        <textarea id="abbr-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="JBL = Journal of Biblical Literature&#10;TDNT = Theological Dictionary of the New Testament&#10;NRSV = New Revised Standard Version&#10;BDAG = Bauer, Danker, Arndt, and Gingrich Greek-English Lexicon&#10;Anchor = Anchor Bible Commentary Series"></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadAbbrDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadAbbrPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyAbbrText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <div class="widget-preview-area">
+                    <div class="abbr-paper-canvas" id="abbr-canvas">
+                        <div class="abbr-header-title">ABBREVIATIONS</div>
+                        <div class="abbr-entry-list" id="abbr-entry-list"></div>
                     </div>
                 </div>
             </div>
@@ -1167,10 +1288,17 @@
             vContent: document.getElementById('body-view-content')
         };
 
+        const tocPasteArea = document.getElementById('toc-paste-area');
+        const tocEntryList = document.getElementById('toc-entry-list');
+        let currentTocEntries = [];
+
         const bibPasteArea = document.getElementById('bib-paste-area');
         const bibEntryList = document.getElementById('bib-entry-list');
-
         let currentAlphabetizedEntries = [];
+
+        const abbrPasteArea = document.getElementById('abbr-paste-area');
+        const abbrEntryList = document.getElementById('abbr-entry-list');
+        let currentAbbrEntries = [];
 
         function showToast(message) {
             const toast = document.getElementById('toast');
@@ -1232,6 +1360,73 @@
 
         renderBodyLiveUpdate();
 
+        // TABLE OF CONTENTS ENGINE
+        function processAndRenderToc() {
+            const rawText = tocPasteArea.value;
+            if (!rawText || !rawText.trim()) {
+                tocEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter table of contents items on the left.</div>';
+                currentTocEntries = [];
+                return;
+            }
+
+            const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+            currentTocEntries = [];
+            tocEntryList.innerHTML = '';
+
+            lines.forEach(line => {
+                let level = 1;
+                let cleanLine = line;
+
+                if (cleanLine.startsWith('>>')) {
+                    level = 3;
+                    cleanLine = cleanLine.substring(2).trim();
+                } else if (cleanLine.startsWith('>')) {
+                    level = 2;
+                    cleanLine = cleanLine.substring(1).trim();
+                }
+
+                let title = cleanLine;
+                let page = '';
+
+                if (cleanLine.includes(',')) {
+                    const parts = cleanLine.split(',');
+                    page = parts.pop().trim();
+                    title = parts.join(',').trim();
+                } else if (cleanLine.includes('\t')) {
+                    const parts = cleanLine.split('\t');
+                    page = parts.pop().trim();
+                    title = parts.join(' ').trim();
+                }
+
+                currentTocEntries.push({ title, page, level });
+
+                const rowDiv = document.createElement('div');
+                rowDiv.className = `toc-item-row toc-level-${level}`;
+
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'toc-item-title';
+                titleSpan.textContent = title;
+
+                const dotsSpan = document.createElement('span');
+                dotsSpan.className = 'toc-item-dots';
+
+                const pageSpan = document.createElement('span');
+                pageSpan.className = 'toc-item-page';
+                pageSpan.textContent = page;
+
+                rowDiv.appendChild(titleSpan);
+                rowDiv.appendChild(dotsSpan);
+                rowDiv.appendChild(pageSpan);
+
+                tocEntryList.appendChild(rowDiv);
+            });
+        }
+
+        if (tocPasteArea) {
+            tocPasteArea.addEventListener('input', processAndRenderToc);
+            processAndRenderToc();
+        }
+
         // BIBLIOGRAPHY ALPHABETIZER ENGINE
         function processAndAlphabetizeBibliography() {
             const rawText = bibPasteArea.value;
@@ -1263,6 +1458,70 @@
             processAndAlphabetizeBibliography();
         }
 
+        // ABBREVIATIONS ENGINE
+        function processAndRenderAbbreviations() {
+            const rawText = abbrPasteArea.value;
+            if (!rawText || !rawText.trim()) {
+                abbrEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter abbreviations on the left.</div>';
+                currentAbbrEntries = [];
+                return;
+            }
+
+            const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+            currentAbbrEntries = [];
+
+            lines.forEach(line => {
+                let term = '';
+                let definition = '';
+
+                if (line.includes('=')) {
+                    const parts = line.split('=');
+                    term = parts[0].trim();
+                    definition = parts.slice(1).join('=').trim();
+                } else if (line.includes(',')) {
+                    const parts = line.split(',');
+                    term = parts[0].trim();
+                    definition = parts.slice(1).join(',').trim();
+                } else if (line.includes('\t')) {
+                    const parts = line.split('\t');
+                    term = parts[0].trim();
+                    definition = parts.slice(1).join('\t').trim();
+                } else {
+                    term = line.trim();
+                }
+
+                if (term) {
+                    currentAbbrEntries.push({ term, definition });
+                }
+            });
+
+            currentAbbrEntries.sort((a, b) => a.term.localeCompare(b.term));
+
+            abbrEntryList.innerHTML = '';
+            currentAbbrEntries.forEach(item => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'abbr-item-row';
+
+                const termSpan = document.createElement('span');
+                termSpan.className = 'abbr-item-term';
+                termSpan.textContent = item.term;
+
+                const defSpan = document.createElement('span');
+                defSpan.className = 'abbr-item-def';
+                defSpan.textContent = item.definition;
+
+                rowDiv.appendChild(termSpan);
+                rowDiv.appendChild(defSpan);
+
+                abbrEntryList.appendChild(rowDiv);
+            });
+        }
+
+        if (abbrPasteArea) {
+            abbrPasteArea.addEventListener('input', processAndRenderAbbreviations);
+            processAndRenderAbbreviations();
+        }
+
         // EXPORT ENGINE
         function copyWidgetText() {
             const outputString = `${widgetFields.vInst.textContent}\n\n\n${widgetFields.vTitle.textContent}\n\n\n${widgetFields.vSub.textContent}\n\n\n${widgetFields.vAuth.textContent}`;
@@ -1285,6 +1544,20 @@
             fallbackCopyText(outputString, 'Body text copied to clipboard!');
         }
 
+        function copyTocText() {
+            if (currentTocEntries.length === 0) {
+                showToast('No Table of Contents items to copy.');
+                return;
+            }
+            let outputString = "CONTENTS\n\n";
+            currentTocEntries.forEach(item => {
+                const indent = item.level === 2 ? "  " : item.level === 3 ? "    " : "";
+                const dots = " " + ".".repeat(Math.max(2, 40 - item.title.length - indent.length)) + " ";
+                outputString += `${indent}${item.title}${dots}${item.page}\n`;
+            });
+            fallbackCopyText(outputString, 'Table of Contents copied to clipboard!');
+        }
+
         function copyBibText() {
             if (currentAlphabetizedEntries.length === 0) {
                 showToast('No bibliography items to copy.');
@@ -1292,6 +1565,18 @@
             }
             const outputString = "BIBLIOGRAPHY\n\n" + currentAlphabetizedEntries.join("\n\n");
             fallbackCopyText(outputString, 'Alphabetized Bibliography copied to clipboard!');
+        }
+
+        function copyAbbrText() {
+            if (currentAbbrEntries.length === 0) {
+                showToast('No abbreviation items to copy.');
+                return;
+            }
+            let outputString = "ABBREVIATIONS\n\n";
+            currentAbbrEntries.forEach(item => {
+                outputString += `${item.term}\t${item.definition}\n`;
+            });
+            fallbackCopyText(outputString, 'Abbreviations copied to clipboard!');
         }
 
         function fallbackCopyText(text, successMsg) {
@@ -1345,6 +1630,23 @@
             html2pdf().set(pdfSettings).from(targetElement).save();
         }
 
+        function downloadTocPdf() {
+            if (typeof html2pdf === 'undefined') {
+                showToast("Error: PDF generator library is unavailable.");
+                return;
+            }
+            window.scrollTo(0, 0);
+            const targetElement = document.getElementById('toc-canvas');
+            const pdfSettings = {
+                margin: [1, 1, 1, 1],
+                filename: 'SBL_Table_of_Contents.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(pdfSettings).from(targetElement).save();
+        }
+
         function downloadBibPdf() {
             if (typeof html2pdf === 'undefined') {
                 showToast("Error: PDF generator library is unavailable.");
@@ -1355,6 +1657,23 @@
             const pdfSettings = {
                 margin: [1, 1, 1, 1],
                 filename: 'SBL_Bibliography.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(pdfSettings).from(targetElement).save();
+        }
+
+        function downloadAbbrPdf() {
+            if (typeof html2pdf === 'undefined') {
+                showToast("Error: PDF generator library is unavailable.");
+                return;
+            }
+            window.scrollTo(0, 0);
+            const targetElement = document.getElementById('abbr-canvas');
+            const pdfSettings = {
+                margin: [1, 1, 1, 1],
+                filename: 'SBL_Abbreviations.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -1453,11 +1772,8 @@
                     }
                 };
 
-                // Level 1: Centered, Bold
                 addDocxSection(bodyFields.h1.value, true, false, AlignmentType.CENTER, bodyFields.p1.value);
-                // Level 1 Subheading: Centered, Italic
                 addDocxSection(bodyFields.h2.value, false, true, AlignmentType.CENTER, bodyFields.p2.value);
-                // Level 2 Subheading: Flush Left, Bold
                 addDocxSection(bodyFields.h3.value, true, false, AlignmentType.LEFT, bodyFields.p3.value);
 
                 const documentStructure = new Document({
@@ -1476,6 +1792,67 @@
                 });
             } catch (err) {
                 showToast("Body DOCX error: " + err.message);
+            }
+        }
+
+        function downloadTocDocx() {
+            const docxLibrary = window.docx;
+            if (!docxLibrary) {
+                showToast("Error: Word document library is unavailable.");
+                return;
+            }
+
+            if (currentTocEntries.length === 0) {
+                showToast("No Table of Contents data to export.");
+                return;
+            }
+
+            const { Document, Packer, Paragraph, TextRun, AlignmentType, TabStopType, TabStopPosition } = docxLibrary;
+
+            try {
+                const tocParagraphs = [
+                    new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { after: 288 },
+                        children: [new TextRun({ text: "CONTENTS", font: "Times New Roman", size: 24, bold: false })]
+                    })
+                ];
+
+                currentTocEntries.forEach(item => {
+                    const indentSize = item.level === 2 ? 360 : item.level === 3 ? 720 : 0;
+                    tocParagraphs.push(new Paragraph({
+                        tabStops: [
+                            {
+                                type: TabStopType.RIGHT,
+                                position: TabStopPosition.MAX,
+                                leader: 'dot',
+                            },
+                        ],
+                        indent: { left: indentSize },
+                        spacing: { after: 120 },
+                        children: [
+                            new TextRun({ text: item.title, font: "Times New Roman", size: 24, bold: item.level === 1, italic: item.level === 3 }),
+                            new TextRun({ text: `\t${item.page}`, font: "Times New Roman", size: 24, bold: item.level === 1 })
+                        ]
+                    }));
+                });
+
+                const documentStructure = new Document({
+                    sections: [{
+                        properties: {
+                            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                        },
+                        children: tocParagraphs
+                    }]
+                });
+
+                Packer.toBlob(documentStructure).then(fileBlob => {
+                    saveFileBlob(fileBlob, "SBL_Table_of_Contents.docx");
+                }).catch(err => {
+                    showToast("TOC DOCX generation error: " + err.message);
+                });
+            } catch (err) {
+                showToast("TOC DOCX error: " + err.message);
             }
         }
 
@@ -1526,6 +1903,64 @@
                 });
             } catch (err) {
                 showToast("Bibliography DOCX error: " + err.message);
+            }
+        }
+
+        function downloadAbbrDocx() {
+            const docxLibrary = window.docx;
+            if (!docxLibrary) {
+                showToast("Error: Word document library is unavailable.");
+                return;
+            }
+
+            if (currentAbbrEntries.length === 0) {
+                showToast("No abbreviation data to export.");
+                return;
+            }
+
+            const { Document, Packer, Paragraph, TextRun, AlignmentType, TabStopType, TabStopPosition } = docxLibrary;
+
+            try {
+                const abbrParagraphs = [
+                    new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { after: 288 },
+                        children: [new TextRun({ text: "ABBREVIATIONS", font: "Times New Roman", size: 24, bold: false })]
+                    })
+                ];
+
+                currentAbbrEntries.forEach(item => {
+                    abbrParagraphs.push(new Paragraph({
+                        tabStops: [
+                            {
+                                type: TabStopType.LEFT,
+                                position: 2160,
+                            },
+                        ],
+                        spacing: { after: 120 },
+                        children: [
+                            new TextRun({ text: item.term, font: "Times New Roman", size: 24, bold: true }),
+                            new TextRun({ text: `\t${item.definition}`, font: "Times New Roman", size: 24, bold: false })
+                        ]
+                    }));
+                });
+
+                const documentStructure = new Document({
+                    sections: [{
+                        properties: {
+                            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+                        },
+                        children: abbrParagraphs
+                    }]
+                });
+
+                Packer.toBlob(documentStructure).then(fileBlob => {
+                    saveFileBlob(fileBlob, "SBL_Abbreviations.docx");
+                }).catch(err => {
+                    showToast("Abbreviations DOCX generation error: " + err.message);
+                });
+            } catch (err) {
+                showToast("Abbreviations DOCX error: " + err.message);
             }
         }
 
