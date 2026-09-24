@@ -1365,10 +1365,6 @@
             bodyFields.vTitle.textContent = paperTitle;
             bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
 
-            const paperTitle = bodyFields.title.value.trim().toUpperCase();
-            bodyFields.vTitle.textContent = paperTitle;
-            bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
-
             bodyFields.vContent.innerHTML = '';
 
             const appendSection = (headingText, headingClass, bodyText) => {
