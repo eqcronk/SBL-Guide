@@ -929,7 +929,8 @@
                 </div>
             </div>
 
-            <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
+        <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
+        <div id="format" class="tab-content"></div>
                 <h3 style="margin-top: 50px;">2. Paper Body & Heading Hierarchy Creator</h3>
                 </div>
 
@@ -978,8 +979,8 @@
                     </div>
 
                     <div class="widget-input-group">
-                        <label for="body-p4">Subtexth</label>
-                        <textarea id="body-p4" rows="3">Letter writing in antiquity followed structured patterns including salutation, thanksgiving, body, and final greetings.</textarea>
+                        <label for="body-h4">Subtext</label>
+                        <input type="text" id="body-h4" value="Epistolary Conventions in Greco-Roman World">
                     </div>
 
                     <div class="widget-actions">
@@ -1366,9 +1367,10 @@
             appendSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
             appendSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
             appendSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
+            appendSection(bodyFields.h4.value, 'sbl-h3', bodyFields.p4.value);
         }
 
-        [bodyFields.title, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3].forEach(element => {
+        [bodyFields.title, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
             if (element) element.addEventListener('input', renderBodyLiveUpdate);
         });
 
