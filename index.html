@@ -1367,46 +1367,56 @@
         renderWidgetLiveUpdate();
 
         // SBL PAPER BODY & HEADING GENERATOR ENGINE
-        function renderBodyLiveUpdate() {
-            const paperTitle = bodyFields.title.value.trim().toUpperCase();
-            bodyFields.vTitle.textContent = paperTitle;
-            bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
+function renderBodyLiveUpdate() {
+  // Fixed: Consistently using lowercase 'title'
+  const paperTitle = bodyFields.title.value.trim().toUpperCase(); 
+  
+  bodyFields.vTitle.textContent = paperTitle;
+  bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
+  
+  // Cleaned up: Reusing the same 'paperTitle' variable instead of reading the DOM again
+  bodyFields.vTitle2.textContent = paperTitle;
+  bodyFields.vTitle2.style.display = paperTitle ? 'block' : 'none';
 
-            const paperTitle2 = bodyFields.title.value.trim().toUpperCase();
-            bodyFields.vTitle2.textContent = paperTitle2;
-            bodyFields.vTitle2.style.display = paperTitle2 ? 'block' : 'none';
+  bodyFields.vContent.innerHTML = '';
 
-            bodyFields.vContent.innerHTML = '';
+  const appendSection = (headingText, headingClass, bodyText) => {
+    if (headingText && headingText.trim()) {
+      const hDiv = document.createElement('div');
+      hDiv.className = headingClass;
+      hDiv.textContent = headingText.trim();
+      bodyFields.vContent.appendChild(hDiv);
+    }
 
-            const appendSection = (headingText, headingClass, bodyText) => {
-                if (headingText && headingText.trim()) {
-                    const hDiv = document.createElement('div');
-                    hDiv.className = headingClass;
-                    hDiv.textContent = headingText.trim();
-                    bodyFields.vContent.appendChild(hDiv);
-                }
-                if (bodyText && bodyText.trim()) {
-                    const paragraphs = bodyText.trim().split(/\n\s*\n/);
-                    paragraphs.forEach(pText => {
-                        const pDiv = document.createElement('div');
-                        pDiv.className = 'body-p';
-                        pDiv.textContent = pText.trim();
-                        bodyFields.vContent.appendChild(pDiv);
-                    });
-                }
-            };
+    if (bodyText && bodyText.trim()) {
+      const paragraphs = bodyText.trim().split(/\n\s*\n/);
+      paragraphs.forEach(pText => {
+        const pDiv = document.createElement('div');
+        pDiv.className = 'body-p';
+        pDiv.textContent = pText.trim();
+        bodyFields.vContent.appendChild(pDiv);
+      });
+    }
+  };
 
-            appendSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
-            appendSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
-            appendSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
-            appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
-        }
+  appendSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
+  appendSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
+  appendSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
+  appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
+}
 
-        [bodyFields.Title, bodyFields.Title2, bodyFields.h1, bodyFields.p1, bodyFields.h2, bodyFields.p2, bodyFields.h3, bodyFields.p3, bodyFields.h4, bodyFields.p4].forEach(element => {
-            if (element) element.addEventListener('input', renderBodyLiveUpdate);
-        });
+// Fixed: Changed 'Title' and 'Title2' to lowercase 'title' to match the DOM references
+[
+  bodyFields.title, 
+  bodyFields.h1, bodyFields.p1, 
+  bodyFields.h2, bodyFields.p2, 
+  bodyFields.h3, bodyFields.p3, 
+  bodyFields.h4, bodyFields.p4
+].forEach(element => {
+  if (element) element.addEventListener('input', renderBodyLiveUpdate);
+});
 
-        renderBodyLiveUpdate();
+renderBodyLiveUpdate();
 
         // TABLE OF CONTENTS ENGINE
         function processAndRenderToc() {
