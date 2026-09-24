@@ -1367,7 +1367,7 @@
 
         // SBL PAPER BODY & HEADING GENERATOR ENGINE
 function renderBodyLiveUpdate() {
-  // Fixed: Consistently using lowercase 'title'
+
   const paperTitle = bodyFields.title.value.trim().toUpperCase(); 
   
   bodyFields.vTitle.textContent = paperTitle;
@@ -1378,9 +1378,8 @@ function renderBodyLiveUpdate() {
   bodyFields.vTitle2.textContent = paperTitle;
   bodyFields.vTitle2.style.display = paperTitle ? 'block' : 'none';
   
-  // Cleaned up: Reusing the same 'paperTitle' variable instead of reading the DOM again
-  bodyFields.vTitle2.textContent = paperTitle;
-  bodyFields.vTitle2.style.display = paperTitle ? 'block' : 'none';
+  bodyFields.vTitle2.textContent = paperTitle2;
+  bodyFields.vTitle2.style.display = paperTitle2 ? 'block' : 'none';
 
   bodyFields.vContent.innerHTML = '';
 
