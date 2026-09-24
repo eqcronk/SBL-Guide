@@ -971,11 +971,19 @@
 
                 <div class="widget-wrapper">
                     <div class="widget-sidebar">
-    
-        <div class="body-page-header">2</div>
+                        function addNewPageToGenerator() {
+                        const previewArea = document.querySelector('.widget-preview-area');
+                        const existingPages = previewArea.querySelectorAll('.body-paper-canvas');
+                        const nextPageNumber = existingPages.length + 1;
+
+                        const newCanvas = document.createElement('div');
+                        newCanvas.className = 'body-paper-canvas';
+                        newCanvas.innerHTML = `
+        <div class="body-page-header">${nextPageNumber}</div>
         <div class="body-content-area" contenteditable="true"></div>
     `;
     previewArea.appendChild(newCanvas);
+
 }
                     <div class="widget-input-group">
                             <label for="body-paper-title">Paper Title (Primary Heading)</label>
