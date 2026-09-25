@@ -931,78 +931,78 @@
                     </div>
                 </div>
 
-    <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
-    <div id="format" class="tab-content"></div>
-    <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
+        <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
+        <div id="format" class="tab-content"></div>
+        <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
 
-        <div class="widget-wrapper">
-            <div class="widget-sidebar">
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
 
-            <div class="widget-input-group">
-                    <label for="body-paper-title">Paper Title (Primary Heading)</label>
-                    <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                <div class="widget-input-group">
+                        <label for="body-paper-title">Paper Title (Primary Heading)</label>
+                        <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                    </div>
+
+                <div class="widget-input-group">
+                    <label for="body-paper-long-title">Paper Long Title</label>
+                    <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
+                </div>
+                    
+                <div class="widget-input-group">
+                    <label for="body-p1">Text</label>
+                    <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                </div>
+                    
+                <div class="widget-input-group">
+                    <label for="body-h1">First Level Heading (Main Points)</label>
+                    <input type="text" id="body-h1" value="Historical Context">
                 </div>
 
-            <div class="widget-input-group">
-                <label for="body-paper-long-title">Paper Long Title</label>
-                <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
-            </div>
-                
-            <div class="widget-input-group">
-                <label for="body-p1">Text</label>
-                <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
-            </div>
-                
-            <div class="widget-input-group">
-                <label for="body-h1">First Level Heading (Main Points)</label>
-                <input type="text" id="body-h1" value="Historical Context">
+                <div class="widget-input-group">
+                    <label for="body-p2">Text</label>
+                    <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
+                    <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-p3">Subtext</label>
+                    <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
+                    <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-p4">Subtext</label>
+                    <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
+                    <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
+                </div>
+
+                <div class="widget-actions">
+                    <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
+                    <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
+                    <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
+                </div>
             </div>
 
-            <div class="widget-input-group">
-                <label for="body-p2">Text</label>
-                <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+            <div class="widget-preview-area">
+                <div class="body-paper-canvas" id="body-canvas">
+                    <div class="body-page-header">1</div>
+                    <div class="body-title-heading" id="body-view-title"></div>
+                    <div class="body-long-title-heading" id="body-view-long-title"></div>
+                    <div class="body-content-area" id="body-view-content"></div>
+                </div>
             </div>
-
-            <div class="widget-input-group">
-                <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
-                <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
-            </div>
-
-            <div class="widget-input-group">
-                <label for="body-p3">Subtext</label>
-                <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-            </div>
-
-            <div class="widget-input-group">
-                <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
-                <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
-            </div>
-
-            <div class="widget-input-group">
-                <label for="body-p4">Subtext</label>
-                <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-            </div>
-
-            <div class="widget-input-group">
-                <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
-                <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
-            </div>
-
-            <div class="widget-actions">
-                <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
-                <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
-                <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
-            </div>
-        </div>
-
-        <div class="widget-preview-area">
-            <div class="body-paper-canvas" id="body-canvas">
-                <div class="body-page-header">1</div>
-                <div class="body-title-heading" id="body-view-title"></div>
-                <div class="body-long-title-heading" id="body-view-long-title"></div>
-                <div class="body-content-area" id="body-view-content"></div>
-            </div>
-        </div>
 
 
     <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
@@ -1345,8 +1345,8 @@
 
         // SBL PAPER BODY & HEADING GENERATOR ENGINE
 
-        <div class="widget-sidebar">
-    <!-- Non-auto-saved warning banner -->
+    <div class="widget-sidebar">
+
     <div class="info-disclaimer" style="margin-bottom: 15px; font-size: 0.85rem;">
         <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently!
     </div>
