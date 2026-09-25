@@ -876,16 +876,16 @@
             </div>
         </div>
 
-        <!-- FORMAT MY PAPER TAB CONTENT -->
-        <div id="format" class="tab-content">
-            <h2>Format My Paper</h2>
-            <p>Follow this standard layout structure when creating your document in Microsoft Word or Google Docs.</p>
-            
-            <h3>Basic Layout Guidelines</h3>
-            <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page number in the bottom center for the first page and subsequently in the top-right (omit page number on title page).</p>
-            
-            <h3 style="margin-top: 40px;">1. Title Page Creator</h3>
-            <p>Fill out the fields below to create and export your formatted SBL Title Page.</p>
+    <!-- FORMAT MY PAPER TAB CONTENT -->
+    <div id="format" class="tab-content">
+        <h2>Format My Paper</h2>
+        <p>Follow this standard layout structure when creating your document in Microsoft Word or Google Docs.</p>
+        
+        <h3>Basic Layout Guidelines</h3>
+        <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page number in the bottom center for the first page and subsequently in the top-right (omit page number on title page).</p>
+        
+        <h3 style="margin-top: 40px;">1. Title Page Creator</h3>
+        <p>Fill out the fields below to create and export your formatted SBL Title Page.</p>
             
             <div class="widget-wrapper">
                 <div class="widget-sidebar">
@@ -932,86 +932,85 @@
             </div>
         </div>
 
-        <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
-        <div id="format" class="tab-content"></div>
-            <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
+            <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
+            <div id="format" class="tab-content"></div>
+                <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
 
-                <div class="widget-wrapper">
-                    <div class="widget-sidebar">
-        
-                    <div class="widget-input-group">
-                            <label for="body-paper-title">Paper Title (Primary Heading)</label>
-                            <input type="text" id="body-paper-title" value="WRITING IN SBL">
-                        </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-paper-long-title">Paper Long Title</label>
-                        <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
-                    </div>
-                        
-                    <div class="widget-input-group">
-                        <label for="body-p1">Text</label>
-                        <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
-                    </div>
-                        
-                    <div class="widget-input-group">
-                        <label for="body-h1">First Level Heading (Main Points)</label>
-                        <input type="text" id="body-h1" value="Historical Context">
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+    
+                <div class="widget-input-group">
+                        <label for="body-paper-title">Paper Title (Primary Heading)</label>
+                        <input type="text" id="body-paper-title" value="WRITING IN SBL">
                     </div>
 
-                    <div class="widget-input-group">
-                        <label for="body-p2">Text</label>
-                        <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
-                    </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
-                        <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
-                    </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-p3">Subtext</label>
-                        <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-                    </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
-                        <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
-                    </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-p4">Subtext</label>
-                        <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-                    </div>
-
-                    <div class="widget-input-group">
-                        <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
-                        <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
-                    </div>
-
-                    <div class="widget-actions">
-                        <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
-                        <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
-                        <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
-                    </div>
+                <div class="widget-input-group">
+                    <label for="body-paper-long-title">Paper Long Title</label>
+                    <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
+                </div>
+                    
+                <div class="widget-input-group">
+                    <label for="body-p1">Text</label>
+                    <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                </div>
+                    
+                <div class="widget-input-group">
+                    <label for="body-h1">First Level Heading (Main Points)</label>
+                    <input type="text" id="body-h1" value="Historical Context">
                 </div>
 
-                <div class="widget-preview-area">
-                    <div class="body-paper-canvas" id="body-canvas">
-                        <div class="body-page-header">1</div>
-                        <div class="body-title-heading" id="body-view-title"></div>
-                        <div class="body-long-title-heading" id="body-view-long-title"></div>
-                        <div class="body-content-area" id="body-view-content"></div>
-                    </div>
+                <div class="widget-input-group">
+                    <label for="body-p2">Text</label>
+                    <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
+                    <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-p3">Subtext</label>
+                    <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
+                    <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-p4">Subtext</label>
+                    <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                </div>
+
+                <div class="widget-input-group">
+                    <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
+                    <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
+                </div>
+
+                <div class="widget-actions">
+                    <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
+                    <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
+                    <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
                 </div>
             </div>
-        </div>
 
-        <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-        <div class="info-disclaimer">
-            <h3 style="margin-top: 40;">4. Bibliography Alphabetizer</h3>
-            <p><strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.</p>
-        </div>
+            <div class="widget-preview-area">
+                <div class="body-paper-canvas" id="body-canvas">
+                    <div class="body-page-header">1</div>
+                    <div class="body-title-heading" id="body-view-title"></div>
+                    <div class="body-long-title-heading" id="body-view-long-title"></div>
+                    <div class="body-content-area" id="body-view-content"></div>
+                </div>
+            </div>
+
+
+            <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
+            <div class="info-disclaimer">
+                <h3 style="margin-top: 40;">4. Bibliography Alphabetizer</h3>
+                <p><strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.</p>
+            </div>
 
             <div class="widget-wrapper">
                 <div class="widget-sidebar">
@@ -1038,49 +1037,49 @@
                 <h3>Advanced Layout Guidelines</h3>
                 <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p
 
-    <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
-        <div class="info-disclaimer">
-            <h3 style="margin-top: 40;">3. Table of Contents SBL Generator</h3>
-            <p><strong>SBL Table of Contents Rules:</strong></p>
-            <ul>
-                <li>Heading titled <strong>CONTENTS</strong> centered at the top.</li>
-                <li>Format entries with dot leaders matching section levels (Level 1, Level 2, Level 3).</li>
-                <li>Type one entry per line using commas or tabs to set page numbers, e.g., <code>Section Title, Page</code> or <code>> Subheading, Page</code> for nested levels.</li>
-            </ul>
-        </div>
+            <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
+            <div class="info-disclaimer">
+                <h3 style="margin-top: 40;">3. Table of Contents SBL Generator</h3>
+                <p><strong>SBL Table of Contents Rules:</strong></p>
+                <ul>
+                    <li>Heading titled <strong>CONTENTS</strong> centered at the top.</li>
+                    <li>Format entries with dot leaders matching section levels (Level 1, Level 2, Level 3).</li>
+                    <li>Type one entry per line using commas or tabs to set page numbers, e.g., <code>Section Title, Page</code> or <code>> Subheading, Page</code> for nested levels.</li>
+                </ul>
+            </div>
 
-        <div class="widget-wrapper">
-            <div class="widget-sidebar">
-                <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                    <label for="toc-paste-area">Entries (Format: Title, Page)</label>
-                    <textarea id="toc-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Abbreviations, iv&#10;1. Introduction and Historical Context, 1&#10;> Socio-Historical Background, 3&#10;>> Epistolary Conventions, 7&#10;2. Exegetical Analysis, 12&#10;3. Conclusion, 24&#10;Bibliography, 28"></textarea>
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="toc-paste-area">Entries (Format: Title, Page)</label>
+                        <textarea id="toc-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Abbreviations, iv&#10;1. Introduction and Historical Context, 1&#10;> Socio-Historical Background, 3&#10;>> Epistolary Conventions, 7&#10;2. Exegetical Analysis, 12&#10;3. Conclusion, 24&#10;Bibliography, 28"></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadTocDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadTocPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyTocText()">Copy Plain Text</button>
+                    </div>
                 </div>
 
-                <div class="widget-actions">
-                    <button class="w-btn w-btn-docx" onclick="downloadTocDocx()">Download .DOCX</button>
-                    <button class="w-btn w-btn-pdf" onclick="downloadTocPdf()">Download .PDF</button>
-                    <button class="w-btn w-btn-copy" onclick="copyTocText()">Copy Plain Text</button>
+                <div class="widget-preview-area">
+                    <div class="toc-paper-canvas" id="toc-canvas">
+                        <div class="toc-header-title">CONTENTS</div>
+                        <div class="toc-entry-list" id="toc-entry-list"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="widget-preview-area">
-                <div class="toc-paper-canvas" id="toc-canvas">
-                    <div class="toc-header-title">CONTENTS</div>
-                    <div class="toc-entry-list" id="toc-entry-list"></div>
+            <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
+            <div class="info-disclaimer"></div>
+                <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
+            
+                    <strong>SBL Abbreviations Rules:</strong><br>
+                    • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
+                    • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
+                    • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
+                    • Entries will automatically be sorted alphabetically.
                 </div>
-            </div>
-        </div>
-
-    <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
-        <div class="info-disclaimer"></div>
-            <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
-        
-                <strong>SBL Abbreviations Rules:</strong><br>
-                • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
-                • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
-                • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
-                • Entries will automatically be sorted alphabetically.
-            </div>
 
             <div class="widget-wrapper">
                 <div class="widget-sidebar">
@@ -1096,56 +1095,56 @@
                     </div>
                 </div>
 
-                <div class="widget-preview-area">
-                    <div class="abbr-paper-canvas" id="abbr-canvas">
-                        <div class="abbr-header-title">ABBREVIATIONS</div>
-                        <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                    <div class="widget-preview-area">
+                        <div class="abbr-paper-canvas" id="abbr-canvas">
+                            <div class="abbr-header-title">ABBREVIATIONS</div>
+                            <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+    <!-- CITE A SOURCE -->
+    <div id="cite" class="tab-content">
+        <h2>Cite a Source</h2>
+        <p>Use the interactive generator below to format your footnotes and bibliography entries.</p>
+
+        <div style="width: 100%; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; margin-top: 20px; margin-bottom: 40px;">
+            <iframe 
+                src="https://eqcronk.github.io/SBL-Citation-Generator/" 
+                title="SBL Citation Generator"
+                style="width: 100%; height: 800px; border: none;"
+                loading="lazy"
+                allow="clipboard-write">
+            </iframe>
         </div>
 
-        <!-- CITE A SOURCE -->
-        <div id="cite" class="tab-content">
-            <h2>Cite a Source</h2>
-            <p>Use the interactive generator below to format your footnotes and bibliography entries.</p>
+        <p>SBL uses footnotes at the bottom of each page, alongside a comprehensive Bibliography list at the very end of your paper.</p>
+        
+        <h3>Reference Rules & Manual Examples</h3>
 
-            <div style="width: 100%; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; margin-top: 20px; margin-bottom: 40px;">
-                <iframe 
-                    src="https://eqcronk.github.io/SBL-Citation-Generator/" 
-                    title="SBL Citation Generator"
-                    style="width: 100%; height: 800px; border: none;"
-                    loading="lazy"
-                    allow="clipboard-write">
-                </iframe>
-            </div>
-
-            <p>SBL uses footnotes at the bottom of each page, alongside a comprehensive Bibliography list at the very end of your paper.</p>
-            
-            <h3>Reference Rules & Manual Examples</h3>
-
-            <div class="citation-block">
-                <div class="citation-type">Standard Book (Single Author)</div>
-                <div class="example-line"><span class="tag">First Note (N):</span> 1. Firstname Lastname, <em>Title of Book: Subtitle</em> (City: Publisher, Year), Page.</div>
-                <div class="example-line"><span class="tag">Short Note (SN):</span> 2. Lastname, <em>Short Title</em>, Page.</div>
-                <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Firstname. <em>Title of Book: Subtitle</em>. City: Publisher, Year.</div>
-                <div class="callout">Key differences: First footnotes use commas and enclose publication details in parentheses. Bibliography items use trailing periods and hanging indents.</div>
-            </div>
-
-            <div class="citation-block">
-                <div class="citation-type">Journal Article</div>
-                <div class="example-line"><span class="tag">First Note (N):</span> 1. Author Firstname Lastname, "Title of the Article," <em>Journal Title</em> Volume Number, no. Issue (Year): Page.</div>
-                <div class="example-line"><span class="tag">Short Note (SN):</span> 2. Lastname, "Short Article Title," Page.</div>
-                <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Author Firstname. "Title of the Article." <em>Journal Title</em> Volume Number, no. Issue (Year): Full Page Range.</div>
-            </div>
-
-            <div class="citation-block">
-                <div class="citation-type">Commentary Volume (In a Series)</div>
-                <div class="example-line"><span class="tag">First Note (N):</span> 1. Scholar Firstname Lastname, <em>The Book of Genesis</em>, Series Title 1A (City: Publisher, Year), Page.</div>
-                <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Scholar Firstname. <em>The Book of Genesis</em>. Series Title 1A. City: Publisher, Year.</div>
-                <div class="callout">Warning: Commentary series formats vary. Verify whether your series treats volumes as authored or edited compilations.</div>
-            </div>
+        <div class="citation-block">
+            <div class="citation-type">Standard Book (Single Author)</div>
+            <div class="example-line"><span class="tag">First Note (N):</span> 1. Firstname Lastname, <em>Title of Book: Subtitle</em> (City: Publisher, Year), Page.</div>
+            <div class="example-line"><span class="tag">Short Note (SN):</span> 2. Lastname, <em>Short Title</em>, Page.</div>
+            <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Firstname. <em>Title of Book: Subtitle</em>. City: Publisher, Year.</div>
+            <div class="callout">Key differences: First footnotes use commas and enclose publication details in parentheses. Bibliography items use trailing periods and hanging indents.</div>
         </div>
+
+        <div class="citation-block">
+            <div class="citation-type">Journal Article</div>
+            <div class="example-line"><span class="tag">First Note (N):</span> 1. Author Firstname Lastname, "Title of the Article," <em>Journal Title</em> Volume Number, no. Issue (Year): Page.</div>
+            <div class="example-line"><span class="tag">Short Note (SN):</span> 2. Lastname, "Short Article Title," Page.</div>
+            <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Author Firstname. "Title of the Article." <em>Journal Title</em> Volume Number, no. Issue (Year): Full Page Range.</div>
+        </div>
+
+        <div class="citation-block">
+            <div class="citation-type">Commentary Volume (In a Series)</div>
+            <div class="example-line"><span class="tag">First Note (N):</span> 1. Scholar Firstname Lastname, <em>The Book of Genesis</em>, Series Title 1A (City: Publisher, Year), Page.</div>
+            <div class="example-line"><span class="tag">Bibliography (B):</span> Lastname, Scholar Firstname. <em>The Book of Genesis</em>. Series Title 1A. City: Publisher, Year.</div>
+            <div class="callout">Warning: Commentary series formats vary. Verify whether your series treats volumes as authored or edited compilations.</div>
+        </div>
+    </div>
 
     <!-- COMMON MISTAKES -->
     <div id="mistakes" class="tab-content">
