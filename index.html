@@ -514,7 +514,7 @@
             color: #000;
         }
 
-                .body-paper-canvas:first-of-type .body-page-footer{
+        .body-paper-canvas:first-of-type .body-page-footer{
             text-align: center;
             margin-top: auto;
             margin-bottom: 0;
@@ -933,177 +933,177 @@
         </div>
     </div>
 
-    <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
-    <div id="format" class="tab-content"></div>
-        <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
+        <!-- SBL PAPER BODY & HEADING GENERATOR WIDGET -->
+        <div id="format" class="tab-content"></div>
+            <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
+
+                <div class="widget-wrapper">
+                    <div class="widget-sidebar">
+        
+                    <div class="widget-input-group">
+                            <label for="body-paper-title">Paper Title (Primary Heading)</label>
+                            <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                        </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-paper-long-title">Paper Long Title</label>
+                        <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
+                    </div>
+                        
+                    <div class="widget-input-group">
+                        <label for="body-p1">Text</label>
+                        <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                    </div>
+                        
+                    <div class="widget-input-group">
+                        <label for="body-h1">First Level Heading (Main Points)</label>
+                        <input type="text" id="body-h1" value="Historical Context">
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-p2">Text</label>
+                        <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
+                        <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-p3">Subtext</label>
+                        <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
+                        <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-p4">Subtext</label>
+                        <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                    </div>
+
+                    <div class="widget-input-group">
+                        <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
+                        <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <div class="widget-preview-area">
+                    <div class="body-paper-canvas" id="body-canvas">
+                        <div class="body-page-header">1</div>
+                        <div class="body-title-heading" id="body-view-title"></div>
+                        <div class="body-long-title-heading" id="body-view-long-title"></div>
+                        <div class="body-content-area" id="body-view-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
+        <div class="info-disclaimer">
+            <h3 style="margin-top: 40;">4. Bibliography Alphabetizer</h3>
+            <p><strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.</p>
+        </div>
 
             <div class="widget-wrapper">
                 <div class="widget-sidebar">
-       
-                <div class="widget-input-group">
-                        <label for="body-paper-title">Paper Title (Primary Heading)</label>
-                        <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
+                        <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
                     </div>
 
-                 <div class="widget-input-group">
-                    <label for="body-paper-long-title">Paper Long Title</label>
-                    <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
-                </div>
-                    
-                <div class="widget-input-group">
-                    <label for="body-p1">Text</label>
-                    <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
-                </div>
-                    
-                <div class="widget-input-group">
-                    <label for="body-h1">First Level Heading (Main Points)</label>
-                    <input type="text" id="body-h1" value="Historical Context">
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadBibDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadBibPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyBibText()">Copy Plain Text</button>
+                    </div>
                 </div>
 
-                <div class="widget-input-group">
-                    <label for="body-p2">Text</label>
-                    <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
-                </div>
-
-                <div class="widget-input-group">
-                    <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
-                    <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
-                </div>
-
-                <div class="widget-input-group">
-                    <label for="body-p3">Subtext</label>
-                    <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-                </div>
-
-                <div class="widget-input-group">
-                    <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
-                    <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
-                </div>
-
-                <div class="widget-input-group">
-                    <label for="body-p4">Subtext</label>
-                    <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
-                </div>
-
-                <div class="widget-input-group">
-                    <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
-                    <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
-                </div>
-
-                <div class="widget-actions">
-                    <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
-                    <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
-                    <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
+                <div class="widget-preview-area">
+                    <div class="bib-paper-canvas" id="bib-canvas">
+                        <div class="bib-header-title">BIBLIOGRAPHY</div>
+                        <div class="bib-entry-list" id="bib-entry-list"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="widget-preview-area">
-                <div class="body-paper-canvas" id="body-canvas">
-                    <div class="body-page-header">1</div>
-                    <div class="body-title-heading" id="body-view-title"></div>
-                    <div class="body-long-title-heading" id="body-view-long-title"></div>
-                    <div class="body-content-area" id="body-view-content"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <h3>Advanced Layout Guidelines</h3>
+                <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p
 
-    <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-    <div class="info-disclaimer">
-        <h3 style="margin-top: 0;">4. Bibliography Alphabetizer</h3>
-        <p><strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.</p>
-    </div>
-
-        <div class="widget-wrapper">
-            <div class="widget-sidebar">
-                <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                    <label for="bib-paste-area">Paste Prepared Citations (One per line)</label>
-                    <textarea id="bib-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Wright, N. T. Jesus and the Victory of God. Minneapolis: Fortress Press, 1996.&#10;&#10;Hays, Richard B. &quot;Psalm 143 and the Logic of Apocalypse in Paul.&quot; Journal of Biblical Literature 117, no. 1 (1998): 21–36.&#10;&#10;Barth, Karl. Church Dogmatics. 14 vols. Edinburgh: T&T Clark, 1936–1977."></textarea>
-                </div>
-
-                <div class="widget-actions">
-                    <button class="w-btn w-btn-docx" onclick="downloadBibDocx()">Download .DOCX</button>
-                    <button class="w-btn w-btn-pdf" onclick="downloadBibPdf()">Download .PDF</button>
-                    <button class="w-btn w-btn-copy" onclick="copyBibText()">Copy Plain Text</button>
-                </div>
-            </div>
-
-            <div class="widget-preview-area">
-                <div class="bib-paper-canvas" id="bib-canvas">
-                    <div class="bib-header-title">BIBLIOGRAPHY</div>
-                    <div class="bib-entry-list" id="bib-entry-list"></div>
-                </div>
-            </div>
-        </div>
-
-            <h3>Advanced Layout Guidelines</h3>
-            <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p
-
-   <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
-    <div class="info-disclaimer">
-        <h3 style="margin-top: 0;">3. Table of Contents SBL Generator</h3>
-        <p><strong>SBL Table of Contents Rules:</strong></p>
-        <ul>
-            <li>Heading titled <strong>CONTENTS</strong> centered at the top.</li>
-            <li>Format entries with dot leaders matching section levels (Level 1, Level 2, Level 3).</li>
-            <li>Type one entry per line using commas or tabs to set page numbers, e.g., <code>Section Title, Page</code> or <code>> Subheading, Page</code> for nested levels.</li>
-        </ul>
-    </div>
-
-    <div class="widget-wrapper">
-        <div class="widget-sidebar">
-            <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                <label for="toc-paste-area">Entries (Format: Title, Page)</label>
-                <textarea id="toc-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Abbreviations, iv&#10;1. Introduction and Historical Context, 1&#10;> Socio-Historical Background, 3&#10;>> Epistolary Conventions, 7&#10;2. Exegetical Analysis, 12&#10;3. Conclusion, 24&#10;Bibliography, 28"></textarea>
-            </div>
-
-            <div class="widget-actions">
-                <button class="w-btn w-btn-docx" onclick="downloadTocDocx()">Download .DOCX</button>
-                <button class="w-btn w-btn-pdf" onclick="downloadTocPdf()">Download .PDF</button>
-                <button class="w-btn w-btn-copy" onclick="copyTocText()">Copy Plain Text</button>
-            </div>
-        </div>
-
-        <div class="widget-preview-area">
-            <div class="toc-paper-canvas" id="toc-canvas">
-                <div class="toc-header-title">CONTENTS</div>
-                <div class="toc-entry-list" id="toc-entry-list"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
-    <div class="info-disclaimer"></div>
-        <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
-    
-            <strong>SBL Abbreviations Rules:</strong><br>
-            • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
-            • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
-            • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
-            • Entries will automatically be sorted alphabetically.
+    <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
+        <div class="info-disclaimer">
+            <h3 style="margin-top: 40;">3. Table of Contents SBL Generator</h3>
+            <p><strong>SBL Table of Contents Rules:</strong></p>
+            <ul>
+                <li>Heading titled <strong>CONTENTS</strong> centered at the top.</li>
+                <li>Format entries with dot leaders matching section levels (Level 1, Level 2, Level 3).</li>
+                <li>Type one entry per line using commas or tabs to set page numbers, e.g., <code>Section Title, Page</code> or <code>> Subheading, Page</code> for nested levels.</li>
+            </ul>
         </div>
 
         <div class="widget-wrapper">
             <div class="widget-sidebar">
                 <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                    <label for="abbr-paste-area">Entries (Format: Abbr = Full Title)</label>
-                    <textarea id="abbr-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="JBL = Journal of Biblical Literature&#10;TDNT = Theological Dictionary of the New Testament&#10;NRSV = New Revised Standard Version&#10;BDAG = Bauer, Danker, Arndt, and Gingrich Greek-English Lexicon&#10;Anchor = Anchor Bible Commentary Series"></textarea>
+                    <label for="toc-paste-area">Entries (Format: Title, Page)</label>
+                    <textarea id="toc-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="Abbreviations, iv&#10;1. Introduction and Historical Context, 1&#10;> Socio-Historical Background, 3&#10;>> Epistolary Conventions, 7&#10;2. Exegetical Analysis, 12&#10;3. Conclusion, 24&#10;Bibliography, 28"></textarea>
                 </div>
 
                 <div class="widget-actions">
-                    <button class="w-btn w-btn-docx" onclick="downloadAbbrDocx()">Download .DOCX</button>
-                    <button class="w-btn w-btn-pdf" onclick="downloadAbbrPdf()">Download .PDF</button>
-                    <button class="w-btn w-btn-copy" onclick="copyAbbrText()">Copy Plain Text</button>
+                    <button class="w-btn w-btn-docx" onclick="downloadTocDocx()">Download .DOCX</button>
+                    <button class="w-btn w-btn-pdf" onclick="downloadTocPdf()">Download .PDF</button>
+                    <button class="w-btn w-btn-copy" onclick="copyTocText()">Copy Plain Text</button>
                 </div>
             </div>
 
             <div class="widget-preview-area">
-                <div class="abbr-paper-canvas" id="abbr-canvas">
-                    <div class="abbr-header-title">ABBREVIATIONS</div>
-                    <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                <div class="toc-paper-canvas" id="toc-canvas">
+                    <div class="toc-header-title">CONTENTS</div>
+                    <div class="toc-entry-list" id="toc-entry-list"></div>
                 </div>
             </div>
         </div>
+
+        <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
+        <div class="info-disclaimer"></div>
+            <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
+        
+                <strong>SBL Abbreviations Rules:</strong><br>
+                • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
+                • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
+                • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
+                • Entries will automatically be sorted alphabetically.
+            </div>
+
+            <div class="widget-wrapper">
+                <div class="widget-sidebar">
+                    <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label for="abbr-paste-area">Entries (Format: Abbr = Full Title)</label>
+                        <textarea id="abbr-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="JBL = Journal of Biblical Literature&#10;TDNT = Theological Dictionary of the New Testament&#10;NRSV = New Revised Standard Version&#10;BDAG = Bauer, Danker, Arndt, and Gingrich Greek-English Lexicon&#10;Anchor = Anchor Bible Commentary Series"></textarea>
+                    </div>
+
+                    <div class="widget-actions">
+                        <button class="w-btn w-btn-docx" onclick="downloadAbbrDocx()">Download .DOCX</button>
+                        <button class="w-btn w-btn-pdf" onclick="downloadAbbrPdf()">Download .PDF</button>
+                        <button class="w-btn w-btn-copy" onclick="copyAbbrText()">Copy Plain Text</button>
+                    </div>
+                </div>
+
+                <div class="widget-preview-area">
+                    <div class="abbr-paper-canvas" id="abbr-canvas">
+                        <div class="abbr-header-title">ABBREVIATIONS</div>
+                        <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                    </div>
+                </div>
+            </div>
 
         <!-- CITE A SOURCE -->
         <div id="cite" class="tab-content">
@@ -1147,136 +1147,135 @@
             </div>
         </div>
 
-        <!-- COMMON MISTAKES -->
-        <div id="mistakes" class="tab-content">
-            <h2>Common Mistakes to Avoid</h2>
-            <p>Review this diagnostic checklist before uploading or submitting your final paper draft.</p>
+    <!-- COMMON MISTAKES -->
+    <div id="mistakes" class="tab-content">
+        <h2>Common Mistakes to Avoid</h2>
+        <p>Review this diagnostic checklist before uploading or submitting your final paper draft.</p>
 
-            <h3>1. The Extinction of "Ibid."</h3>
-            <p>SBL 2nd Edition <strong>completely banned</strong> the use of "Ibid." for consecutive duplicate citations.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>1. Smith, <em>Genesis</em>, 12.<br>2. Ibid., 14.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>1. Smith, <em>Genesis</em>, 12.<br>2. Smith, <em>Genesis</em>, 14.</p>
-                </div>
+        <h3>1. The Extinction of "Ibid."</h3>
+        <p>SBL 2nd Edition <strong>completely banned</strong> the use of "Ibid." for consecutive duplicate citations.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>1. Smith, <em>Genesis</em>, 12.<br>2. Ibid., 14.</p>
             </div>
-
-            <h3>2. The Bibliography Triple 3-Em Dash (——.)</h3>
-            <p>When citing multiple works by the exact same author in your Bibliography, replace the author's name in subsequent entries with a 3-em dash (3 consecutive em dashes or 6 hyphens) followed by a period.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>Wright, N. T. <em>Climax of the Covenant</em>...<br>Wright, N. T. <em>Jesus and the Victory of God</em>...</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>Wright, N. T. <em>Climax of the Covenant</em>...<br>———. <em>Jesus and the Victory of God</em>...</p>
-                </div>
-            </div>
-
-            <h3>3. The Bible Bibliography Trap & Verse Citation Format</h3>
-            <p>Modern translation editions of Holy Scripture are <strong>cited textually in inline parenthetical blocks</strong>. Do not list standard Bible translations in your trailing Bibliography index! Furthermore, use a <strong>colon</strong> (not a period) to separate chapter and verse.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>Adding "The New Revised Standard Version. Nashville: Nelson, 1989" into your bibliography, or citing verse as <strong>Rom 1.16</strong>.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>Incorporate the reference directly in prose using a colon: "...as stated in the text (<strong>Rom 1:16</strong> NRSV)."</p>
-                </div>
-            </div>
-
-            <h3>4. Punctuation Placement with Footnotes</h3>
-            <p>Footnote callout numbers must sit outside trailing punctuation marks like periods or quotation marks.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>According to research<sup>3</sup>, the context changes. Or "This is true."<sup>4</sup></p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>According to research, the context changes.<sup>3</sup> Or "This is true."<sup>4</sup></p>
-                </div>
-            </div>
-
-            <h3>5. Possessives for Proper Names Ending in "S"</h3>
-            <p>SBL style requires adding an apostrophe <em>and</em> an 's' for proper names ending in 's' or an 's' sound (e.g., <strong>Jesus's</strong>, <strong>Moses's</strong>), rather than just an apostrophe.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>Jesus' disciples or Moses' law.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>Jesus's disciples or Moses's law.</p>
-                </div>
-            </div>
-
-            <h3>6. Parenthetical Scripture References & Biblical Abbreviations</h3>
-            <p>Primary biblical references belong in parenthetical citations in the main body text (e.g., "...as Paul notes [Rom 1:16]"), rather than in footnotes, unless they are part of a broader discursive note. Additionally, do <strong>not</strong> include periods in biblical book abbreviations.</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>Gen. 1:1, Matt. 5:3, or 1 Cor. 13:4.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>Gen 1:1, Matt 5:3, or 1 Cor 13:4.</p>
-                </div>
-            </div>
-
-            <h3>7. Era Designations (BCE / CE)</h3>
-            <p>Use <strong>BCE</strong> and <strong>CE</strong> in all capital letters with no internal periods (do not use B.C.E., C.E., or BC/AD).</p>
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>50 B.C.E. or 70 A.D.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>50 BCE or 70 CE</p>
-                </div>
-            </div>
-
-            <h3>8. Numbers, Specialized Terminology, and Transliterations</h3>
-            <p>Follow standard SBL conventions regarding numerals, technical terminology capitalization, and non-Latin character transliteration.</p>
-            
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>• 84 manuscripts were examined.<br>• Reading the gospel of Matthew.<br>• Inserting raw un-transliterated Hebrew without proper fonts or rendering.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>• Spell out numbers lower than 100 in prose: "<strong>eighty-four manuscripts</strong>."<br>• Lowercase general "<strong>gospel</strong>," but capitalize specific canonical books: "<strong>Gospel of Matthew</strong>."<br>• Use standard SBL Latin character transliterations for Hebrew, Greek, and Arabic when specialized fonts are absent.</p>
-                </div>
-            </div>
-
-            <div class="sblhs-callout">
-                These general issues regarding punctuation, numbers, terminology, and transliteration are discussed at length in <strong>§4 and §5 (pages 12–67) of SBLHS</strong>.
-            </div>
-
-            <h3>9. Structural & Institutional Formatting Rules</h3>
-            <p>Verify structural notes regarding footnotes, pagination, and sorting conventions before final submission.</p>
-
-            <div class="wrong-right">
-                <div class="box-wrong">
-                    <div class="box-title">Incorrect Form</div>
-                    <p>• Using Endnotes instead of Footnotes.<br>• Placing footnote text on a different page than its callout.<br>• Sorting Bibliography entries by book title or publication order.<br>• Missing spelling or capitalization errors in source author names.</p>
-                </div>
-                <div class="box-right">
-                    <div class="box-title">Correct SBL 2nd Edition Form</div>
-                    <p>• <strong>Footnotes only:</strong> North Central utilizes bottom-of-page footnotes (endnotes are not permitted).<br>• Footnote text must reside at the bottom of the <em>same page</em> as its number callout.<br>• Sort Bibliography entries in <strong>alphabetical order</strong> by the author's last name.<br>• Double-check spelling and pagination using Page Breaks for clear section splits.</p>
-                </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>1. Smith, <em>Genesis</em>, 12.<br>2. Smith, <em>Genesis</em>, 14.</p>
             </div>
         </div>
 
+        <h3>2. The Bibliography Triple 3-Em Dash (——.)</h3>
+        <p>When citing multiple works by the exact same author in your Bibliography, replace the author's name in subsequent entries with a 3-em dash (3 consecutive em dashes or 6 hyphens) followed by a period.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>Wright, N. T. <em>Climax of the Covenant</em>...<br>Wright, N. T. <em>Jesus and the Victory of God</em>...</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>Wright, N. T. <em>Climax of the Covenant</em>...<br>———. <em>Jesus and the Victory of God</em>...</p>
+            </div>
+        </div>
+
+        <h3>3. The Bible Bibliography Trap & Verse Citation Format</h3>
+        <p>Modern translation editions of Holy Scripture are <strong>cited textually in inline parenthetical blocks</strong>. Do not list standard Bible translations in your trailing Bibliography index! Furthermore, use a <strong>colon</strong> (not a period) to separate chapter and verse.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>Adding "The New Revised Standard Version. Nashville: Nelson, 1989" into your bibliography, or citing verse as <strong>Rom 1.16</strong>.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>Incorporate the reference directly in prose using a colon: "...as stated in the text (<strong>Rom 1:16</strong> NRSV)."</p>
+            </div>
+         </div>
+
+        <h3>4. Punctuation Placement with Footnotes</h3>
+        <p>Footnote callout numbers must sit outside trailing punctuation marks like periods or quotation marks.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>According to research<sup>3</sup>, the context changes. Or "This is true."<sup>4</sup></p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>According to research, the context changes.<sup>3</sup> Or "This is true."<sup>4</sup></p>
+            </div>
+        </div>
+
+        <h3>5. Possessives for Proper Names Ending in "S"</h3>
+        <p>SBL style requires adding an apostrophe <em>and</em> an 's' for proper names ending in 's' or an 's' sound (e.g., <strong>Jesus's</strong>, <strong>Moses's</strong>), rather than just an apostrophe.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>Jesus' disciples or Moses' law.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>Jesus's disciples or Moses's law.</p>
+            </div>
+        </div>
+
+        <h3>6. Parenthetical Scripture References & Biblical Abbreviations</h3>
+        <p>Primary biblical references belong in parenthetical citations in the main body text (e.g., "...as Paul notes [Rom 1:16]"), rather than in footnotes, unless they are part of a broader discursive note. Additionally, do <strong>not</strong> include periods in biblical book abbreviations.</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>Gen. 1:1, Matt. 5:3, or 1 Cor. 13:4.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>Gen 1:1, Matt 5:3, or 1 Cor 13:4.</p>
+            </div>
+        </div>
+
+        <h3>7. Era Designations (BCE / CE)</h3>
+        <p>Use <strong>BCE</strong> and <strong>CE</strong> in all capital letters with no internal periods (do not use B.C.E., C.E., or BC/AD).</p>
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>50 B.C.E. or 70 A.D.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>50 BCE or 70 CE</p>
+            </div>
+        </div>
+
+        <h3>8. Numbers, Specialized Terminology, and Transliterations</h3>
+        <p>Follow standard SBL conventions regarding numerals, technical terminology capitalization, and non-Latin character transliteration.</p>
+            
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>• 84 manuscripts were examined.<br>• Reading the gospel of Matthew.<br>• Inserting raw un-transliterated Hebrew without proper fonts or rendering.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>• Spell out numbers lower than 100 in prose: "<strong>eighty-four manuscripts</strong>."<br>• Lowercase general "<strong>gospel</strong>," but capitalize specific canonical books: "<strong>Gospel of Matthew</strong>."<br>• Use standard SBL Latin character transliterations for Hebrew, Greek, and Arabic when specialized fonts are absent.</p>
+            </div>
+        </div>
+
+        <div class="sblhs-callout">
+                These general issues regarding punctuation, numbers, terminology, and transliteration are discussed at length in <strong>§4 and §5 (pages 12–67) of SBLHS</strong>.
+        </div>
+
+        <h3>9. Structural & Institutional Formatting Rules</h3>
+        <p>Verify structural notes regarding footnotes, pagination, and sorting conventions before final submission.</p>
+
+        <div class="wrong-right">
+            <div class="box-wrong">
+                <div class="box-title">Incorrect Form</div>
+                <p>• Using Endnotes instead of Footnotes.<br>• Placing footnote text on a different page than its callout.<br>• Sorting Bibliography entries by book title or publication order.<br>• Missing spelling or capitalization errors in source author names.</p>
+            </div>
+            <div class="box-right">
+                <div class="box-title">Correct SBL 2nd Edition Form</div>
+                <p>• <strong>Footnotes only:</strong> North Central utilizes bottom-of-page footnotes (endnotes are not permitted).<br>• Footnote text must reside at the bottom of the <em>same page</em> as its number callout.<br>• Sort Bibliography entries in <strong>alphabetical order</strong> by the author's last name.<br>• Double-check spelling and pagination using Page Breaks for clear section splits.</p>
+            </div>
+        </div>
     </div>
+
 
     <div id="toast" class="toast-message"></div>
 
@@ -1379,7 +1378,7 @@ function addNewPageToGenerator() {
         <div class="body-content-area" contenteditable="true"></div>
     `;
     previewArea.appendChild(newCanvas);
-}
+    }
 
 function renderBodyLiveUpdate() {
 
