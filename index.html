@@ -773,7 +773,7 @@
 
                 </div>
         </div>
-        
+
         <!-- TEMPLATES TAB CONTENT -->
         <div id="templates" class="tab-content">
             <h4>Sample Templates</h4>
@@ -2119,5 +2119,31 @@ renderBodyLiveUpdate();
             }
         }
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Put your switchTab function inside here
+            window.switchTab = function(tabName, btnElement) {
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                const targetTab = document.getElementById(tabName);
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+
+                if (btnElement) {
+                    btnElement.classList.add('active');
+                }
+            };
+
+            // 2. Put any other setup or live-update binding here
+            console.log("DOM fully loaded and scripts initialized!");
+        });
+        </script>
+
 </body>
 </html>
