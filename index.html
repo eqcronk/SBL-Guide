@@ -2081,21 +2081,31 @@ renderBodyLiveUpdate();
             document.body.removeChild(anchorElement);
         }
 
-        function tabName(tabId) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+        function switchTab(tabName) {
+            // Hide all tab content sections
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
 
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            // Remove the 'active' class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
 
-            document.getElementById(tabId).classList.add('active');
-            
-            const indexMap = { 'home': 0, 'templates': 1, 'format': 2, 'cite': 3, 'mistakes': 4 };
-            if (indexMap[tabId] !== undefined) {
-                buttons[indexMap[tabId]].classList.add('active');
+            // Show the selected tab content
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
             }
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Find and highlight the button that was clicked
+            tabButtons.forEach(btn => {
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabName)) {
+                    btn.classList.add('active');
+                }
+            });
         }
     </script>
 </body>
