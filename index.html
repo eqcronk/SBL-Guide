@@ -751,11 +751,11 @@
     </header>
 
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('home')">Home</button>
-        <button class="tab-btn" onclick="switchTab('templates')">Templates</button>
-        <button class="tab-btn" onclick="switchTab('format')">Format My Paper</button>
-        <button class="tab-btn" onclick="switchTab('cite')">Cite a Source</button>
-        <button class="tab-btn" onclick="switchTab('mistakes')">Common Mistakes</button>
+        <button class="tab-btn active" onclick="tabName('home')">Home</button>
+        <button class="tab-btn" onclick="tabName('templates')">Templates</button>
+        <button class="tab-btn" onclick="tabName('format')">Format My Paper</button>
+        <button class="tab-btn" onclick="tabName('cite')">Cite a Source</button>
+        <button class="tab-btn" onclick="tabName('mistakes')">Common Mistakes</button>
     </nav>
 
     <div class="container">
@@ -770,19 +770,19 @@
             <p>Select what you need help with to get step-by-step help:</p>
             
             <div class="grid">
-                <div class="card" onclick="switchTab('templates')">
+                <div class="card" onclick="tabName('templates')">
                     <h4>Sample Templates</h4>
                     <p>Download basic sample papers, literature reviews, annotated bibliographies and thesis resources in SBL style.</p>
                 </div>
-                <div class="card" onclick="switchTab('format')">
+                <div class="card" onclick="tabName('format')">
                     <h4>General Layout</h4>
                     <p>How to format your margins, font, line spacing, and title page</p>
                 </div>
-                <div class="card" onclick="switchTab('cite')">
+                <div class="card" onclick="tabName('cite')">
                     <h4>SBL Citation Creator</h4>
                     <p>Create SBL First Footnotes, Short Notes, and Bibliography entries.</p>
                 </div>
-                <div class="card" onclick="switchTab('mistakes')">
+                <div class="card" onclick="tabName('mistakes')">
                     <h4>Check For Mistakes</h4>
                     <p>Read through common mistakes and examples of proper SBL formatting.</p>
                 </div>
@@ -1042,7 +1042,7 @@
  <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
             <h3 style="margin-top: 50px;">4. Bibliography Alphabetizer</h3>
             <div class="info-disclaimer">
-                <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.
+                <strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="tabName('cite'); return false;">Cite a Source page</a>.
             </div>
 
             <div class="widget-wrapper">
@@ -2081,7 +2081,7 @@ renderBodyLiveUpdate();
             document.body.removeChild(anchorElement);
         }
 
-        function switchTab(tabId) {
+        function tabName(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
