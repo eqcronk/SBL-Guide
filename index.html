@@ -751,11 +751,11 @@
     </header>
 
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="tabName('home')">Home</button>
-        <button class="tab-btn" onclick="tabName('templates')">Templates</button>
-        <button class="tab-btn" onclick="tabName('format')">Format My Paper</button>
-        <button class="tab-btn" onclick="tabName('cite')">Cite a Source</button>
-        <button class="tab-btn" onclick="tabName('mistakes')">Common Mistakes</button>
+        <button class="tab-btn active" onclick="switchTab('home', this)">Home</button>
+        <button class="tab-btn" onclick="switchTab('templates', this)">Templates</button>
+        <button class="tab-btn" onclick="switchTab('format', this)">Format My Paper</button>
+        <button class="tab-btn" onclick="switchTab('cite', this)">Cite a Source</button>
+        <button class="tab-btn" onclick="switchTab('mistakes', this)">Common Mistakes</button>
     </nav>
 
     <div class="container">
@@ -2081,31 +2081,31 @@ renderBodyLiveUpdate();
             document.body.removeChild(anchorElement);
         }
 
-        function tabName {
-            // Hide all tab content sections
+        function switchTab(tabName, btnElement) {
+            // 1. Hide all tab content sections
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
                 content.classList.remove('active');
             });
 
-            // Remove the 'active' class from all tab buttons
+            // 2. Remove the 'active' class from all tab buttons
             const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(btn => {
                 btn.classList.remove('active');
             });
 
-            // Show the selected tab content
+            // 3. Show the target tab content (make sure your divs have matching IDs like id="home", id="format", etc.)
             const targetTab = document.getElementById(tabName);
             if (targetTab) {
                 targetTab.classList.add('active');
+            } else {
+                console.warn("Target tab content not found for ID:", tabName);
             }
 
-            // Find and highlight the button that was clicked
-            tabButtons.forEach(btn => {
-                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabName)) {
-                    btn.classList.add('active');
-                }
-            });
+            // 4. Highlight the specific button that was clicked
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
         }
     </script>
 </body>
