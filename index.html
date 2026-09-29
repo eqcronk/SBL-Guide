@@ -1075,7 +1075,7 @@
 
 
     <!-- BIBLIOGRAPHY ALPHABETIZER WIDGET -->
-    <h3 style="margin-top: 40;">4. Bibliography Alphabetizer</h3>
+    <h3 style="margin-top: 40;">3. Bibliography Alphabetizer</h3>
     <div class="info-disclaimer">⚠️ <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently to avoid losing progress.</div>
     <p><strong>Note:</strong> This tool alphabetizes your pre-formatted entries; it does not automatically convert plain text into SBL format. If you need to build or verify SBL citations, please visit the <a href="#" onclick="switchTab('cite'); return false;">Cite a Source page</a>.</p>
         <div class="widget-wrapper">
@@ -1104,8 +1104,40 @@
     <h3>Advanced Layout Guidelines</h3>
     <p>1-inch margins on all four sides, Times New Roman, 12-point font for main text. Double-spaced body text, single-spaced block quotes, page numbers in the top-right (omit page number on title page).</p>
 
+    <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
+    <h3 style="margin-top: 50px;">4. Abbreviation Page Generator</h3>
+    <div class="info-disclaimer">⚠️ <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently to avoid losing progress.</div>
+        <strong>SBL Abbreviations Rules:</strong><br>
+        • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
+        • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
+        • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
+        • Entries will automatically be sorted alphabetically.
+
+        <div class="widget-wrapper">
+            <div class="widget-sidebar">
+                <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
+                    <label for="abbr-paste-area">Entries (Format: Abbr = Full Title)</label>
+                    <textarea id="abbr-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="JBL = Journal of Biblical Literature&#10;TDNT = Theological Dictionary of the New Testament&#10;NRSV = New Revised Standard Version&#10;BDAG = Bauer, Danker, Arndt, and Gingrich Greek-English Lexicon&#10;Anchor = Anchor Bible Commentary Series"></textarea>
+                </div>
+
+                <div class="widget-actions">
+                    <button class="w-btn w-btn-docx" onclick="downloadAbbrDocx()">Download .DOCX</button>
+                    <button class="w-btn w-btn-pdf" onclick="downloadAbbrPdf()">Download .PDF</button>
+                    <button class="w-btn w-btn-copy" onclick="copyAbbrText()">Copy Plain Text</button>
+                </div>
+            </div>
+
+            <div class="widget-preview-area" id="abbr-preview-area">
+                <div class="abbr-paper-canvas" id="abbr-canvas">
+                    <div class="abbr-header-title">ABBREVIATIONS</div>
+                    <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                    <div class="gen-page-footer">i</div>
+                </div>
+            </div>
+        </div><!-- /.widget-wrapper -->
+
     <!-- TABLE OF CONTENTS GENERATOR WIDGET -->
-    <h3 style="margin-top: 40;">3. Table of Contents SBL Generator</h3>
+    <h3 style="margin-top: 50px;">5. Table of Contents SBL Generator</h3>
     <div class="info-disclaimer">⚠️ <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently to avoid losing progress.</div>
     <p><strong>SBL Table of Contents Rules:</strong></p>
         <ul>
@@ -1137,37 +1169,6 @@
         </div>
     </div><!-- /.widget-wrapper -->
 
-    <!-- ABBREVIATION PAGE GENERATOR WIDGET -->
-    <h3 style="margin-top: 50px;">5. Abbreviation Page Generator</h3>
-    <div class="info-disclaimer">⚠️ <strong>Notice:</strong> This tool does <strong>not auto-save</strong>. Please export or copy your work frequently to avoid losing progress.</div>
-        <strong>SBL Abbreviations Rules:</strong><br>
-        • Heading titled <strong>ABBREVIATIONS</strong> centered at top.<br>
-        • Format as a 2-column list: Abbreviation flush left (bolded), Full Name or Title aligned to the right.<br>
-        • Enter entries on separate lines using a comma, equals sign, or tab separator (e.g., <code>JBL = Journal of Biblical Literature</code>).<br>
-        • Entries will automatically be sorted alphabetically.
-
-        <div class="widget-wrapper">
-            <div class="widget-sidebar">
-                <div class="widget-input-group" style="flex: 1; display: flex; flex-direction: column;">
-                    <label for="abbr-paste-area">Entries (Format: Abbr = Full Title)</label>
-                    <textarea id="abbr-paste-area" style="flex: 1; min-height: 220px; line-height: 1.4;" placeholder="JBL = Journal of Biblical Literature&#10;TDNT = Theological Dictionary of the New Testament&#10;NRSV = New Revised Standard Version&#10;BDAG = Bauer, Danker, Arndt, and Gingrich Greek-English Lexicon&#10;Anchor = Anchor Bible Commentary Series"></textarea>
-                </div>
-
-                <div class="widget-actions">
-                    <button class="w-btn w-btn-docx" onclick="downloadAbbrDocx()">Download .DOCX</button>
-                    <button class="w-btn w-btn-pdf" onclick="downloadAbbrPdf()">Download .PDF</button>
-                    <button class="w-btn w-btn-copy" onclick="copyAbbrText()">Copy Plain Text</button>
-                </div>
-            </div>
-
-            <div class="widget-preview-area" id="abbr-preview-area">
-                <div class="abbr-paper-canvas" id="abbr-canvas">
-                    <div class="abbr-header-title">ABBREVIATIONS</div>
-                    <div class="abbr-entry-list" id="abbr-entry-list"></div>
-                    <div class="gen-page-footer">i</div>
-                </div>
-            </div>
-        </div><!-- /.widget-wrapper -->
     </div><!-- /#format.tab-content -->
 
     <!-- CITE A SOURCE -->
