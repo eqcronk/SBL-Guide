@@ -454,6 +454,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            gap: 24px;
         }
 
         /* GENERATOR CANVAS / PREVIEWS USE TIMES NEW ROMAN */
@@ -492,14 +493,16 @@
 
         .body-paper-canvas {
             width: 450px;
-            min-height: 582px;
+            height: 582px;
+            box-sizing: border-box;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 0.5in;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            box-sizing: border-box;
+            overflow: hidden;
+            flex-shrink: 0;
             text-align: left;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
@@ -516,11 +519,13 @@
             color: #000;
         }
 
-        .body-paper-canvas:first-of-type .body-page-footer{
+        .body-page-footer {
             text-align: center;
-            margin-top: auto;
-            margin-bottom: 0;
-            font-size: 8.5pt;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8pt;
+            color: #000;
+            flex: 0 0 auto;
+            margin-top: 6pt;
         }
 
         .body-page-header {
@@ -553,8 +558,15 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
+        /* The content area flexes to fill exactly the space left between the
+           title blocks and the page footer. Because it has its own `overflow`,
+           clientHeight = available space and scrollHeight = natural content
+           height, so the pagination logic can detect overflow by comparing the
+           two — no need to measure sibling elements. */
         .body-content-area {
-            flex: 1;
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow: hidden;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             line-height: 1.6;
@@ -953,7 +965,7 @@
     <h3 style="margin-top: 50px;">2. Paper Body & Heading Creator</h3>
 
         <div class="widget-wrapper">
-            <div class="widget-sidebar">
+            <div class="widget-sidebar" id="body-sidebar">
 
             <div class="widget-input-group">
                     <label for="body-paper-title">Paper Title (Primary Heading)</label>
@@ -1005,20 +1017,19 @@
                 <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
             </div>
 
-            <div class="widget-actions">
+            <div class="widget-actions" id="body-sidebar-actions">
                 <button class="w-btn w-btn-docx" onclick="downloadBodyDocx()">Download .DOCX</button>
                 <button class="w-btn w-btn-pdf" onclick="downloadBodyPdf()">Download .PDF</button>
                 <button class="w-btn w-btn-copy" onclick="copyBodyText()">Copy Plain Text</button>
-                <button type="button" class="w-btn w-btn-docx" onclick="addNewPageToGenerator()">+ Add New Page</button>
             </div>
         </div><!-- /.widget-sidebar -->
 
         <div class="widget-preview-area" id="body-preview-area">
             <div class="body-paper-canvas" id="body-canvas">
-                <div class="body-page-header">1</div>
                 <div class="body-title-heading" id="body-view-title"></div>
                 <div class="body-long-title-heading" id="body-view-long-title"></div>
                 <div class="body-content-area" id="body-view-content"></div>
+                <div class="body-page-footer">1</div>
             </div>
         </div>
     </div><!-- /.widget-wrapper -->
@@ -1292,6 +1303,7 @@
 
     <div id="toast" class="toast-message"></div>
 
+
     <footer>
         AI was used in the creation of this resource; always check automatically generated resources.
     </footer>
@@ -1362,62 +1374,160 @@
         renderWidgetLiveUpdate();
 
         // SBL PAPER BODY & HEADING GENERATOR ENGINE
+        // Pages are created/removed automatically as content grows or shrinks.
 
-        // Appends an extra editable page canvas to the body generator's preview area.
-        // Scoped to #body-preview-area so it cannot append into the title page preview.
-        function addNewPageToGenerator() {
-            const previewArea = document.getElementById('body-preview-area');
+        function renderBodyLiveUpdate() {
+            var previewArea = document.getElementById('body-preview-area');
             if (!previewArea) { return; }
 
-            const existingPages = previewArea.querySelectorAll('.body-paper-canvas');
-            const nextPageNumber = existingPages.length + 1;
+            // Snapshot current canvases before we modify anything
+            var canvases = Array.from(previewArea.querySelectorAll('.body-paper-canvas'));
+            if (canvases.length === 0) { return; }
 
-            const newCanvas = document.createElement('div');
-            newCanvas.className = 'body-paper-canvas';
-            newCanvas.innerHTML =
-                '<div class="body-page-header">' + nextPageNumber + '</div>' +
-                '<div class="body-content-area" contenteditable="true"></div>';
-            previewArea.appendChild(newCanvas);
+            // If the canvas has not been laid out yet (hidden tab, fonts still
+            // loading), measurements are meaningless and pagination would spiral.
+            // Clear page 1 and re-run once layout is actually available.
+            var probe = canvases[0].querySelector('.body-content-area');
+            if (canvases[0].clientHeight < 100 || !probe || probe.clientHeight < 20) {
+                var ca0 = canvases[0].querySelector('.body-content-area');
+                if (ca0) { ca0.innerHTML = ''; }
+                if (!renderBodyLiveUpdate._retryQueued) {
+                    renderBodyLiveUpdate._retryQueued = true;
+                    requestAnimationFrame(function () {
+                        renderBodyLiveUpdate._retryQueued = false;
+                        renderBodyLiveUpdate();
+                    });
+                }
+                return;
+            }
+
+            // ── 1. Clear all content areas ─────────────────────────────────────
+            canvases.forEach(function (canvas, i) {
+                var ca = canvas.querySelector('.body-content-area');
+                if (ca) { ca.innerHTML = ''; }
+                if (i === 0) {
+                    var vt  = canvas.querySelector('#body-view-title');
+                    var vt2 = canvas.querySelector('#body-view-long-title');
+                    if (vt)  { vt.textContent  = ''; vt.style.display  = 'none'; }
+                    if (vt2) { vt2.textContent = ''; vt2.style.display = 'none'; }
+                }
+            });
+
+            // ── 2. Render page-1 title blocks ─────────────────────────────────
+            var title  = (bodyFields.title.value  || '').trim().toUpperCase();
+            var title2 = (bodyFields.title2.value || '').trim().toUpperCase();
+            var vTitle  = document.getElementById('body-view-title');
+            var vTitle2 = document.getElementById('body-view-long-title');
+            if (vTitle)  { vTitle.textContent  = title;  vTitle.style.display  = title  ? 'block' : 'none'; }
+            if (vTitle2) { vTitle2.textContent = title2; vTitle2.style.display = title2 ? 'block' : 'none'; }
+
+            // ── 3. Build flat segment list from the sidebar ────────────────────
+            var segments = [];
+            function addSection(hVal, hClass, pVal) {
+                if (hVal && hVal.trim()) {
+                    segments.push({ cls: hClass, text: hVal.trim() });
+                }
+                if (pVal && pVal.trim()) {
+                    pVal.trim().split(/\n\s*\n/).forEach(function (p) {
+                        if (p.trim()) { segments.push({ cls: 'body-p', text: p.trim() }); }
+                    });
+                }
+            }
+            addSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
+            addSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
+            addSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
+            addSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
+
+            // ── 4. Pour segments into pages; auto-create pages on overflow ─────
+            var pageIndex = 0;
+
+            function currentCanvas()     { return canvases[pageIndex]; }
+            function currentContentArea() {
+                var c = currentCanvas();
+                return c ? c.querySelector('.body-content-area') : null;
+            }
+            var MAX_PAGES = 60;   // hard stop against runaway pagination
+            function advancePage() {
+                if (pageIndex >= MAX_PAGES - 1) { return; }
+                pageIndex++;
+                if (!canvases[pageIndex]) {
+                    var num = pageIndex + 1;
+                    var nc  = document.createElement('div');
+                    nc.className = 'body-paper-canvas';
+                    nc.id = 'body-canvas-' + num;
+                    nc.innerHTML =
+                        '<div class="body-page-header">' + num + '</div>' +
+                        '<div class="body-content-area"></div>';
+                    previewArea.appendChild(nc);
+                    canvases.push(nc);
+                }
+            }
+
+            // The content area is a flex child that fills the space left over
+            // after the title blocks and footer, and it owns its own overflow.
+            // So clientHeight is the space available and scrollHeight is the
+            // natural height of the content — if scrollHeight exceeds
+            // clientHeight the content does not fit on this page.
+            function fits(ca) {
+                return ca.scrollHeight <= ca.clientHeight + 1;
+            }
+
+            segments.forEach(function (seg) {
+                var ca = currentContentArea();
+                if (!ca) { return; }
+
+                var el = document.createElement('div');
+                el.className = seg.cls;
+                el.textContent = seg.text;
+                ca.appendChild(el);
+
+                if (fits(ca)) { return; }
+
+                // Doesn't fit. If the page already has other content, try moving
+                // the whole element to a fresh page first.
+                if (ca.children.length > 1) {
+                    ca.removeChild(el);
+                    advancePage();
+                    ca = currentContentArea();
+                    if (!ca) { return; }
+                    ca.appendChild(el);
+                    if (fits(ca)) { return; }
+                }
+
+                // Still doesn't fit even alone on its own page: split it word by
+                // word across as many pages as needed.
+                var words = seg.text.split(/\s+/);
+                el.textContent = '';
+                var buffer = [];
+
+                words.forEach(function (word) {
+                    buffer.push(word);
+                    el.textContent = buffer.join(' ');
+
+                    if (!fits(ca)) {
+                        // Roll back the word that broke the page
+                        buffer.pop();
+                        el.textContent = buffer.join(' ');
+
+                        // Start a continuation block on the next page
+                        advancePage();
+                        ca = currentContentArea();
+                        el = document.createElement('div');
+                        el.className = seg.cls;
+                        ca.appendChild(el);
+
+                        buffer = [word];
+                        el.textContent = word;
+                    }
+                });
+            });
+
+            // ── 5. Remove stale extra pages beyond the last used one ───────────
+            for (var i = canvases.length - 1; i > pageIndex; i--) {
+                canvases[i].parentNode.removeChild(canvases[i]);
+                canvases.pop();
+            }
         }
-
-function renderBodyLiveUpdate() {
-
-  const paperTitle = bodyFields.title.value.trim().toUpperCase(); 
-  
-  bodyFields.vTitle.textContent = paperTitle;
-  bodyFields.vTitle.style.display = paperTitle ? 'block' : 'none';
-
-   const paperTitle2 = bodyFields.title2.value.trim().toUpperCase(); 
-  
-  bodyFields.vTitle2.textContent = paperTitle2;
-  bodyFields.vTitle2.style.display = paperTitle2 ? 'block' : 'none';
-
-  bodyFields.vContent.innerHTML = '';
-
-  const appendSection = (headingText, headingClass, bodyText) => {
-    if (headingText && headingText.trim()) {
-      const hDiv = document.createElement('div');
-      hDiv.className = headingClass;
-      hDiv.textContent = headingText.trim();
-      bodyFields.vContent.appendChild(hDiv);
-    }
-
-    if (bodyText && bodyText.trim()) {
-      const paragraphs = bodyText.trim().split(/\n\s*\n/);
-      paragraphs.forEach(pText => {
-        const pDiv = document.createElement('div');
-        pDiv.className = 'body-p';
-        pDiv.textContent = pText.trim();
-        bodyFields.vContent.appendChild(pDiv);
-      });
-    }
-  };
-
-  appendSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
-  appendSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
-  appendSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
-  appendSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
-}
 
 
 [
