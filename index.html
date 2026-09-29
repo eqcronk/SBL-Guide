@@ -497,7 +497,9 @@
             box-sizing: border-box;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 0.5in;
+            /* Extra bottom padding reserves space for the absolutely-positioned
+               page-number footer so content can never reach behind it. */
+            padding: 0.5in 0.5in calc(0.5in + 22px) 0.5in;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -520,12 +522,14 @@
         }
 
         .body-page-footer {
+            position: absolute;
+            bottom: 0.5in;
+            left: 0.5in;
+            right: 0.5in;
             text-align: center;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8pt;
             color: #000;
-            flex: 0 0 auto;
-            margin-top: 6pt;
         }
 
         .body-page-header {
@@ -558,11 +562,8 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        /* The content area flexes to fill exactly the space left between the
-           title blocks and the page footer. Because it has its own `overflow`,
-           clientHeight = available space and scrollHeight = natural content
-           height, so the pagination logic can detect overflow by comparing the
-           two — no need to measure sibling elements. */
+        /* The content area fills the flex space left after the title blocks.
+           The footer is absolutely positioned outside the flex flow. */
         .body-content-area {
             flex: 1 1 auto;
             min-height: 0;
@@ -1476,50 +1477,62 @@
                 var ca = currentContentArea();
                 if (!ca) { return; }
 
-                var el = document.createElement('div');
-                el.className = seg.cls;
-                el.textContent = seg.text;
-                ca.appendChild(el);
+                var isHeading = /^sbl-h[1-4]$/.test(seg.cls);
 
-                if (fits(ca)) { return; }
-
-                // Doesn't fit. If the page already has other content, try moving
-                // the whole element to a fresh page first.
-                if (ca.children.length > 1) {
-                    ca.removeChild(el);
-                    advancePage();
-                    ca = currentContentArea();
-                    if (!ca) { return; }
+                if (isHeading) {
+                    // ── Headings move as an atomic unit ─────────────────────
+                    var el = document.createElement('div');
+                    el.className = seg.cls;
+                    el.textContent = seg.text;
                     ca.appendChild(el);
-                    if (fits(ca)) { return; }
-                }
 
-                // Still doesn't fit even alone on its own page: split it word by
-                // word across as many pages as needed.
-                var words = seg.text.split(/\s+/);
-                el.textContent = '';
-                var buffer = [];
-
-                words.forEach(function (word) {
-                    buffer.push(word);
-                    el.textContent = buffer.join(' ');
-
-                    if (!fits(ca)) {
-                        // Roll back the word that broke the page
-                        buffer.pop();
-                        el.textContent = buffer.join(' ');
-
-                        // Start a continuation block on the next page
+                    // Only move to the next page if the heading itself overflows.
+                    if (!fits(ca) && ca.children.length > 1) {
+                        ca.removeChild(el);
                         advancePage();
                         ca = currentContentArea();
-                        el = document.createElement('div');
-                        el.className = seg.cls;
-                        ca.appendChild(el);
-
-                        buffer = [word];
-                        el.textContent = word;
+                        if (ca) { ca.appendChild(el); }
                     }
-                });
+
+                } else {
+                    // ── Paragraphs always word-split to fill the current page ─
+                    // Never move the whole paragraph — always leave as much as
+                    // possible on the current page so it is never mostly empty.
+                    var el = document.createElement('div');
+                    el.className = seg.cls;
+                    el.textContent = '';
+                    ca.appendChild(el);
+
+                    var words = seg.text.split(/\s+/);
+                    var buffer = [];
+
+                    words.forEach(function (word) {
+                        buffer.push(word);
+                        el.textContent = buffer.join(' ');
+
+                        if (!fits(ca)) {
+                            buffer.pop();
+                            el.textContent = buffer.join(' ');
+
+                            if (buffer.length === 0) {
+                                // Single word is already too wide — keep it
+                                buffer = [word];
+                                el.textContent = word;
+                                return;
+                            }
+
+                            // Advance to next page and continue the paragraph there
+                            advancePage();
+                            ca = currentContentArea();
+                            el = document.createElement('div');
+                            el.className = seg.cls;
+                            ca.appendChild(el);
+
+                            buffer = [word];
+                            el.textContent = word;
+                        }
+                    });
+                }
             });
 
             // ── 5. Remove stale extra pages beyond the last used one ───────────
