@@ -460,35 +460,70 @@
         /* GENERATOR CANVAS / PREVIEWS USE TIMES NEW ROMAN */
         .widget-paper-canvas {
             width: 450px;
-            min-height: 582px;
+            height: 582px;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 0.5in;
-            display: block;
-            flex-direction: column;
-            justify-content: center; /* Keeps it centered vertically in the middle of the page */
-            align-items: center;     /* Centers items horizontally */
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;   /* vertical center */
+            align-items: center;       /* horizontal center */
             text-align: center;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             font-weight: normal;
+            flex-shrink: 0;
         }
         .bib-paper-canvas, .toc-paper-canvas, .abbr-paper-canvas {
             width: 450px;
-            min-height: 582px;
+            height: 582px;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 0.5in;
-            display: block;
+            /* Extra bottom padding reserves room for the page-number footer */
+            padding: 0.5in 0.5in calc(0.5in + 22px) 0.5in;
+            display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            align-items: center;
+            overflow: hidden;
+            flex-shrink: 0;
             box-sizing: border-box;
             text-align: left;
             font-family: 'Times New Roman', Times, serif;
             font-size: 8.5pt;
             font-weight: normal;
+            position: relative;
+        }
+
+        /* Entry lists own their overflow so pagination can measure them:
+           clientHeight = space available, scrollHeight = natural content height */
+        .bib-entry-list, .toc-entry-list, .abbr-entry-list {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* Page-number footer for TOC / abbreviations (bottom center) */
+        .gen-page-footer {
+            position: absolute;
+            bottom: 0.5in;
+            left: 0.5in;
+            right: 0.5in;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8pt;
+            color: #000;
+            z-index: 2;  /* paint above the entry list stacking context */
+        }
+
+        /* Page number for the bibliography (top right, per request) */
+        .gen-page-header {
+            text-align: right;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8pt;
+            margin-bottom: 8pt;
+            color: #000;
+            flex: 0 0 auto;
         }
 
         .body-paper-canvas {
@@ -713,6 +748,7 @@
             line-height: 1.4;
             color: #000000;
             text-align: center;
+            align-self: stretch;
             text-transform: uppercase;
             font-weight: normal;
             width: 100%;
@@ -1056,6 +1092,7 @@
 
             <div class="widget-preview-area" id="bib-preview-area">
                 <div class="bib-paper-canvas" id="bib-canvas">
+                    <div class="gen-page-header">1</div>
                     <div class="bib-header-title">BIBLIOGRAPHY</div>
                     <div class="bib-entry-list" id="bib-entry-list"></div>
                 </div>
@@ -1093,6 +1130,7 @@
             <div class="toc-paper-canvas" id="toc-canvas">
                 <div class="toc-header-title">CONTENTS</div>
                 <div class="toc-entry-list" id="toc-entry-list"></div>
+                <div class="gen-page-footer">i</div>
             </div>
         </div>
     </div><!-- /.widget-wrapper -->
@@ -1124,6 +1162,7 @@
                 <div class="abbr-paper-canvas" id="abbr-canvas">
                     <div class="abbr-header-title">ABBREVIATIONS</div>
                     <div class="abbr-entry-list" id="abbr-entry-list"></div>
+                    <div class="gen-page-footer">i</div>
                 </div>
             </div>
         </div><!-- /.widget-wrapper -->
@@ -1556,18 +1595,134 @@
 
 renderBodyLiveUpdate();
 
+        // Converts a positive integer to lowercase Roman numerals (i, ii, iii, iv…)
+        function toRoman(n) {
+            var val = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+            var sym = ['m','cm','d','cd','c','xc','l','xl','x','ix','v','iv','i'];
+            var result = '';
+            for (var i = 0; i < val.length; i++) {
+                while (n >= val[i]) { result += sym[i]; n -= val[i]; }
+            }
+            return result;
+        }
+
+        // Removes every page canvas except the first, and shows placeholder text
+        // in it. Used by the empty-state branch of each generator.
+        function resetGeneratorToSinglePage(previewAreaId, canvasClass, listClass, placeholderHtml) {
+            var area = document.getElementById(previewAreaId);
+            if (!area) { return; }
+            var canvases = Array.from(area.querySelectorAll('.' + canvasClass));
+            for (var i = canvases.length - 1; i > 0; i--) {
+                canvases[i].parentNode.removeChild(canvases[i]);
+            }
+            if (canvases[0]) {
+                var list = canvases[0].querySelector('.' + listClass);
+                if (list) { list.innerHTML = placeholderHtml; }
+            }
+        }
+
+        // ── SHARED PAGINATION HELPER ──────────────────────────────────────────
+        // Distributes a list of DOM elements across as many page canvases as
+        // needed, creating and removing pages automatically.
+        //
+        // cfg = {
+        //   previewAreaId : container holding the canvases
+        //   canvasClass   : class of each page canvas
+        //   listClass     : class of the entry-list element inside each canvas
+        //   buildPage     : function(pageNum) -> HTML string for a fresh canvas
+        //   elements      : array of DOM elements to distribute
+        // }
+        function paginateGenerator(cfg) {
+            var area = document.getElementById(cfg.previewAreaId);
+            if (!area) { return; }
+
+            var canvases = Array.from(area.querySelectorAll('.' + cfg.canvasClass));
+            if (canvases.length === 0) { return; }
+
+            // Clear every page's entry list
+            canvases.forEach(function (c) {
+                var list = c.querySelector('.' + cfg.listClass);
+                if (list) { list.innerHTML = ''; }
+            });
+
+            var firstList = canvases[0].querySelector('.' + cfg.listClass);
+            if (!firstList) { return; }
+
+            // Layout not ready yet (hidden tab / fonts loading) — retry next frame
+            if (canvases[0].clientHeight < 100 || firstList.clientHeight < 20) {
+                if (!paginateGenerator._retry) { paginateGenerator._retry = {}; }
+                if (!paginateGenerator._retry[cfg.previewAreaId]) {
+                    paginateGenerator._retry[cfg.previewAreaId] = true;
+                    requestAnimationFrame(function () {
+                        paginateGenerator._retry[cfg.previewAreaId] = false;
+                        paginateGenerator(cfg);
+                    });
+                }
+                return;
+            }
+
+            var pageIndex = 0;
+            var MAX_PAGES = 60;
+
+            function currentList() {
+                var c = canvases[pageIndex];
+                return c ? c.querySelector('.' + cfg.listClass) : null;
+            }
+
+            function advancePage() {
+                if (pageIndex >= MAX_PAGES - 1) { return; }
+                pageIndex++;
+                if (!canvases[pageIndex]) {
+                    var num = pageIndex + 1;
+                    var nc = document.createElement('div');
+                    nc.className = cfg.canvasClass;
+                    nc.innerHTML = cfg.buildPage(num);
+                    area.appendChild(nc);
+                    canvases.push(nc);
+                }
+            }
+
+            function fits(list) {
+                return list.scrollHeight <= list.clientHeight + 1;
+            }
+
+            cfg.elements.forEach(function (el) {
+                var list = currentList();
+                if (!list) { return; }
+
+                list.appendChild(el);
+
+                // Overflowed: move this entry to the next page (entries are
+                // atomic units here — a citation or row is never split).
+                if (!fits(list) && list.children.length > 1) {
+                    list.removeChild(el);
+                    advancePage();
+                    var next = currentList();
+                    if (next) { next.appendChild(el); }
+                }
+            });
+
+            // Remove leftover pages beyond the last one used
+            for (var i = canvases.length - 1; i > pageIndex; i--) {
+                canvases[i].parentNode.removeChild(canvases[i]);
+                canvases.pop();
+            }
+        }
+        // ──────────────────────────────────────────────────────────────────────
+
         // TABLE OF CONTENTS ENGINE
         function processAndRenderToc() {
             const rawText = tocPasteArea.value;
             if (!rawText || !rawText.trim()) {
-                tocEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter table of contents items on the left.</div>';
+                resetGeneratorToSinglePage('toc-preview-area', 'toc-paper-canvas', 'toc-entry-list',
+                    '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter table of contents items on the left.</div>');
                 currentTocEntries = [];
                 return;
             }
 
             const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
             currentTocEntries = [];
-            tocEntryList.innerHTML = '';
+            const rows = [];
 
             lines.forEach(line => {
                 let level = 1;
@@ -1614,7 +1769,19 @@ renderBodyLiveUpdate();
                 rowDiv.appendChild(dotsSpan);
                 rowDiv.appendChild(pageSpan);
 
-                tocEntryList.appendChild(rowDiv);
+                rows.push(rowDiv);
+            });
+
+            paginateGenerator({
+                previewAreaId: 'toc-preview-area',
+                canvasClass:   'toc-paper-canvas',
+                listClass:     'toc-entry-list',
+                elements:      rows,
+                buildPage: function (num) {
+                    return '<div class="toc-header-title">CONTENTS (cont.)</div>' +
+                           '<div class="toc-entry-list"></div>' +
+                           '<div class="gen-page-footer">' + toRoman(num) + '</div>';
+                }
             });
         }
 
@@ -1627,7 +1794,8 @@ renderBodyLiveUpdate();
         function processAndAlphabetizeBibliography() {
             const rawText = bibPasteArea.value;
             if (!rawText || !rawText.trim()) {
-                bibEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Paste your citations on the left to alphabetize them.</div>';
+                resetGeneratorToSinglePage('bib-preview-area', 'bib-paper-canvas', 'bib-entry-list',
+                    '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Paste your citations on the left to alphabetize them.</div>');
                 currentAlphabetizedEntries = [];
                 return;
             }
@@ -1640,12 +1808,23 @@ renderBodyLiveUpdate();
                 return cleanA.localeCompare(cleanB);
             });
 
-            bibEntryList.innerHTML = '';
-            currentAlphabetizedEntries.forEach(entry => {
+            const items = currentAlphabetizedEntries.map(entry => {
                 const div = document.createElement('div');
                 div.className = 'bib-item';
                 div.textContent = entry;
-                bibEntryList.appendChild(div);
+                return div;
+            });
+
+            paginateGenerator({
+                previewAreaId: 'bib-preview-area',
+                canvasClass:   'bib-paper-canvas',
+                listClass:     'bib-entry-list',
+                elements:      items,
+                buildPage: function (num) {
+                    // Page number in the upper-right corner
+                    return '<div class="gen-page-header">' + num + '</div>' +
+                           '<div class="bib-entry-list"></div>';
+                }
             });
         }
 
@@ -1658,7 +1837,8 @@ renderBodyLiveUpdate();
         function processAndRenderAbbreviations() {
             const rawText = abbrPasteArea.value;
             if (!rawText || !rawText.trim()) {
-                abbrEntryList.innerHTML = '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter abbreviations on the left.</div>';
+                resetGeneratorToSinglePage('abbr-preview-area', 'abbr-paper-canvas', 'abbr-entry-list',
+                    '<div style="color: #94a3b8; font-style: italic; text-align: center; font-size: 8.5pt;">Enter abbreviations on the left.</div>');
                 currentAbbrEntries = [];
                 return;
             }
@@ -1693,8 +1873,7 @@ renderBodyLiveUpdate();
 
             currentAbbrEntries.sort((a, b) => a.term.localeCompare(b.term));
 
-            abbrEntryList.innerHTML = '';
-            currentAbbrEntries.forEach(item => {
+            const rows = currentAbbrEntries.map(item => {
                 const rowDiv = document.createElement('div');
                 rowDiv.className = 'abbr-item-row';
 
@@ -1708,8 +1887,19 @@ renderBodyLiveUpdate();
 
                 rowDiv.appendChild(termSpan);
                 rowDiv.appendChild(defSpan);
+                return rowDiv;
+            });
 
-                abbrEntryList.appendChild(rowDiv);
+            paginateGenerator({
+                previewAreaId: 'abbr-preview-area',
+                canvasClass:   'abbr-paper-canvas',
+                listClass:     'abbr-entry-list',
+                elements:      rows,
+                buildPage: function (num) {
+                    return '<div class="abbr-header-title">ABBREVIATIONS (cont.)</div>' +
+                           '<div class="abbr-entry-list"></div>' +
+                           '<div class="gen-page-footer">' + toRoman(num) + '</div>';
+                }
             });
         }
 
