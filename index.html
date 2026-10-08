@@ -780,6 +780,30 @@
         .w-sub-block { margin-bottom: 36pt; line-height: 1.4; }
         .w-auth-block { margin-top: 0; }
 
+        /* ── Print / Save-as-PDF ──────────────────────────────────────────── */
+        #sbl-print-container { display: none; }
+
+        @media print {
+            /* Hide everything except the print container */
+            body > *:not(#sbl-print-container) { display: none !important; }
+            #sbl-print-container { display: block !important; }
+
+            /* Each cloned canvas = one PDF page, sized to the canvas */
+            @page { margin: 0; size: 4.6875in 6.0625in; }
+
+            .sbl-print-page {
+                width: 450px !important;
+                height: 582px !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+        /* ─────────────────────────────────────────────────────────────────── */
+
         .toast-message {
             position: fixed;
             bottom: 20px;
@@ -1375,6 +1399,7 @@
 
 
     <div id="toast" class="toast-message"></div>
+    <div id="sbl-print-container"></div>
 
 
     <footer>
@@ -2015,85 +2040,51 @@ renderBodyLiveUpdate();
             document.body.removeChild(textArea);
         }
 
-        // Shared PDF helper — clones all matching page canvases into a temporary
-        // wrapper that is briefly visible at z-index 99999 (html2canvas requires
-        // the element to be in the viewport to capture it), then removed after
-        // the PDF is saved. PDF page size is set to match the canvas exactly.
-        function exportToPdf(canvasSelector, filename) {
-            if (typeof html2pdf === 'undefined') {
-                showToast('Error: PDF generator library is unavailable.');
-                return;
-            }
-
+        // Shared PDF export — uses the browser's native print engine (File → Save as PDF).
+        // Far more reliable than html2canvas: no CDN dependency, no blank-page
+        // rendering bugs, pixel-perfect output.
+        function exportToPdf(canvasSelector) {
             var canvases = Array.from(document.querySelectorAll(canvasSelector));
             if (!canvases.length) { showToast('Nothing to export.'); return; }
 
-            var W = canvases[0].offsetWidth  || 450;
-            var H = canvases[0].offsetHeight || 582;
+            var container = document.getElementById('sbl-print-container');
+            container.innerHTML = '';
 
-            // Build wrapper — placed at top of viewport so html2canvas can see it
-            var wrapper = document.createElement('div');
-            wrapper.style.cssText = [
-                'position:fixed', 'top:0', 'left:0',
-                'z-index:99999',
-                'width:' + W + 'px',
-                'background:#fff',
-                'overflow:visible',
-                'pointer-events:none'
-            ].join(';');
-
-            canvases.forEach(function (canvas, i) {
+            canvases.forEach(function (canvas) {
                 var clone = canvas.cloneNode(true);
-                // Clear inline styles so class rules govern sizing, then override
-                // only what's needed to avoid shadow artefacts.
-                clone.style.boxShadow = 'none';
-                clone.style.background = '#fff';
-                if (i > 0) {
-                    clone.style.pageBreakBefore = 'always';
-                    clone.style.breakBefore     = 'page';
-                }
-                wrapper.appendChild(clone);
+                // Add the print-page class; the @media print rule sizes it correctly.
+                clone.classList.add('sbl-print-page');
+                container.appendChild(clone);
             });
 
-            document.body.appendChild(wrapper);
-            window.scrollTo(0, 0);
+            showToast('Opening print dialog — choose "Save as PDF"');
 
-            var pageW = W / 96;   // px → inches at 96 DPI
-            var pageH = H / 96;
-
-            html2pdf().set({
-                margin:      0,
-                filename:    filename,
-                image:       { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0, width: W },
-                jsPDF:       { unit: 'in', format: [pageW, pageH], orientation: 'portrait' },
-                pagebreak:   { mode: ['css', 'legacy'] }
-            }).from(wrapper).save().then(function () {
-                document.body.removeChild(wrapper);
-            }).catch(function (err) {
-                if (document.body.contains(wrapper)) { document.body.removeChild(wrapper); }
-                showToast('PDF error: ' + err.message);
-            });
+            // Brief delay so the toast renders before the dialog blocks the UI
+            setTimeout(function () {
+                window.print();
+                // Clean up after the dialog closes
+                setTimeout(function () { container.innerHTML = ''; }, 500);
+            }, 150);
         }
 
         function downloadWidgetPdf() {
-            exportToPdf('#widget-canvas', 'SBL_Title_Page.pdf');
+            exportToPdf('#widget-canvas');
         }
 
         function downloadBodyPdf() {
-            exportToPdf('#body-preview-area .body-paper-canvas', 'SBL_Paper_Body.pdf');
+            exportToPdf('#body-preview-area .body-paper-canvas');
         }
 
         function downloadBibPdf() {
-            exportToPdf('#bib-preview-area .bib-paper-canvas', 'SBL_Bibliography.pdf');
+            exportToPdf('#bib-preview-area .bib-paper-canvas');
         }
 
         function downloadTocPdf() {
-            exportToPdf('#toc-preview-area .toc-paper-canvas', 'SBL_Table_of_Contents.pdf');
+            exportToPdf('#toc-preview-area .toc-paper-canvas');
         }
 
         function downloadAbbrPdf() {
-            exportToPdf('#abbr-preview-area .abbr-paper-canvas', 'SBL_Abbreviations.pdf');
+            exportToPdf('#abbr-preview-area .abbr-paper-canvas');
         }
 
         function downloadWidgetDocx() {
