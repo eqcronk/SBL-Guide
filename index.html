@@ -700,29 +700,34 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        .abbr-item-term {
-            flex: 0 0 90px;
-            font-weight: bold;
-            padding-right: 8px;
-            overflow-wrap: break-word;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
+        /* SBL abbreviations: full title (definition) in the first column,
+           abbreviation in the second — nothing bolded. */
         .abbr-item-def {
             flex: 1 1 auto;
             min-width: 0;
             text-align: left;
             overflow-wrap: break-word;
             font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            padding-right: 12px;
+        }
+
+        .abbr-item-term {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            font-weight: normal;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         /* SBL table of contents: title flush left, dot leaders filling the gap,
-           page number flush right on the same baseline. */
+           page number flush right on the same baseline.
+           Single-spaced within entries; double-spacing (one blank line) between. */
         .toc-item-row {
             display: flex;
             align-items: baseline;
-            margin-bottom: 6pt;
+            margin-bottom: 12pt;   /* ~one line height → visual double-spacing between entries */
             width: 100%;
+            line-height: 1.2;      /* single-spaced */
             font-family: 'Times New Roman', Times, serif;
         }
 
@@ -752,9 +757,9 @@
 
         /* Indentation by heading level. Padding goes on the row (a flex
            container), not the inner spans, so the dot leaders still align. */
-        .toc-level-1 { padding-left: 0;     font-weight: bold; }
-        .toc-level-2 { padding-left: 0.2in; font-weight: normal; }
-        .toc-level-3 { padding-left: 0.4in; font-weight: normal; font-style: italic; }
+        .toc-level-1 { padding-left: 0;     font-weight: normal; text-transform: uppercase; }
+        .toc-level-2 { padding-left: 0.2in; font-weight: normal; text-transform: none; }
+        .toc-level-3 { padding-left: 0.4in; font-weight: normal; font-style: italic; text-transform: none; }
 
       .w-sbl-text {
             font-family: 'Times New Roman', Times, serif;
@@ -1913,8 +1918,8 @@ renderBodyLiveUpdate();
                 defSpan.className = 'abbr-item-def';
                 defSpan.textContent = item.definition;
 
-                rowDiv.appendChild(termSpan);
-                rowDiv.appendChild(defSpan);
+                rowDiv.appendChild(defSpan);   // full title first
+                rowDiv.appendChild(termSpan);  // abbreviation after
                 return rowDiv;
             });
 
@@ -2010,89 +2015,85 @@ renderBodyLiveUpdate();
             document.body.removeChild(textArea);
         }
 
-        function downloadWidgetPdf() {
+        // Shared PDF helper — clones all matching page canvases into a temporary
+        // off-screen wrapper, then exports with the PDF page sized to match each
+        // canvas exactly (no extra margins, no letter-page scaling artifacts).
+        // Each canvas gets its own PDF page via CSS page-break.
+        function exportToPdf(canvasSelector, filename) {
             if (typeof html2pdf === 'undefined') {
-                showToast("Error: PDF generator library is unavailable.");
+                showToast('Error: PDF generator library is unavailable.');
                 return;
             }
-            window.scrollTo(0, 0);
-            const targetElement = document.getElementById('widget-canvas');
-            const pdfSettings = {
-                margin: [1, 1, 1, 1],
-                filename: 'SBL_Title_Page.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(pdfSettings).from(targetElement).save();
+
+            const canvases = Array.from(document.querySelectorAll(canvasSelector));
+            if (!canvases.length) { showToast('Nothing to export.'); return; }
+
+            const W = canvases[0].offsetWidth  || 450;
+            const H = canvases[0].offsetHeight || 582;
+
+            // Stack clones in a temporary off-screen container
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = [
+                'position:fixed', 'top:-99999px', 'left:-99999px',
+                'width:' + W + 'px', 'background:#fff', 'overflow:visible'
+            ].join(';');
+
+            canvases.forEach(function (canvas, i) {
+                const clone = canvas.cloneNode(true);
+                clone.style.cssText = '';          // clear any inline overrides
+                clone.style.width  = W + 'px';
+                clone.style.height = H + 'px';
+                clone.style.overflow  = 'hidden';
+                clone.style.boxShadow = 'none';
+                clone.style.position  = 'relative';
+                clone.style.display   = 'flex';
+                clone.style.flexDirection = 'column';
+                if (i > 0) {
+                    clone.style.pageBreakBefore = 'always';
+                    clone.style.breakBefore     = 'page';
+                }
+                wrapper.appendChild(clone);
+            });
+
+            document.body.appendChild(wrapper);
+
+            // PDF page dimensions match the canvas (pixels → inches at 96 DPI)
+            var pageW = W / 96;
+            var pageH = H / 96;
+
+            html2pdf().set({
+                margin:     0,
+                filename:   filename,
+                image:      { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0, width: W },
+                jsPDF:      { unit: 'in', format: [pageW, pageH], orientation: 'portrait' },
+                pagebreak:  { mode: ['css', 'legacy'] }
+            }).from(wrapper).save().then(function () {
+                document.body.removeChild(wrapper);
+            }).catch(function (err) {
+                if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+                showToast('PDF error: ' + err.message);
+            });
+        }
+
+        function downloadWidgetPdf() {
+            exportToPdf('#widget-canvas', 'SBL_Title_Page.pdf');
         }
 
         function downloadBodyPdf() {
-            if (typeof html2pdf === 'undefined') {
-                showToast("Error: PDF generator library is unavailable.");
-                return;
-            }
-            window.scrollTo(0, 0);
-            const targetElement = document.getElementById('body-canvas');
-            const pdfSettings = {
-                margin: [1, 1, 1, 1],
-                filename: 'SBL_Paper_Body.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(pdfSettings).from(targetElement).save();
-        }
-
-        function downloadTocPdf() {
-            if (typeof html2pdf === 'undefined') {
-                showToast("Error: PDF generator library is unavailable.");
-                return;
-            }
-            window.scrollTo(0, 0);
-            const targetElement = document.getElementById('toc-canvas');
-            const pdfSettings = {
-                margin: [1, 1, 1, 1],
-                filename: 'SBL_Table_of_Contents.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(pdfSettings).from(targetElement).save();
+            exportToPdf('#body-preview-area .body-paper-canvas', 'SBL_Paper_Body.pdf');
         }
 
         function downloadBibPdf() {
-            if (typeof html2pdf === 'undefined') {
-                showToast("Error: PDF generator library is unavailable.");
-                return;
-            }
-            window.scrollTo(0, 0);
-            const targetElement = document.getElementById('bib-canvas');
-            const pdfSettings = {
-                margin: [1, 1, 1, 1],
-                filename: 'SBL_Bibliography.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(pdfSettings).from(targetElement).save();
+            exportToPdf('#bib-preview-area .bib-paper-canvas', 'SBL_Bibliography.pdf');
+        }
+
+        function downloadTocPdf() {
+            exportToPdf('#toc-preview-area .toc-paper-canvas', 'SBL_Table_of_Contents.pdf');
         }
 
         function downloadAbbrPdf() {
-            if (typeof html2pdf === 'undefined') {
-                showToast("Error: PDF generator library is unavailable.");
-                return;
-            }
-            window.scrollTo(0, 0);
-            const targetElement = document.getElementById('abbr-canvas');
-            const pdfSettings = {
-                margin: [1, 1, 1, 1],
-                filename: 'SBL_Abbreviations.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(pdfSettings).from(targetElement).save();
+            exportToPdf('#abbr-preview-area .abbr-paper-canvas', 'SBL_Abbreviations.pdf');
         }
 
         function downloadWidgetDocx() {
