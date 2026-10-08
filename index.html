@@ -780,29 +780,6 @@
         .w-sub-block { margin-bottom: 36pt; line-height: 1.4; }
         .w-auth-block { margin-top: 0; }
 
-        /* ── Print / Save-as-PDF ──────────────────────────────────────────── */
-        #sbl-print-container { display: none; }
-
-        @media print {
-            /* Hide everything except the print container */
-            body > *:not(#sbl-print-container) { display: none !important; }
-            #sbl-print-container { display: block !important; }
-
-            /* Each cloned canvas = one PDF page, sized to the canvas */
-            @page { margin: 0; size: 4.6875in 6.0625in; }
-
-            .sbl-print-page {
-                width: 450px !important;
-                height: 582px !important;
-                box-sizing: border-box !important;
-                overflow: hidden !important;
-                background: #ffffff !important;
-                box-shadow: none !important;
-                page-break-after: always;
-                break-after: page;
-            }
-        }
-        /* ─────────────────────────────────────────────────────────────────── */
 
         .toast-message {
             position: fixed;
@@ -835,7 +812,8 @@
     </style>
 
     <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1399,7 +1377,6 @@
 
 
     <div id="toast" class="toast-message"></div>
-    <div id="sbl-print-container"></div>
 
 
     <footer>
@@ -2040,51 +2017,76 @@ renderBodyLiveUpdate();
             document.body.removeChild(textArea);
         }
 
-        // Shared PDF export — uses the browser's native print engine (File → Save as PDF).
-        // Far more reliable than html2canvas: no CDN dependency, no blank-page
-        // rendering bugs, pixel-perfect output.
-        function exportToPdf(canvasSelector) {
+        // Shared PDF export — captures each original canvas with html2canvas,
+        // builds a multi-page PDF with jsPDF, and downloads it directly.
+        // No print dialog, no cloning.
+        async function exportToPdf(canvasSelector, filename) {
+            if (!window.html2canvas || !window.jspdf) {
+                showToast('PDF libraries loading — please try again in a moment.');
+                return;
+            }
+
             var canvases = Array.from(document.querySelectorAll(canvasSelector));
             if (!canvases.length) { showToast('Nothing to export.'); return; }
 
-            var container = document.getElementById('sbl-print-container');
-            container.innerHTML = '';
+            showToast('Generating PDF…');
 
-            canvases.forEach(function (canvas) {
-                var clone = canvas.cloneNode(true);
-                // Add the print-page class; the @media print rule sizes it correctly.
-                clone.classList.add('sbl-print-page');
-                container.appendChild(clone);
-            });
+            var W = canvases[0].offsetWidth  || 450;
+            var H = canvases[0].offsetHeight || 582;
+            var pageW = W / 96;   // px → inches at 96 DPI
+            var pageH = H / 96;
 
-            showToast('Opening print dialog — choose "Save as PDF"');
+            var { jsPDF } = window.jspdf;
+            var pdf = new jsPDF({ unit: 'in', format: [pageW, pageH], orientation: 'portrait' });
 
-            // Brief delay so the toast renders before the dialog blocks the UI
-            setTimeout(function () {
-                window.print();
-                // Clean up after the dialog closes
-                setTimeout(function () { container.innerHTML = ''; }, 500);
-            }, 150);
+            try {
+                for (var i = 0; i < canvases.length; i++) {
+                    if (i > 0) { pdf.addPage([pageW, pageH]); }
+
+                    // Scroll the canvas into view so html2canvas can see it
+                    canvases[i].scrollIntoView({ block: 'start', behavior: 'instant' });
+                    // Wait one frame for the browser to settle the scroll position
+                    await new Promise(function (r) { requestAnimationFrame(r); });
+
+                    var captured = await window.html2canvas(canvases[i], {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        scrollY: -window.scrollY,
+                        scrollX: -window.scrollX,
+                        width:  W,
+                        height: H
+                    });
+
+                    var imgData = captured.toDataURL('image/jpeg', 0.95);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pageW, pageH);
+                }
+
+                pdf.save(filename);
+                showToast('PDF downloaded!');
+            } catch (err) {
+                showToast('PDF error: ' + err.message);
+            }
         }
 
         function downloadWidgetPdf() {
-            exportToPdf('#widget-canvas');
+            exportToPdf('#widget-canvas', 'SBL_Title_Page.pdf');
         }
 
         function downloadBodyPdf() {
-            exportToPdf('#body-preview-area .body-paper-canvas');
+            exportToPdf('#body-preview-area .body-paper-canvas', 'SBL_Paper_Body.pdf');
         }
 
         function downloadBibPdf() {
-            exportToPdf('#bib-preview-area .bib-paper-canvas');
+            exportToPdf('#bib-preview-area .bib-paper-canvas', 'SBL_Bibliography.pdf');
         }
 
         function downloadTocPdf() {
-            exportToPdf('#toc-preview-area .toc-paper-canvas');
+            exportToPdf('#toc-preview-area .toc-paper-canvas', 'SBL_Table_of_Contents.pdf');
         }
 
         function downloadAbbrPdf() {
-            exportToPdf('#abbr-preview-area .abbr-paper-canvas');
+            exportToPdf('#abbr-preview-area .abbr-paper-canvas', 'SBL_Abbreviations.pdf');
         }
 
         function downloadWidgetDocx() {
