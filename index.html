@@ -2016,38 +2016,38 @@ renderBodyLiveUpdate();
         }
 
         // Shared PDF helper — clones all matching page canvases into a temporary
-        // off-screen wrapper, then exports with the PDF page sized to match each
-        // canvas exactly (no extra margins, no letter-page scaling artifacts).
-        // Each canvas gets its own PDF page via CSS page-break.
+        // wrapper that is briefly visible at z-index 99999 (html2canvas requires
+        // the element to be in the viewport to capture it), then removed after
+        // the PDF is saved. PDF page size is set to match the canvas exactly.
         function exportToPdf(canvasSelector, filename) {
             if (typeof html2pdf === 'undefined') {
                 showToast('Error: PDF generator library is unavailable.');
                 return;
             }
 
-            const canvases = Array.from(document.querySelectorAll(canvasSelector));
+            var canvases = Array.from(document.querySelectorAll(canvasSelector));
             if (!canvases.length) { showToast('Nothing to export.'); return; }
 
-            const W = canvases[0].offsetWidth  || 450;
-            const H = canvases[0].offsetHeight || 582;
+            var W = canvases[0].offsetWidth  || 450;
+            var H = canvases[0].offsetHeight || 582;
 
-            // Stack clones in a temporary off-screen container
-            const wrapper = document.createElement('div');
+            // Build wrapper — placed at top of viewport so html2canvas can see it
+            var wrapper = document.createElement('div');
             wrapper.style.cssText = [
-                'position:fixed', 'top:-99999px', 'left:-99999px',
-                'width:' + W + 'px', 'background:#fff', 'overflow:visible'
+                'position:fixed', 'top:0', 'left:0',
+                'z-index:99999',
+                'width:' + W + 'px',
+                'background:#fff',
+                'overflow:visible',
+                'pointer-events:none'
             ].join(';');
 
             canvases.forEach(function (canvas, i) {
-                const clone = canvas.cloneNode(true);
-                clone.style.cssText = '';          // clear any inline overrides
-                clone.style.width  = W + 'px';
-                clone.style.height = H + 'px';
-                clone.style.overflow  = 'hidden';
+                var clone = canvas.cloneNode(true);
+                // Clear inline styles so class rules govern sizing, then override
+                // only what's needed to avoid shadow artefacts.
                 clone.style.boxShadow = 'none';
-                clone.style.position  = 'relative';
-                clone.style.display   = 'flex';
-                clone.style.flexDirection = 'column';
+                clone.style.background = '#fff';
                 if (i > 0) {
                     clone.style.pageBreakBefore = 'always';
                     clone.style.breakBefore     = 'page';
@@ -2056,22 +2056,22 @@ renderBodyLiveUpdate();
             });
 
             document.body.appendChild(wrapper);
+            window.scrollTo(0, 0);
 
-            // PDF page dimensions match the canvas (pixels → inches at 96 DPI)
-            var pageW = W / 96;
+            var pageW = W / 96;   // px → inches at 96 DPI
             var pageH = H / 96;
 
             html2pdf().set({
-                margin:     0,
-                filename:   filename,
-                image:      { type: 'jpeg', quality: 0.98 },
+                margin:      0,
+                filename:    filename,
+                image:       { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0, width: W },
-                jsPDF:      { unit: 'in', format: [pageW, pageH], orientation: 'portrait' },
-                pagebreak:  { mode: ['css', 'legacy'] }
+                jsPDF:       { unit: 'in', format: [pageW, pageH], orientation: 'portrait' },
+                pagebreak:   { mode: ['css', 'legacy'] }
             }).from(wrapper).save().then(function () {
                 document.body.removeChild(wrapper);
             }).catch(function (err) {
-                if (document.body.contains(wrapper)) document.body.removeChild(wrapper);
+                if (document.body.contains(wrapper)) { document.body.removeChild(wrapper); }
                 showToast('PDF error: ' + err.message);
             });
         }
