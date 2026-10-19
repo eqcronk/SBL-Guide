@@ -991,27 +991,27 @@
                 <div class="widget-sidebar">
                     <div class="widget-input-group">
                         <label for="w-institution">Institution Name</label>
-                        <input type="text" id="w-institution" value="NORTH CENTRAL UNIVERSITY">
+                        <input type="text" id="w-institution" placeholder="NORTH CENTRAL UNIVERSITY">
                     </div>
                     <div class="widget-input-group">
                         <label for="w-title">Paper Title & Subtitle</label>
-                        <textarea id="w-title" rows="3">WRITING IN SBL:&#10;COMPLICATED FORMATTING</textarea>
+                        <textarea id="w-title" rows="3" placeholder="WRITING IN SBL:&#10;COMPLICATED FORMATTING"></textarea>
                     </div>
                     <div class="widget-input-group">
                         <label for="w-instructor">Instructor Name</label>
-                        <input type="text" id="w-instructor" value="DR. OLD MCDONALD">
+                        <input type="text" id="w-instructor" placeholder="DR. OLD MCDONALD">
                     </div>
                     <div class="widget-input-group">
                         <label for="w-course">Course Code & Description</label>
-                        <input type="text" id="w-course" value="BIBL 777 INTERPRETATION OF SCRIPTURE">
+                        <input type="text" id="w-course" placeholder="BIBL 777 INTERPRETATION OF SCRIPTURE">
                     </div>
                     <div class="widget-input-group">
                         <label for="w-author">Student Name</label>
-                        <input type="text" id="w-author" value="ANDREW CARLSON">
+                        <input type="text" id="w-author" placeholder="ANDREW CARLSON">
                     </div>
                     <div class="widget-input-group">
                         <label for="w-date">Submission Date</label>
-                        <input type="text" id="w-date" value="DECEMBER 11, 2026">
+                        <input type="text" id="w-date" placeholder="DECEMBER 11, 2026">
                     </div>
                     
                     <div class="widget-actions">
@@ -1040,52 +1040,52 @@
 
             <div class="widget-input-group">
                     <label for="body-paper-title">Paper Title (Primary Heading)</label>
-                    <input type="text" id="body-paper-title" value="WRITING IN SBL">
+                    <input type="text" id="body-paper-title" placeholder="WRITING IN SBL">
                 </div>
 
             <div class="widget-input-group">
                 <label for="body-paper-long-title">Paper Long Title</label>
-                <input type="text" id="body-paper-long-title" value="COMPLICATED FORMATTING">
+                <input type="text" id="body-paper-long-title" placeholder="COMPLICATED FORMATTING">
             </div>
-                
+
             <div class="widget-input-group">
                 <label for="body-p1">Text</label>
-                <textarea id="body-p1" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                <textarea id="body-p1" rows="3" placeholder="Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards."></textarea>
             </div>
-                
+
             <div class="widget-input-group">
                 <label for="body-h1">First Level Heading (Main Points)</label>
-                <input type="text" id="body-h1" value="Historical Context">
+                <input type="text" id="body-h1" placeholder="Historical Context">
             </div>
 
             <div class="widget-input-group">
                 <label for="body-p2">Text</label>
-                <textarea id="body-p2" rows="3">Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.</textarea>
+                <textarea id="body-p2" rows="3" placeholder="Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards."></textarea>
             </div>
 
             <div class="widget-input-group">
                 <label for="body-h2">First Level Subheading (Subpoints to Main Points)</label>
-                <input type="text" id="body-h2" value="Socio-Historical Background of 1st Century">
+                <input type="text" id="body-h2" placeholder="Socio-Historical Background of 1st Century">
             </div>
 
             <div class="widget-input-group">
                 <label for="body-p3">Subtext</label>
-                <textarea id="body-p3" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                <textarea id="body-p3" rows="3" placeholder="In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire."></textarea>
             </div>
 
             <div class="widget-input-group">
                 <label for="body-h3">Second Level Subheading (Subpoints to Subpoints) </label>
-                <input type="text" id="body-h3" value="Epistolary Conventions in Greco-Roman World">
+                <input type="text" id="body-h3" placeholder="Epistolary Conventions in Greco-Roman World">
             </div>
 
             <div class="widget-input-group">
                 <label for="body-p4">Subtext</label>
-                <textarea id="body-p4" rows="3">In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.</textarea>
+                <textarea id="body-p4" rows="3" placeholder="In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire."></textarea>
             </div>
 
             <div class="widget-input-group">
                 <label for="body-h4">First Level Subheading (Subpoints to Main Points)</label>
-                <input type="text" id="body-h4" value="Socio-Historical Background of 1st Century">
+                <input type="text" id="body-h4" placeholder="Socio-Historical Background of 1st Century">
             </div>
 
             <div class="widget-actions" id="body-sidebar-actions">
@@ -1435,11 +1435,41 @@
         }
 
         // TITLE PAGE CREATOR ENGINE
+        // Each preview block falls back to its example text independently —
+        // so only the section you type into clears the example.
         function renderWidgetLiveUpdate() {
-            widgetFields.vInst.textContent = widgetFields.inst.value.toUpperCase();
-            widgetFields.vTitle.textContent = widgetFields.title.value.toUpperCase();
-            widgetFields.vSub.textContent = `SUBMITTED TO ${widgetFields.instructor.value.toUpperCase()}\nIN PARTIAL FULFILLMENT OF\n${widgetFields.course.value.toUpperCase()}`;
-            widgetFields.vAuth.textContent = `BY\n${widgetFields.author.value.toUpperCase()}\n${widgetFields.date.value.toUpperCase()}`;
+            const inst       = widgetFields.inst.value.trim().toUpperCase();
+            const title      = widgetFields.title.value.trim().toUpperCase();
+            const instructor = widgetFields.instructor.value.trim().toUpperCase();
+            const course     = widgetFields.course.value.trim().toUpperCase();
+            const author     = widgetFields.author.value.trim().toUpperCase();
+            const date       = widgetFields.date.value.trim().toUpperCase();
+
+            // Institution: use typed value or keep example
+            widgetFields.vInst.textContent = inst || 'NORTH CENTRAL UNIVERSITY';
+
+            // Title: use typed value or keep example
+            widgetFields.vTitle.textContent = title || 'WRITING IN SBL:\nCOMPLICATED FORMATTING';
+
+            // Instructor + Course block
+            if (!instructor && !course) {
+                widgetFields.vSub.textContent = 'SUBMITTED TO DR. OLD MCDONALD\nIN PARTIAL FULFILLMENT OF\nBIBL 777 INTERPRETATION OF SCRIPTURE';
+            } else {
+                const subLines = [];
+                if (instructor) { subLines.push('SUBMITTED TO ' + instructor); }
+                if (course)     { subLines.push('IN PARTIAL FULFILLMENT OF'); subLines.push(course); }
+                widgetFields.vSub.textContent = subLines.join('\n');
+            }
+
+            // Author + Date block
+            if (!author && !date) {
+                widgetFields.vAuth.textContent = 'BY\nANDREW CARLSON\nDECEMBER 11, 2026';
+            } else {
+                const authLines = [];
+                if (author) { authLines.push('BY'); authLines.push(author); }
+                if (date)   { authLines.push(date); }
+                widgetFields.vAuth.textContent = authLines.join('\n');
+            }
         }
 
         [widgetFields.inst, widgetFields.title, widgetFields.instructor, widgetFields.course, widgetFields.author, widgetFields.date].forEach(element => {
@@ -1488,9 +1518,11 @@
                 }
             });
 
-            // ── 2. Render page-1 title blocks ─────────────────────────────────
-            var title  = (bodyFields.title.value  || '').trim().toUpperCase();
-            var title2 = (bodyFields.title2.value || '').trim().toUpperCase();
+            // ── 2. Render page-1 title blocks — fall back to example per field ─
+            // Each field independently shows example text until the user types
+            // into that specific box, so only the typed section clears.
+            var title  = (bodyFields.title.value  || 'WRITING IN SBL').trim().toUpperCase();
+            var title2 = (bodyFields.title2.value || 'COMPLICATED FORMATTING').trim().toUpperCase();
             var vTitle  = document.getElementById('body-view-title');
             var vTitle2 = document.getElementById('body-view-long-title');
             if (vTitle)  { vTitle.textContent  = title;  vTitle.style.display  = title  ? 'block' : 'none'; }
@@ -1508,10 +1540,13 @@
                     });
                 }
             }
-            addSection(bodyFields.h1.value, 'sbl-h1', bodyFields.p1.value);
-            addSection(bodyFields.h2.value, 'sbl-h2', bodyFields.p2.value);
-            addSection(bodyFields.h3.value, 'sbl-h3', bodyFields.p3.value);
-            addSection(bodyFields.h4.value, 'sbl-h4', bodyFields.p4.value);
+            // Each heading/text pair falls back to its example independently.
+            var EX_P1 = 'Exegesis of biblical literature requires meticulous attention to historical, literary, and theological contexts. When incorporating primary source material, scholars must adhere strictly to established citation standards.';
+            var EX_P2 = 'In the Pauline corpus, key themes such as justification by faith and covenantal membership frequently intersect with socio-historical dynamics of the Roman Empire.';
+            addSection(bodyFields.h1.value || 'Historical Context',                          'sbl-h1', bodyFields.p1.value || EX_P1);
+            addSection(bodyFields.h2.value || 'Socio-Historical Background of 1st Century',  'sbl-h2', bodyFields.p2.value || EX_P1);
+            addSection(bodyFields.h3.value || 'Epistolary Conventions in Greco-Roman World', 'sbl-h3', bodyFields.p3.value || EX_P2);
+            addSection(bodyFields.h4.value || 'Socio-Historical Background of 1st Century',  'sbl-h4', bodyFields.p4.value || EX_P2);
 
             // ── 4. Pour segments into pages; auto-create pages on overflow ─────
             var pageIndex = 0;
